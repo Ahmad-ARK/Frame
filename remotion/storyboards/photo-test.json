@@ -1,0 +1,304 @@
+{
+  "id": "photo-modes-test",
+  "channelId": "documentary-dark",
+  "topic": "The Faces of Partition",
+  "thesis": "The images tell it.",
+  "scenes": [
+    {
+      "id": "s1-radcliffe",
+      "narration": "Cyril Radcliffe, a London lawyer who had never set foot in India, was handed the job of drawing its borders in just five weeks.",
+      "visual": {
+        "type": "archivalPhoto",
+        "directive": "A portrait of Cyril Radcliffe, the boundary commissioner.",
+        "style": {
+          "photo": {
+            "mode": "single",
+            "items": [
+              {
+                "subject": "Cyril Radcliffe portrait",
+                "caption": "Cyril Radcliffe, boundary commissioner, 1947",
+                "src": "assets/photo-modes-test/s1-radcliffe-p0.jpg",
+                "attribution": "Elliott & Fry · CC BY 3.0 · via Wikimedia Commons",
+                "focal": {
+                  "x": 0.5,
+                  "y": 0.505625
+                }
+              }
+            ]
+          }
+        },
+        "overlays": [
+          {
+            "kind": "text",
+            "atMs": 1600,
+            "durationMs": 3000,
+            "anchor": "bottomLeft",
+            "text": "Never visited India before 1947",
+            "emphasis": true
+          },
+          {
+            "kind": "stat",
+            "atMs": 6400,
+            "durationMs": 3500,
+            "anchor": "bottomRight",
+            "value": "5 weeks",
+            "label": "to draw the border of a nation"
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 8000
+    },
+    {
+      "id": "s2-suffering",
+      "narration": "What followed was a torrent of suffering. Trains arriving full of the dead. Endless columns of refugees. Whole villages set ablaze.",
+      "visual": {
+        "type": "archivalPhoto",
+        "directive": "Rapid imagery of the partition violence and refugee crisis.",
+        "style": {
+          "photo": {
+            "mode": "montage",
+            "items": [
+              {
+                "subject": "Partition India refugees 1947",
+                "caption": "Columns of refugees displaced by Partition",
+                "src": "assets/photo-modes-test/s2-suffering-p0.jpg",
+                "attribution": "shankar s. · CC BY 2.0 · via Wikimedia Commons",
+                "focal": {
+                  "x": 0.375,
+                  "y": 0.5
+                }
+              },
+              {
+                "subject": "Partition train dead 1947",
+                "caption": "Trains arriving filled with the dead",
+                "src": "assets/photo-modes-test/s2-suffering-p1.jpg",
+                "focal": {
+                  "x": 0.5,
+                  "y": 0.518160741885626
+                }
+              },
+              {
+                "subject": "Partition village burning 1947",
+                "caption": "Villages set ablaze during communal violence",
+                "src": "assets/photo-modes-test/s2-suffering-p2.jpg",
+                "focal": {
+                  "x": 0.5,
+                  "y": 0.55
+                }
+              },
+              {
+                "subject": "India Pakistan Partition exodus",
+                "caption": "Mass exodus across the new border",
+                "src": "assets/photo-modes-test/s2-suffering-p3.jpg",
+                "focal": {
+                  "x": 0.45,
+                  "y": 0.5
+                }
+              }
+            ]
+          }
+        },
+        "overlays": [
+          {
+            "kind": "text",
+            "atMs": 1800,
+            "durationMs": 2500,
+            "anchor": "topLeft",
+            "text": "The largest mass migration in history",
+            "emphasis": true
+          },
+          {
+            "kind": "stat",
+            "atMs": 7200,
+            "durationMs": 3000,
+            "anchor": "bottomRight",
+            "value": "1–2 million",
+            "label": "killed in Partition violence"
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 9000
+    },
+    {
+      "id": "s3-two-retreats",
+      "narration": "Two retreats, forty years apart. The Soviets leaving Afghanistan in 1989. The Americans leaving in 2021. The same roads, the same defeat.",
+      "visual": {
+        "type": "archivalPhoto",
+        "directive": "Contrast the 1989 Soviet withdrawal with the 2021 American withdrawal.",
+        "style": {
+          "photo": {
+            "mode": "split",
+            "items": [
+              {
+                "subject": "Soviet withdrawal Afghanistan 1989",
+                "caption": "Soviet forces leaving Afghanistan, February 1989",
+                "src": "assets/photo-modes-test/s3-two-retreats-p0.jpg",
+                "focal": {
+                  "x": 0.38654444828778967,
+                  "y": 0.5
+                }
+              },
+              {
+                "subject": "US withdrawal Afghanistan 2021",
+                "caption": "American forces departing Afghanistan, August 2021",
+                "src": "assets/photo-modes-test/s3-two-retreats-p1.jpg",
+                "focal": {
+                  "x": 0.4166666666666667,
+                  "y": 0.5
+                }
+              }
+            ]
+          }
+        },
+        "overlays": [
+          {
+            "kind": "text",
+            "atMs": 1800,
+            "durationMs": 3000,
+            "anchor": "center",
+            "text": "40 years apart — same defeat",
+            "emphasis": true
+          },
+          {
+            "kind": "image",
+            "atMs": 4500,
+            "durationMs": 3500,
+            "anchor": "topLeft",
+            "src": "assets/photo-modes-test/s3-two-retreats-ov1.png",
+            "subject": "Salang Highway Soviet convoy",
+            "caption": "Soviet convoys on the Salang Highway, 1989",
+            "attribution": "Generated · FLUX"
+          },
+          {
+            "kind": "image",
+            "atMs": 7200,
+            "durationMs": 3500,
+            "anchor": "topRight",
+            "src": "assets/photo-modes-test/s3-two-retreats-ov2.jpg",
+            "subject": "Kabul airport 2021 evacuation",
+            "caption": "Kabul airport evacuation, August 2021"
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 9000
+    },
+    {
+      "id": "s4-architects",
+      "narration": "The men who carved up the subcontinent: Louis Mountbatten, Jawaharlal Nehru, Muhammad Ali Jinnah, and Cyril Radcliffe.",
+      "visual": {
+        "type": "archivalPhoto",
+        "directive": "A wall of the four key figures behind partition.",
+        "style": {
+          "photo": {
+            "mode": "grid",
+            "items": [
+              {
+                "subject": "Louis Mountbatten portrait",
+                "caption": "Lord Mountbatten, last Viceroy of India",
+                "src": "assets/photo-modes-test/s4-architects-p0.jpg",
+                "focal": {
+                  "x": 0.5,
+                  "y": 0.506
+                }
+              },
+              {
+                "subject": "Jawaharlal Nehru portrait",
+                "caption": "Jawaharlal Nehru, first Prime Minister of India",
+                "src": "assets/photo-modes-test/s4-architects-p1.jpg",
+                "focal": {
+                  "x": 0.49803536345776034,
+                  "y": 0.3979769794209976
+                }
+              },
+              {
+                "subject": "Muhammad Ali Jinnah portrait",
+                "caption": "Muhammad Ali Jinnah, founder of Pakistan",
+                "src": "assets/photo-modes-test/s4-architects-p2.jpg",
+                "focal": {
+                  "x": 0.5,
+                  "y": 0.5810736026563365
+                }
+              },
+              {
+                "subject": "Cyril Radcliffe portrait",
+                "caption": "Cyril Radcliffe, boundary commissioner",
+                "src": "assets/photo-modes-test/s4-architects-p3.jpg",
+                "attribution": "Elliott & Fry · CC BY 3.0 · via Wikimedia Commons",
+                "focal": {
+                  "x": 0.5,
+                  "y": 0.505625
+                }
+              }
+            ]
+          }
+        },
+        "overlays": [
+          {
+            "kind": "text",
+            "atMs": 1600,
+            "durationMs": 3000,
+            "anchor": "bottomLeft",
+            "text": "Four men, one fractured continent",
+            "emphasis": true
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 8000
+    },
+    {
+      "id": "s5-commission",
+      "narration": "Look closely at the boundary commission. One man holds the pen that will displace fifteen million people.",
+      "visual": {
+        "type": "archivalPhoto",
+        "directive": "A photo of the boundary commission, with Radcliffe singled out.",
+        "style": {
+          "photo": {
+            "mode": "annotated",
+            "items": [
+              {
+                "subject": "India Partition boundary commission 1947",
+                "caption": "The Punjab Boundary Commission, 1947",
+                "src": "assets/photo-modes-test/s5-commission-p0.jpg",
+                "focal": {
+                  "x": 0.5,
+                  "y": 0.45778100599237337
+                }
+              }
+            ],
+            "annotation": {
+              "x": 0.62,
+              "y": 0.38,
+              "radius": 0.1,
+              "label": "Cyril Radcliffe — the pen that displaced 15 million"
+            }
+          }
+        },
+        "overlays": [
+          {
+            "kind": "stat",
+            "atMs": 1600,
+            "durationMs": 3500,
+            "anchor": "bottomRight",
+            "value": "15 million",
+            "label": "people displaced by the boundary award"
+          },
+          {
+            "kind": "text",
+            "atMs": 6400,
+            "durationMs": 3000,
+            "anchor": "topLeft",
+            "text": "One signature. Two nations. Millions displaced.",
+            "emphasis": true
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 8000
+    }
+  ],
+  "status": "draft"
+}

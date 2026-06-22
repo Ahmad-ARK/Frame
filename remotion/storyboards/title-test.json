@@ -1,0 +1,76 @@
+{
+  "id": "title-modes-test",
+  "channelId": "documentary-dark",
+  "topic": "Title Reveals",
+  "thesis": "How a title should hit.",
+  "scenes": [
+    {
+      "id": "s1-main-title",
+      "narration": "Who won the Soviet-Afghan war?",
+      "visual": {
+        "type": "titleCard",
+        "directive": "The main video title — a hard drop.",
+        "style": {
+          "titleCard": {
+            "mode": "impact",
+            "eyebrow": "A DOCUMENTARY",
+            "title": "WHO WON THE\nSOVIET-AFGHAN WAR",
+            "subtitle": ""
+          }
+        }
+      },
+      "sources": [],
+      "durationMs": 3000
+    },
+    {
+      "id": "s2-thesis",
+      "narration": "Victory and defeat are the same word.",
+      "visual": {
+        "type": "titleCard",
+        "directive": "The thesis line, revealed as the narrator speaks it.",
+        "style": {
+          "titleCard": {
+            "mode": "wordByWord",
+            "title": "Victory and defeat\nare the same word."
+          }
+        }
+      },
+      "sources": [],
+      "durationMs": 3500
+    },
+    {
+      "id": "s3-codename",
+      "narration": "Operation Cyclone.",
+      "visual": {
+        "type": "titleCard",
+        "directive": "The classified codename of the CIA covert program.",
+        "style": {
+          "titleCard": {
+            "mode": "typewriter",
+            "eyebrow": "CIA COVERT PROGRAM",
+            "title": "OPERATION CYCLONE"
+          }
+        }
+      },
+      "sources": [],
+      "durationMs": 3000
+    },
+    {
+      "id": "s4-closing",
+      "narration": "We will keep paying for it.",
+      "visual": {
+        "type": "titleCard",
+        "directive": "The closing line of the film.",
+        "style": {
+          "titleCard": {
+            "mode": "lineReveal",
+            "title": "We will keep\npaying for it."
+          }
+        }
+      },
+      "sources": [],
+      "durationMs": 3500
+    }
+  ],
+  "status": "draft"
+}

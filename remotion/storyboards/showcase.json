@@ -1,0 +1,1102 @@
+{
+  "id": "scene-showcase",
+  "channelId": "documentary-dark",
+  "topic": "Who Won the Soviet-Afghan War",
+  "thesis": "Victory and defeat are the same word, spoken by different people.",
+  "scenes": [
+    {
+      "id": "s1-hook",
+      "narration": "In February 1989, the last Soviet soldier walked out of Afghanistan. The most powerful army on earth had been beaten.",
+      "visual": {
+        "type": "archivalPhoto",
+        "directive": "The Soviet withdrawal across the Friendship Bridge, 1989.",
+        "style": {
+          "photo": {
+            "mode": "single",
+            "items": [
+              {
+                "subject": "Soviet withdrawal Afghanistan 1989",
+                "caption": "The last Soviet column crosses the Friendship Bridge, February 1989.",
+                "src": "assets/scene-showcase/s1-hook-p0.jpg",
+                "focal": {
+                  "x": 0.38654444828778967,
+                  "y": 0.5
+                }
+              }
+            ]
+          }
+        },
+        "overlays": [
+          {
+            "kind": "image",
+            "atMs": 296,
+            "durationMs": 3500,
+            "anchor": "topRight",
+            "src": "assets/scene-showcase/s1-hook-ov0.jpg",
+            "subject": "Friendship Bridge Termez 1989",
+            "caption": "Friendship Bridge, Termez — the Soviet exit point",
+            "focal": {
+              "x": 0.375,
+              "y": 0.5
+            }
+          },
+          {
+            "kind": "stat",
+            "atMs": 8540,
+            "durationMs": 3000,
+            "anchor": "bottomLeft",
+            "value": "10 years",
+            "label": "Soviet occupation of Afghanistan"
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 9842,
+      "audioRef": "audio/scene-showcase/s1-hook.mp3",
+      "wordTimings": [
+        {
+          "word": "In",
+          "startMs": 100,
+          "endMs": 296
+        },
+        {
+          "word": "February",
+          "startMs": 296,
+          "endMs": 1078
+        },
+        {
+          "word": "1989",
+          "startMs": 1078,
+          "endMs": 1568
+        },
+        {
+          "word": "the",
+          "startMs": 1568,
+          "endMs": 1861
+        },
+        {
+          "word": "last",
+          "startMs": 1861,
+          "endMs": 2253
+        },
+        {
+          "word": "Soviet",
+          "startMs": 2253,
+          "endMs": 2840
+        },
+        {
+          "word": "soldier",
+          "startMs": 2840,
+          "endMs": 3525
+        },
+        {
+          "word": "walked",
+          "startMs": 3525,
+          "endMs": 4112
+        },
+        {
+          "word": "out",
+          "startMs": 4112,
+          "endMs": 4405
+        },
+        {
+          "word": "of",
+          "startMs": 4405,
+          "endMs": 4601
+        },
+        {
+          "word": "Afghanistan",
+          "startMs": 4601,
+          "endMs": 5775
+        },
+        {
+          "word": "The",
+          "startMs": 5725,
+          "endMs": 5981
+        },
+        {
+          "word": "most",
+          "startMs": 5981,
+          "endMs": 6322
+        },
+        {
+          "word": "powerful",
+          "startMs": 6322,
+          "endMs": 7005
+        },
+        {
+          "word": "army",
+          "startMs": 7005,
+          "endMs": 7346
+        },
+        {
+          "word": "on",
+          "startMs": 7346,
+          "endMs": 7517
+        },
+        {
+          "word": "earth",
+          "startMs": 7517,
+          "endMs": 7943
+        },
+        {
+          "word": "had",
+          "startMs": 7943,
+          "endMs": 8199
+        },
+        {
+          "word": "been",
+          "startMs": 8199,
+          "endMs": 8540
+        },
+        {
+          "word": "beaten",
+          "startMs": 8540,
+          "endMs": 9138
+        }
+      ]
+    },
+    {
+      "id": "s2-title",
+      "narration": "Who won the Soviet-Afghan war?",
+      "visual": {
+        "type": "titleCard",
+        "directive": "The main title drop.",
+        "style": {
+          "titleCard": {
+            "mode": "impact",
+            "eyebrow": "A DOCUMENTARY",
+            "title": "WHO WON THE\nSOVIET-AFGHAN WAR",
+            "subtitle": null
+          }
+        }
+      },
+      "sources": [],
+      "durationMs": 3482,
+      "audioRef": "audio/scene-showcase/s2-title.mp3",
+      "wordTimings": [
+        {
+          "word": "Who",
+          "startMs": 100,
+          "endMs": 413
+        },
+        {
+          "word": "won",
+          "startMs": 413,
+          "endMs": 726
+        },
+        {
+          "word": "the",
+          "startMs": 726,
+          "endMs": 1039
+        },
+        {
+          "word": "Soviet-Afghan",
+          "startMs": 1039,
+          "endMs": 2395
+        },
+        {
+          "word": "war",
+          "startMs": 2395,
+          "endMs": 2812
+        }
+      ]
+    },
+    {
+      "id": "s3-map",
+      "narration": "It began in December 1979, when Soviet tanks crossed the Amu Darya river into Afghanistan.",
+      "visual": {
+        "type": "map",
+        "directive": "Locate Afghanistan, the Soviet target.",
+        "style": {
+          "map": {
+            "mode": "locator",
+            "center": [
+              66.2385139,
+              33.7680065
+            ],
+            "scale": 3384,
+            "camera": {
+              "keyframes": [
+                {
+                  "atMs": 0,
+                  "center": [
+                    66.2385139,
+                    33.7680065
+                  ],
+                  "scale": 2369
+                },
+                {
+                  "atMs": 2005,
+                  "center": [
+                    66.2385139,
+                    33.7680065
+                  ],
+                  "scale": 3384
+                }
+              ]
+            },
+            "highlights": [
+              {
+                "iso": "4",
+                "color": "primary",
+                "opacity": 0.7
+              }
+            ]
+          }
+        },
+        "overlays": [
+          {
+            "kind": "text",
+            "atMs": 960,
+            "durationMs": 2500,
+            "anchor": "topLeft",
+            "text": "December 1979",
+            "emphasis": true
+          },
+          {
+            "kind": "image",
+            "atMs": 3158,
+            "durationMs": 3500,
+            "anchor": "bottomRight",
+            "src": "assets/scene-showcase/s3-map-ov1.jpg",
+            "subject": "Soviet tanks Afghanistan 1979",
+            "caption": "Soviet armor enters Afghanistan, December 1979",
+            "focal": {
+              "x": 0.42780373831775703,
+              "y": 0.5
+            }
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 8018,
+      "audioRef": "audio/scene-showcase/s3-map.mp3",
+      "wordTimings": [
+        {
+          "word": "It",
+          "startMs": 100,
+          "endMs": 291
+        },
+        {
+          "word": "began",
+          "startMs": 291,
+          "endMs": 769
+        },
+        {
+          "word": "in",
+          "startMs": 769,
+          "endMs": 960
+        },
+        {
+          "word": "December",
+          "startMs": 960,
+          "endMs": 1725
+        },
+        {
+          "word": "1979",
+          "startMs": 1725,
+          "endMs": 2202
+        },
+        {
+          "word": "when",
+          "startMs": 2202,
+          "endMs": 2585
+        },
+        {
+          "word": "Soviet",
+          "startMs": 2585,
+          "endMs": 3158
+        },
+        {
+          "word": "tanks",
+          "startMs": 3158,
+          "endMs": 3636
+        },
+        {
+          "word": "crossed",
+          "startMs": 3636,
+          "endMs": 4305
+        },
+        {
+          "word": "the",
+          "startMs": 4305,
+          "endMs": 4591
+        },
+        {
+          "word": "Amu",
+          "startMs": 4591,
+          "endMs": 4878
+        },
+        {
+          "word": "Darya",
+          "startMs": 4878,
+          "endMs": 5356
+        },
+        {
+          "word": "river",
+          "startMs": 5356,
+          "endMs": 5834
+        },
+        {
+          "word": "into",
+          "startMs": 5834,
+          "endMs": 6216
+        },
+        {
+          "word": "Afghanistan",
+          "startMs": 6216,
+          "endMs": 7362
+        }
+      ]
+    },
+    {
+      "id": "s4-timeline",
+      "narration": "What followed unfolded across four decades: the Soviet war, the vacuum it left behind, and America's own long war.",
+      "visual": {
+        "type": "timeline",
+        "directive": "The three eras from 1979 to 2021.",
+        "style": {
+          "timeline": {
+            "mode": "eras",
+            "heading": "Four Decades of War",
+            "eras": [
+              {
+                "from": "1979",
+                "to": "1989",
+                "label": "Soviet-Afghan War",
+                "color": "primary"
+              },
+              {
+                "from": "1989",
+                "to": "2001",
+                "label": "The Vacuum — Civil War & Taliban Rise",
+                "color": "accent"
+              },
+              {
+                "from": "2001",
+                "to": "2021",
+                "label": "America's Long War",
+                "color": "primary"
+              }
+            ]
+          }
+        },
+        "overlays": [
+          {
+            "kind": "text",
+            "atMs": 3570,
+            "durationMs": 3000,
+            "anchor": "topLeft",
+            "text": "1979–1989: Soviet War",
+            "emphasis": true
+          },
+          {
+            "kind": "text",
+            "atMs": 4670,
+            "durationMs": 3000,
+            "anchor": "topRight",
+            "text": "The Power Vacuum",
+            "emphasis": true
+          },
+          {
+            "kind": "text",
+            "atMs": 6532,
+            "durationMs": 3000,
+            "anchor": "bottomRight",
+            "text": "2001–2021: U.S. War",
+            "emphasis": true
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 8882,
+      "audioRef": "audio/scene-showcase/s4-timeline.mp3",
+      "wordTimings": [
+        {
+          "word": "What",
+          "startMs": 100,
+          "endMs": 439
+        },
+        {
+          "word": "followed",
+          "startMs": 439,
+          "endMs": 1116
+        },
+        {
+          "word": "unfolded",
+          "startMs": 1116,
+          "endMs": 1793
+        },
+        {
+          "word": "across",
+          "startMs": 1793,
+          "endMs": 2301
+        },
+        {
+          "word": "four",
+          "startMs": 2301,
+          "endMs": 2639
+        },
+        {
+          "word": "decades",
+          "startMs": 2639,
+          "endMs": 3316
+        },
+        {
+          "word": "the",
+          "startMs": 3316,
+          "endMs": 3570
+        },
+        {
+          "word": "Soviet",
+          "startMs": 3570,
+          "endMs": 4078
+        },
+        {
+          "word": "war",
+          "startMs": 4078,
+          "endMs": 4416
+        },
+        {
+          "word": "the",
+          "startMs": 4416,
+          "endMs": 4670
+        },
+        {
+          "word": "vacuum",
+          "startMs": 4670,
+          "endMs": 5178
+        },
+        {
+          "word": "it",
+          "startMs": 5178,
+          "endMs": 5347
+        },
+        {
+          "word": "left",
+          "startMs": 5347,
+          "endMs": 5686
+        },
+        {
+          "word": "behind",
+          "startMs": 5686,
+          "endMs": 6278
+        },
+        {
+          "word": "and",
+          "startMs": 6278,
+          "endMs": 6532
+        },
+        {
+          "word": "America's",
+          "startMs": 6532,
+          "endMs": 7294
+        },
+        {
+          "word": "own",
+          "startMs": 7294,
+          "endMs": 7548
+        },
+        {
+          "word": "long",
+          "startMs": 7548,
+          "endMs": 7886
+        },
+        {
+          "word": "war",
+          "startMs": 7886,
+          "endMs": 8225
+        }
+      ]
+    },
+    {
+      "id": "s5-stat",
+      "narration": "The Soviets lost fifteen thousand soldiers. Afghanistan lost two million people.",
+      "visual": {
+        "type": "stat",
+        "directive": "Soviet dead versus Afghan dead.",
+        "style": {
+          "data": {
+            "mode": "compare",
+            "title": "The Cost of the Soviet-Afghan War",
+            "items": [
+              {
+                "label": "Soviet Soldiers Killed",
+                "value": 15000,
+                "prefix": "",
+                "suffix": "",
+                "sublabel": "USSR military dead",
+                "color": "accent"
+              },
+              {
+                "label": "Afghan Civilians Killed",
+                "value": 2000000,
+                "prefix": "",
+                "suffix": "",
+                "sublabel": "Afghan dead — 133× more",
+                "color": "primary"
+              }
+            ]
+          }
+        },
+        "overlays": [
+          {
+            "kind": "stat",
+            "atMs": 1426,
+            "durationMs": 3000,
+            "anchor": "topLeft",
+            "value": "15,000",
+            "label": "Soviet soldiers lost"
+          },
+          {
+            "kind": "stat",
+            "atMs": 5156,
+            "durationMs": 3500,
+            "anchor": "bottomRight",
+            "value": "2,000,000",
+            "label": "Afghans killed"
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 7562,
+      "audioRef": "audio/scene-showcase/s5-stat.mp3",
+      "wordTimings": [
+        {
+          "word": "The",
+          "startMs": 100,
+          "endMs": 384
+        },
+        {
+          "word": "Soviets",
+          "startMs": 384,
+          "endMs": 1047
+        },
+        {
+          "word": "lost",
+          "startMs": 1047,
+          "endMs": 1426
+        },
+        {
+          "word": "fifteen",
+          "startMs": 1426,
+          "endMs": 2089
+        },
+        {
+          "word": "thousand",
+          "startMs": 2089,
+          "endMs": 2847
+        },
+        {
+          "word": "soldiers",
+          "startMs": 2847,
+          "endMs": 3700
+        },
+        {
+          "word": "Afghanistan",
+          "startMs": 3650,
+          "endMs": 4754
+        },
+        {
+          "word": "lost",
+          "startMs": 4754,
+          "endMs": 5156
+        },
+        {
+          "word": "two",
+          "startMs": 5156,
+          "endMs": 5457
+        },
+        {
+          "word": "million",
+          "startMs": 5457,
+          "endMs": 6160
+        },
+        {
+          "word": "people",
+          "startMs": 6160,
+          "endMs": 6862
+        }
+      ]
+    },
+    {
+      "id": "s6-quote",
+      "narration": "Asked decades later if he had any regrets, Zbigniew Brzezinski said: Regret what? That secret operation was an excellent idea.",
+      "visual": {
+        "type": "quoteCard",
+        "directive": "Brzezinski's unrepentant words.",
+        "style": {
+          "quote": {
+            "mode": "portrait",
+            "quote": "Regret what? That secret operation was an excellent idea.",
+            "attribution": "Zbigniew Brzezinski",
+            "role": "U.S. National Security Advisor, 1979–1981",
+            "portrait": {
+              "subject": "Zbigniew Brzezinski portrait",
+              "src": "assets/scene-showcase/s6-quote-portrait.jpg",
+              "focal": {
+                "x": 0.35985104942450913,
+                "y": 0.4980099502487562
+              },
+              "caption": "Zbigniew Brzezinski"
+            }
+          }
+        },
+        "overlays": [
+          {
+            "kind": "image",
+            "atMs": 2428,
+            "durationMs": 3500,
+            "anchor": "topRight",
+            "src": "assets/scene-showcase/s6-quote-ov0.jpg",
+            "subject": "Zbigniew Brzezinski White House",
+            "caption": "Brzezinski in the Carter White House",
+            "focal": {
+              "x": 0.638,
+              "y": 0.5
+            }
+          },
+          {
+            "kind": "text",
+            "atMs": 8163,
+            "durationMs": 3000,
+            "anchor": "bottomLeft",
+            "text": "\"An excellent idea\"",
+            "emphasis": true
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 10130,
+      "audioRef": "audio/scene-showcase/s6-quote.mp3",
+      "wordTimings": [
+        {
+          "word": "Asked",
+          "startMs": 100,
+          "endMs": 531
+        },
+        {
+          "word": "decades",
+          "startMs": 531,
+          "endMs": 1135
+        },
+        {
+          "word": "later",
+          "startMs": 1135,
+          "endMs": 1566
+        },
+        {
+          "word": "if",
+          "startMs": 1566,
+          "endMs": 1738
+        },
+        {
+          "word": "he",
+          "startMs": 1738,
+          "endMs": 1911
+        },
+        {
+          "word": "had",
+          "startMs": 1911,
+          "endMs": 2170
+        },
+        {
+          "word": "any",
+          "startMs": 2170,
+          "endMs": 2428
+        },
+        {
+          "word": "regrets",
+          "startMs": 2428,
+          "endMs": 3118
+        },
+        {
+          "word": "Zbigniew",
+          "startMs": 3118,
+          "endMs": 3808
+        },
+        {
+          "word": "Brzezinski",
+          "startMs": 3808,
+          "endMs": 4670
+        },
+        {
+          "word": "said",
+          "startMs": 4670,
+          "endMs": 5101
+        },
+        {
+          "word": "Regret",
+          "startMs": 5101,
+          "endMs": 5619
+        },
+        {
+          "word": "what",
+          "startMs": 5619,
+          "endMs": 6050
+        },
+        {
+          "word": "That",
+          "startMs": 6000,
+          "endMs": 6361
+        },
+        {
+          "word": "secret",
+          "startMs": 6361,
+          "endMs": 6901
+        },
+        {
+          "word": "operation",
+          "startMs": 6901,
+          "endMs": 7712
+        },
+        {
+          "word": "was",
+          "startMs": 7712,
+          "endMs": 7983
+        },
+        {
+          "word": "an",
+          "startMs": 7983,
+          "endMs": 8163
+        },
+        {
+          "word": "excellent",
+          "startMs": 8163,
+          "endMs": 8974
+        },
+        {
+          "word": "idea",
+          "startMs": 8974,
+          "endMs": 9425
+        }
+      ]
+    },
+    {
+      "id": "s7-montage",
+      "narration": "The war left a torrent of suffering behind it: refugees, ruins, and a generation raised on the gun.",
+      "visual": {
+        "type": "archivalPhoto",
+        "directive": "Rapid imagery of the war's human aftermath.",
+        "style": {
+          "photo": {
+            "mode": "montage",
+            "items": [
+              {
+                "subject": "Afghan refugees Pakistan 1980s",
+                "caption": "Millions fled to Pakistan and Iran",
+                "src": "assets/scene-showcase/s7-montage-p0.jpg",
+                "focal": {
+                  "x": 0.6025927581582476,
+                  "y": 0.5
+                }
+              },
+              {
+                "subject": "Kabul ruins Soviet war",
+                "caption": "Kabul left in ruins after years of fighting",
+                "src": "assets/scene-showcase/s7-montage-p1.jpg",
+                "focal": {
+                  "x": 0.5853260869565218,
+                  "y": 0.5
+                }
+              },
+              {
+                "subject": "Afghan mujahideen fighters",
+                "caption": "A generation raised on the gun",
+                "src": "assets/scene-showcase/s7-montage-p2.jpg",
+                "focal": {
+                  "x": 0.6366666666666667,
+                  "y": 0.5
+                }
+              },
+              {
+                "subject": "Afghan child refugee camp",
+                "caption": "Children grew up in refugee camps",
+                "src": "assets/scene-showcase/s7-montage-p3.jpg",
+                "focal": {
+                  "x": 0.3794299643727733,
+                  "y": 0.5
+                }
+              },
+              {
+                "subject": "Soviet war Afghanistan aftermath",
+                "caption": "The torrent of suffering left behind",
+                "src": "assets/scene-showcase/s7-montage-p4.jpg",
+                "focal": {
+                  "x": 0.3541666666666667,
+                  "y": 0.5
+                }
+              }
+            ]
+          }
+        },
+        "overlays": [
+          {
+            "kind": "text",
+            "atMs": 1059,
+            "durationMs": 3000,
+            "anchor": "topLeft",
+            "text": "A torrent of suffering",
+            "emphasis": true
+          },
+          {
+            "kind": "image",
+            "atMs": 3413,
+            "durationMs": 3500,
+            "anchor": "topRight",
+            "src": "assets/scene-showcase/s7-montage-ov1.jpg",
+            "subject": "Afghan refugee camp 1980s",
+            "caption": "Over 5 million refugees displaced",
+            "focal": {
+              "x": 0.6025927581582476,
+              "y": 0.5
+            }
+          },
+          {
+            "kind": "stat",
+            "atMs": 5070,
+            "durationMs": 3000,
+            "anchor": "bottomLeft",
+            "value": "5M+",
+            "label": "Afghan refugees displaced"
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 7898,
+      "audioRef": "audio/scene-showcase/s7-montage.mp3",
+      "wordTimings": [
+        {
+          "word": "The",
+          "startMs": 100,
+          "endMs": 362
+        },
+        {
+          "word": "war",
+          "startMs": 362,
+          "endMs": 623
+        },
+        {
+          "word": "left",
+          "startMs": 623,
+          "endMs": 972
+        },
+        {
+          "word": "a",
+          "startMs": 972,
+          "endMs": 1059
+        },
+        {
+          "word": "torrent",
+          "startMs": 1059,
+          "endMs": 1670
+        },
+        {
+          "word": "of",
+          "startMs": 1670,
+          "endMs": 1844
+        },
+        {
+          "word": "suffering",
+          "startMs": 1844,
+          "endMs": 2629
+        },
+        {
+          "word": "behind",
+          "startMs": 2629,
+          "endMs": 3152
+        },
+        {
+          "word": "it",
+          "startMs": 3152,
+          "endMs": 3413
+        },
+        {
+          "word": "refugees",
+          "startMs": 3413,
+          "endMs": 4198
+        },
+        {
+          "word": "ruins",
+          "startMs": 4198,
+          "endMs": 4721
+        },
+        {
+          "word": "and",
+          "startMs": 4721,
+          "endMs": 4983
+        },
+        {
+          "word": "a",
+          "startMs": 4983,
+          "endMs": 5070
+        },
+        {
+          "word": "generation",
+          "startMs": 5070,
+          "endMs": 5942
+        },
+        {
+          "word": "raised",
+          "startMs": 5942,
+          "endMs": 6465
+        },
+        {
+          "word": "on",
+          "startMs": 6465,
+          "endMs": 6640
+        },
+        {
+          "word": "the",
+          "startMs": 6640,
+          "endMs": 6901
+        },
+        {
+          "word": "gun",
+          "startMs": 6901,
+          "endMs": 7250
+        }
+      ]
+    },
+    {
+      "id": "s8-close",
+      "narration": "This is not a tragedy. It is a pattern. And until we see it, we will keep paying for it.",
+      "visual": {
+        "type": "titleCard",
+        "directive": "The closing line.",
+        "style": {
+          "titleCard": {
+            "mode": "lineReveal",
+            "title": "This is not a tragedy.\nIt is a pattern.\nAnd until we see it,\nwe will keep paying for it.",
+            "subtitle": null
+          }
+        },
+        "overlays": [
+          {
+            "kind": "text",
+            "atMs": 1343,
+            "durationMs": 3000,
+            "anchor": "bottomLeft",
+            "text": "Not a tragedy",
+            "emphasis": true
+          },
+          {
+            "kind": "text",
+            "atMs": 2965,
+            "durationMs": 3500,
+            "anchor": "bottomRight",
+            "text": "A pattern",
+            "emphasis": true
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 8282,
+      "audioRef": "audio/scene-showcase/s8-close.mp3",
+      "wordTimings": [
+        {
+          "word": "This",
+          "startMs": 100,
+          "endMs": 597
+        },
+        {
+          "word": "is",
+          "startMs": 597,
+          "endMs": 846
+        },
+        {
+          "word": "not",
+          "startMs": 846,
+          "endMs": 1219
+        },
+        {
+          "word": "a",
+          "startMs": 1219,
+          "endMs": 1343
+        },
+        {
+          "word": "tragedy",
+          "startMs": 1343,
+          "endMs": 2338
+        },
+        {
+          "word": "It",
+          "startMs": 2288,
+          "endMs": 2559
+        },
+        {
+          "word": "is",
+          "startMs": 2559,
+          "endMs": 2830
+        },
+        {
+          "word": "a",
+          "startMs": 2830,
+          "endMs": 2965
+        },
+        {
+          "word": "pattern",
+          "startMs": 2965,
+          "endMs": 4050
+        },
+        {
+          "word": "And",
+          "startMs": 4050,
+          "endMs": 4328
+        },
+        {
+          "word": "until",
+          "startMs": 4328,
+          "endMs": 4792
+        },
+        {
+          "word": "we",
+          "startMs": 4792,
+          "endMs": 4978
+        },
+        {
+          "word": "see",
+          "startMs": 4978,
+          "endMs": 5256
+        },
+        {
+          "word": "it",
+          "startMs": 5256,
+          "endMs": 5534
+        },
+        {
+          "word": "we",
+          "startMs": 5534,
+          "endMs": 5720
+        },
+        {
+          "word": "will",
+          "startMs": 5720,
+          "endMs": 6091
+        },
+        {
+          "word": "keep",
+          "startMs": 6091,
+          "endMs": 6462
+        },
+        {
+          "word": "paying",
+          "startMs": 6462,
+          "endMs": 7018
+        },
+        {
+          "word": "for",
+          "startMs": 7018,
+          "endMs": 7297
+        },
+        {
+          "word": "it",
+          "startMs": 7297,
+          "endMs": 7575
+        }
+      ]
+    }
+  ],
+  "status": "draft"
+}

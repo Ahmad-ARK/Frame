@@ -1,0 +1,561 @@
+{
+  "id": "video-modes-test",
+  "channelId": "documentary-dark",
+  "topic": "The Atomic Age",
+  "thesis": "We built it, then we couldn't look away.",
+  "scenes": [
+    {
+      "id": "s1-trinity",
+      "narration": "In the New Mexico desert, before sunrise, the first atomic bomb tore open the sky.",
+      "visual": {
+        "type": "video",
+        "directive": "Establishing footage of the first atomic detonation.",
+        "style": {
+          "video": {
+            "mode": "single",
+            "clips": [
+              {
+                "subject": "Trinity nuclear test 1945",
+                "caption": "Trinity, New Mexico — July 16, 1945",
+                "src": "assets/video-modes-test/s1-trinity-v0.mp4",
+                "kind": "video",
+                "trimBeforeMs": 612528
+              }
+            ]
+          }
+        },
+        "overlays": [
+          {
+            "kind": "text",
+            "atMs": 1361,
+            "durationMs": 3000,
+            "anchor": "bottomLeft",
+            "text": "New Mexico, July 1945",
+            "emphasis": true
+          },
+          {
+            "kind": "text",
+            "atMs": 3523,
+            "durationMs": 3500,
+            "anchor": "topRight",
+            "text": "The world's first nuclear detonation",
+            "emphasis": true
+          },
+          {
+            "kind": "image",
+            "atMs": 4514,
+            "durationMs": 4000,
+            "anchor": "bottomRight",
+            "src": "assets/video-modes-test/s1-trinity-ov2.jpg",
+            "subject": "Trinity test fireball photograph",
+            "caption": "The Trinity fireball, 0.016 seconds after detonation",
+            "focal": {
+              "x": 0.39487962021024076,
+              "y": 0.5
+            }
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 6890,
+      "audioRef": "audio/video-modes-test/s1-trinity.mp3",
+      "wordTimings": [
+        {
+          "word": "In",
+          "startMs": 100,
+          "endMs": 280
+        },
+        {
+          "word": "the",
+          "startMs": 280,
+          "endMs": 550
+        },
+        {
+          "word": "New",
+          "startMs": 550,
+          "endMs": 821
+        },
+        {
+          "word": "Mexico",
+          "startMs": 821,
+          "endMs": 1361
+        },
+        {
+          "word": "desert",
+          "startMs": 1361,
+          "endMs": 1992
+        },
+        {
+          "word": "before",
+          "startMs": 1992,
+          "endMs": 2532
+        },
+        {
+          "word": "sunrise",
+          "startMs": 2532,
+          "endMs": 3253
+        },
+        {
+          "word": "the",
+          "startMs": 3253,
+          "endMs": 3523
+        },
+        {
+          "word": "first",
+          "startMs": 3523,
+          "endMs": 3973
+        },
+        {
+          "word": "atomic",
+          "startMs": 3973,
+          "endMs": 4514
+        },
+        {
+          "word": "bomb",
+          "startMs": 4514,
+          "endMs": 4874
+        },
+        {
+          "word": "tore",
+          "startMs": 4874,
+          "endMs": 5234
+        },
+        {
+          "word": "open",
+          "startMs": 5234,
+          "endMs": 5594
+        },
+        {
+          "word": "the",
+          "startMs": 5594,
+          "endMs": 5865
+        },
+        {
+          "word": "sky",
+          "startMs": 5865,
+          "endMs": 6225
+        }
+      ]
+    },
+    {
+      "id": "s2-decade",
+      "narration": "What followed was a decade of testing: blast after blast, across the deserts and the Pacific, each one larger than the last.",
+      "visual": {
+        "type": "video",
+        "directive": "A montage of nuclear tests through the 1950s.",
+        "style": {
+          "video": {
+            "mode": "montage",
+            "clips": [
+              {
+                "subject": "nuclear bomb test Nevada desert 1950s",
+                "caption": "Nevada Test Site, early 1950s",
+                "src": "assets/video-modes-test/s2-decade-v0.mp4",
+                "kind": "video",
+                "trimBeforeMs": 308096
+              },
+              {
+                "subject": "Operation Crossroads atomic blast Bikini",
+                "caption": "Bikini Atoll, Operation Crossroads, 1946",
+                "src": "assets/video-modes-test/s2-decade-v1.mp4",
+                "kind": "video",
+                "trimBeforeMs": 240566
+              },
+              {
+                "subject": "hydrogen bomb Pacific test 1952",
+                "caption": "Enewetak Atoll — Ivy Mike, 1952",
+                "src": "assets/video-modes-test/s2-decade-v2.mp4",
+                "kind": "video",
+                "trimBeforeMs": 64126
+              },
+              {
+                "subject": "atomic bomb detonation mushroom cloud US test",
+                "caption": "U.S. nuclear testing, Nevada, mid-1950s",
+                "src": "assets/video-modes-test/s2-decade-v3.jpg",
+                "kind": "image",
+                "focal": {
+                  "x": 0.458128078817734,
+                  "y": 0.497907949790795
+                }
+              },
+              {
+                "subject": "Castle Bravo nuclear explosion Pacific 1954",
+                "caption": "Castle Bravo — largest U.S. nuclear test, 1954",
+                "src": "assets/video-modes-test/s2-decade-v4.png",
+                "kind": "image",
+                "focal": {
+                  "x": 0.398125,
+                  "y": 0.5
+                }
+              }
+            ]
+          }
+        }
+      },
+      "sources": [],
+      "durationMs": 8810,
+      "audioRef": "audio/video-modes-test/s2-decade.mp3",
+      "wordTimings": [
+        {
+          "word": "What",
+          "startMs": 100,
+          "endMs": 413
+        },
+        {
+          "word": "followed",
+          "startMs": 413,
+          "endMs": 1038
+        },
+        {
+          "word": "was",
+          "startMs": 1038,
+          "endMs": 1272
+        },
+        {
+          "word": "a",
+          "startMs": 1272,
+          "endMs": 1350
+        },
+        {
+          "word": "decade",
+          "startMs": 1350,
+          "endMs": 1819
+        },
+        {
+          "word": "of",
+          "startMs": 1819,
+          "endMs": 1976
+        },
+        {
+          "word": "testing",
+          "startMs": 1976,
+          "endMs": 2601
+        },
+        {
+          "word": "blast",
+          "startMs": 2601,
+          "endMs": 2992
+        },
+        {
+          "word": "after",
+          "startMs": 2992,
+          "endMs": 3383
+        },
+        {
+          "word": "blast",
+          "startMs": 3383,
+          "endMs": 3851
+        },
+        {
+          "word": "across",
+          "startMs": 3851,
+          "endMs": 4320
+        },
+        {
+          "word": "the",
+          "startMs": 4320,
+          "endMs": 4555
+        },
+        {
+          "word": "deserts",
+          "startMs": 4555,
+          "endMs": 5102
+        },
+        {
+          "word": "and",
+          "startMs": 5102,
+          "endMs": 5336
+        },
+        {
+          "word": "the",
+          "startMs": 5336,
+          "endMs": 5571
+        },
+        {
+          "word": "Pacific",
+          "startMs": 5571,
+          "endMs": 6196
+        },
+        {
+          "word": "each",
+          "startMs": 6196,
+          "endMs": 6509
+        },
+        {
+          "word": "one",
+          "startMs": 6509,
+          "endMs": 6743
+        },
+        {
+          "word": "larger",
+          "startMs": 6743,
+          "endMs": 7212
+        },
+        {
+          "word": "than",
+          "startMs": 7212,
+          "endMs": 7525
+        },
+        {
+          "word": "the",
+          "startMs": 7525,
+          "endMs": 7759
+        },
+        {
+          "word": "last",
+          "startMs": 7759,
+          "endMs": 8150
+        }
+      ]
+    },
+    {
+      "id": "s3-cloud",
+      "narration": "And one image burned itself into the public mind forever: the mushroom cloud, endlessly rising.",
+      "visual": {
+        "type": "video",
+        "directive": "The iconic mushroom cloud, held on screen.",
+        "style": {
+          "video": {
+            "mode": "loop",
+            "clips": [
+              {
+                "subject": "mushroom cloud rising nuclear test footage",
+                "caption": "The mushroom cloud — symbol of the atomic age",
+                "src": "assets/video-modes-test/s3-cloud-v0.jpg",
+                "kind": "image",
+                "focal": {
+                  "x": 0.4099669067549153,
+                  "y": 0.5
+                }
+              }
+            ]
+          }
+        },
+        "overlays": [
+          {
+            "kind": "text",
+            "atMs": 592,
+            "durationMs": 4000,
+            "anchor": "bottomLeft",
+            "text": "An image burned into history",
+            "emphasis": true
+          },
+          {
+            "kind": "text",
+            "atMs": 3378,
+            "durationMs": 3500,
+            "anchor": "topRight",
+            "text": "The defining symbol of the Atomic Age",
+            "emphasis": true
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 7394,
+      "audioRef": "audio/video-modes-test/s3-cloud.mp3",
+      "wordTimings": [
+        {
+          "word": "And",
+          "startMs": 100,
+          "endMs": 346
+        },
+        {
+          "word": "one",
+          "startMs": 346,
+          "endMs": 592
+        },
+        {
+          "word": "image",
+          "startMs": 592,
+          "endMs": 1001
+        },
+        {
+          "word": "burned",
+          "startMs": 1001,
+          "endMs": 1493
+        },
+        {
+          "word": "itself",
+          "startMs": 1493,
+          "endMs": 1985
+        },
+        {
+          "word": "into",
+          "startMs": 1985,
+          "endMs": 2312
+        },
+        {
+          "word": "the",
+          "startMs": 2312,
+          "endMs": 2558
+        },
+        {
+          "word": "public",
+          "startMs": 2558,
+          "endMs": 3050
+        },
+        {
+          "word": "mind",
+          "startMs": 3050,
+          "endMs": 3378
+        },
+        {
+          "word": "forever",
+          "startMs": 3378,
+          "endMs": 4033
+        },
+        {
+          "word": "the",
+          "startMs": 4033,
+          "endMs": 4279
+        },
+        {
+          "word": "mushroom",
+          "startMs": 4279,
+          "endMs": 4935
+        },
+        {
+          "word": "cloud",
+          "startMs": 4935,
+          "endMs": 5426
+        },
+        {
+          "word": "endlessly",
+          "startMs": 5426,
+          "endMs": 6164
+        },
+        {
+          "word": "rising",
+          "startMs": 6164,
+          "endMs": 6738
+        }
+      ]
+    },
+    {
+      "id": "s4-shockwave",
+      "narration": "Watch the shockwave race outward from the fireball, faster than the speed of sound.",
+      "visual": {
+        "type": "video",
+        "directive": "Freeze on the expanding shockwave with a callout.",
+        "style": {
+          "video": {
+            "mode": "freeze",
+            "clips": [
+              {
+                "subject": "nuclear explosion shockwave pressure wave film",
+                "caption": "Shockwave expanding from the fireball",
+                "src": "assets/video-modes-test/s4-shockwave-v0.jpg",
+                "kind": "image",
+                "focal": {
+                  "x": 0.4099669067549153,
+                  "y": 0.5
+                }
+              }
+            ],
+            "annotation": {
+              "x": 0.62,
+              "y": 0.45,
+              "radius": 0.12,
+              "label": "Shockwave front — travelling faster than sound"
+            },
+            "freezeAtMs": 720
+          }
+        },
+        "overlays": [
+          {
+            "kind": "text",
+            "atMs": 2812,
+            "durationMs": 3000,
+            "anchor": "bottomLeft",
+            "text": "Expanding at ~340 m/s",
+            "emphasis": true
+          },
+          {
+            "kind": "text",
+            "atMs": 5060,
+            "durationMs": 3500,
+            "anchor": "topRight",
+            "text": "Faster than sound",
+            "emphasis": true
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 6194,
+      "audioRef": "audio/video-modes-test/s4-shockwave.mp3",
+      "wordTimings": [
+        {
+          "word": "Watch",
+          "startMs": 100,
+          "endMs": 488
+        },
+        {
+          "word": "the",
+          "startMs": 488,
+          "endMs": 720
+        },
+        {
+          "word": "shockwave",
+          "startMs": 720,
+          "endMs": 1418
+        },
+        {
+          "word": "race",
+          "startMs": 1418,
+          "endMs": 1728
+        },
+        {
+          "word": "outward",
+          "startMs": 1728,
+          "endMs": 2270
+        },
+        {
+          "word": "from",
+          "startMs": 2270,
+          "endMs": 2580
+        },
+        {
+          "word": "the",
+          "startMs": 2580,
+          "endMs": 2812
+        },
+        {
+          "word": "fireball",
+          "startMs": 2812,
+          "endMs": 3510
+        },
+        {
+          "word": "faster",
+          "startMs": 3510,
+          "endMs": 3975
+        },
+        {
+          "word": "than",
+          "startMs": 3975,
+          "endMs": 4285
+        },
+        {
+          "word": "the",
+          "startMs": 4285,
+          "endMs": 4518
+        },
+        {
+          "word": "speed",
+          "startMs": 4518,
+          "endMs": 4905
+        },
+        {
+          "word": "of",
+          "startMs": 4905,
+          "endMs": 5060
+        },
+        {
+          "word": "sound",
+          "startMs": 5060,
+          "endMs": 5525
+        }
+      ]
+    }
+  ],
+  "status": "draft"
+}

@@ -1,0 +1,362 @@
+{
+  "id": "timeline-modes-test",
+  "channelId": "documentary-dark",
+  "topic": "The Arc of the Afghan Wars",
+  "thesis": "Time tells the story.",
+  "scenes": [
+    {
+      "id": "s1-decade",
+      "narration": "The war unfolded over a decade. Operation Cyclone began in July 1979. The Soviets invaded that December. The CIA sent Stinger missiles in 1986. And the last Soviet troops withdrew in February 1989.",
+      "visual": {
+        "type": "timeline",
+        "directive": "The key events of the war in sequence, with detail.",
+        "style": {
+          "timeline": {
+            "mode": "vertical",
+            "heading": "A Decade of War",
+            "events": [
+              {
+                "date": "July 1979",
+                "title": "Operation Cyclone Begins",
+                "description": "The CIA launches its covert program to arm and fund Afghan mujahideen fighting Soviet influence.",
+                "color": "accent"
+              },
+              {
+                "date": "December 1979",
+                "title": "Soviet Invasion",
+                "description": "Soviet troops pour across the border into Afghanistan, triggering a decade-long occupation.",
+                "color": "primary"
+              },
+              {
+                "date": "1986",
+                "title": "Stinger Missiles Delivered",
+                "description": "The CIA supplies Stinger surface-to-air missiles to the mujahideen, shifting the balance of air power.",
+                "color": "accent"
+              },
+              {
+                "date": "February 1989",
+                "title": "Soviet Withdrawal",
+                "description": "The last Soviet troops cross the Friendship Bridge out of Afghanistan, ending the occupation.",
+                "color": "primary"
+              }
+            ]
+          }
+        },
+        "overlays": [
+          {
+            "kind": "image",
+            "atMs": 2200,
+            "durationMs": 3500,
+            "anchor": "topRight",
+            "subject": "CIA Operation Cyclone Afghanistan",
+            "caption": "Operation Cyclone — CIA's covert arming program"
+          },
+          {
+            "kind": "text",
+            "atMs": 4400,
+            "durationMs": 3000,
+            "anchor": "bottomLeft",
+            "text": "100,000 Soviet troops cross the border",
+            "emphasis": true
+          },
+          {
+            "kind": "image",
+            "atMs": 6600,
+            "durationMs": 4000,
+            "anchor": "right",
+            "subject": "Stinger missile mujahideen Afghanistan",
+            "caption": "Stinger missiles — a war-changing weapon"
+          },
+          {
+            "kind": "image",
+            "atMs": 8800,
+            "durationMs": 3500,
+            "anchor": "bottomRight",
+            "subject": "Soviet troops withdrawal Afghanistan 1989",
+            "caption": "February 1989 — the Soviets leave"
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 11000
+    },
+    {
+      "id": "s2-eras",
+      "narration": "The story breaks into three distinct eras. From 1979 to 1989, the Soviet war. From 1989 to 2001, the vacuum left behind. From 2001 to 2021, America's own long war.",
+      "visual": {
+        "type": "timeline",
+        "directive": "The three historical phases.",
+        "style": {
+          "timeline": {
+            "mode": "eras",
+            "heading": "Three Eras of Afghan Conflict",
+            "eras": [
+              {
+                "from": "1979",
+                "to": "1989",
+                "label": "The Soviet War",
+                "color": "primary"
+              },
+              {
+                "from": "1989",
+                "to": "2001",
+                "label": "The Vacuum",
+                "color": "accent"
+              },
+              {
+                "from": "2001",
+                "to": "2021",
+                "label": "America's Long War",
+                "color": "primary"
+              }
+            ]
+          }
+        },
+        "overlays": [
+          {
+            "kind": "text",
+            "atMs": 2000,
+            "durationMs": 3000,
+            "anchor": "topLeft",
+            "text": "A decade of superpower occupation",
+            "emphasis": true
+          },
+          {
+            "kind": "text",
+            "atMs": 5000,
+            "durationMs": 3000,
+            "anchor": "center",
+            "text": "Civil war, warlords, the Taliban rise",
+            "emphasis": true
+          },
+          {
+            "kind": "stat",
+            "atMs": 8000,
+            "durationMs": 3500,
+            "anchor": "bottomRight",
+            "value": "20 years",
+            "label": "America's war in Afghanistan"
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 10000
+    },
+    {
+      "id": "s3-turning-points",
+      "narration": "Three dates changed everything. 1979, the invasion. 1989, the retreat. 2001, the blowback.",
+      "visual": {
+        "type": "timeline",
+        "directive": "Three pivotal turning points.",
+        "style": {
+          "timeline": {
+            "mode": "milestones",
+            "events": [
+              {
+                "date": "1979",
+                "title": "The Invasion",
+                "description": "Soviet forces invade Afghanistan — igniting a proxy war that reshapes global geopolitics.",
+                "color": "primary"
+              },
+              {
+                "date": "1989",
+                "title": "The Retreat",
+                "description": "The Soviet withdrawal leaves a power vacuum and a country awash in weapons and competing factions.",
+                "color": "accent"
+              },
+              {
+                "date": "2001",
+                "title": "The Blowback",
+                "description": "The September 11 attacks — carried out by forces born of the Afghan jihad — bring America into its own Afghan war.",
+                "color": "primary"
+              }
+            ]
+          }
+        },
+        "overlays": [
+          {
+            "kind": "image",
+            "atMs": 1800,
+            "durationMs": 3500,
+            "anchor": "topRight",
+            "subject": "Soviet invasion Afghanistan 1979 tanks",
+            "caption": "Soviet tanks enter Kabul, December 1979"
+          },
+          {
+            "kind": "image",
+            "atMs": 4500,
+            "durationMs": 3500,
+            "anchor": "topRight",
+            "subject": "Soviet withdrawal Afghanistan 1989 bridge",
+            "caption": "Soviet troops cross the Friendship Bridge, 1989"
+          },
+          {
+            "kind": "image",
+            "atMs": 7200,
+            "durationMs": 4000,
+            "anchor": "topRight",
+            "subject": "September 11 2001 attacks New York",
+            "caption": "September 11, 2001 — the blowback"
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 9000
+    },
+    {
+      "id": "s4-two-sides",
+      "narration": "Watch the two players move. America funneled billions to the rebels starting in 1979 and sent Stingers in 1986. The Soviets invaded in 1979 and finally withdrew in 1989.",
+      "visual": {
+        "type": "timeline",
+        "directive": "What each superpower did, side by side.",
+        "style": {
+          "timeline": {
+            "mode": "parallel",
+            "heading": "Two Superpowers, One Decade",
+            "tracks": [
+              {
+                "label": "USA",
+                "color": "accent",
+                "events": [
+                  {
+                    "date": "1979",
+                    "title": "Funneled billions to rebels"
+                  },
+                  {
+                    "date": "1986",
+                    "title": "Sent Stinger missiles"
+                  }
+                ]
+              },
+              {
+                "label": "Soviet Union",
+                "color": "primary",
+                "events": [
+                  {
+                    "date": "1979",
+                    "title": "Invaded Afghanistan"
+                  },
+                  {
+                    "date": "1989",
+                    "title": "Finally withdrew"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "overlays": [
+          {
+            "kind": "stat",
+            "atMs": 2000,
+            "durationMs": 3500,
+            "anchor": "topLeft",
+            "value": "$3B+",
+            "label": "US covert aid to Afghan rebels"
+          },
+          {
+            "kind": "image",
+            "atMs": 5000,
+            "durationMs": 3500,
+            "anchor": "topRight",
+            "subject": "Stinger missile mujahideen shoulder fired",
+            "caption": "Stingers neutralised Soviet air superiority"
+          },
+          {
+            "kind": "image",
+            "atMs": 8000,
+            "durationMs": 3500,
+            "anchor": "bottomRight",
+            "subject": "Soviet withdrawal Afghanistan convoy 1989",
+            "caption": "Soviet convoy leaves — February 1989"
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 10000
+    },
+    {
+      "id": "s5-long-arc",
+      "narration": "Trace the long arc. The Iran coup in 1953. The Iraq coup in 1963. Afghanistan in 1979. The American invasion in 2001. Libya in 2011. The fall of Kabul in 2021.",
+      "visual": {
+        "type": "timeline",
+        "directive": "The seventy-year pattern across many countries.",
+        "style": {
+          "timeline": {
+            "mode": "horizontal",
+            "heading": "Seventy Years of Intervention",
+            "events": [
+              {
+                "date": "1953",
+                "title": "Iran Coup",
+                "color": "accent"
+              },
+              {
+                "date": "1963",
+                "title": "Iraq Coup",
+                "color": "accent"
+              },
+              {
+                "date": "1979",
+                "title": "Afghanistan",
+                "color": "primary"
+              },
+              {
+                "date": "2001",
+                "title": "American Invasion",
+                "color": "primary"
+              },
+              {
+                "date": "2011",
+                "title": "Libya",
+                "color": "accent"
+              },
+              {
+                "date": "2021",
+                "title": "Fall of Kabul",
+                "color": "primary"
+              }
+            ]
+          }
+        },
+        "overlays": [
+          {
+            "kind": "image",
+            "atMs": 2200,
+            "durationMs": 3000,
+            "anchor": "topLeft",
+            "subject": "Iran 1953 coup Mohammad Mosaddegh",
+            "caption": "Iran, 1953 — Mosaddegh ousted"
+          },
+          {
+            "kind": "image",
+            "atMs": 4400,
+            "durationMs": 3500,
+            "anchor": "topRight",
+            "subject": "Soviet invasion Afghanistan 1979",
+            "caption": "Afghanistan, 1979 — the pivot point"
+          },
+          {
+            "kind": "image",
+            "atMs": 6600,
+            "durationMs": 3500,
+            "anchor": "bottomLeft",
+            "subject": "US invasion Afghanistan 2001 troops",
+            "caption": "America invades, October 2001"
+          },
+          {
+            "kind": "image",
+            "atMs": 8800,
+            "durationMs": 4000,
+            "anchor": "bottomRight",
+            "subject": "Fall of Kabul Taliban 2021",
+            "caption": "Kabul falls, August 2021"
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 11000
+    }
+  ],
+  "status": "draft"
+}

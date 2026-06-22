@@ -1,0 +1,61 @@
+{
+  "id": "asset-test",
+  "channelId": "documentary-dark",
+  "topic": "Asset stage test",
+  "thesis": "Verify Wikimedia fetch + license + download + ref wiring.",
+  "scenes": [
+    {
+      "id": "s01-radcliffe",
+      "narration": "Cyril Radcliffe, the man who drew the line.",
+      "visual": {
+        "type": "archivalPhoto",
+        "directive": "Portrait of Cyril Radcliffe, the British lawyer who drew the partition border.",
+        "style": {
+          "query": "Cyril Radcliffe portrait",
+          "caption": "Cyril Radcliffe",
+          "sublabel": "Boundary Commission · 1947"
+        },
+        "assets": [
+          {
+            "ref": "assets/asset-test/s01-radcliffe.jpg",
+            "kind": "image",
+            "source": "wikimedia",
+            "license": {
+              "type": "CC BY",
+              "attributionRequired": true,
+              "attributionText": "Elliott & Fry · CC BY 3.0 · via Wikimedia Commons"
+            }
+          }
+        ]
+      },
+      "sources": []
+    },
+    {
+      "id": "s02-refugees",
+      "narration": "Millions fled across the new border.",
+      "visual": {
+        "type": "archivalPhoto",
+        "directive": "Refugees fleeing across the India-Pakistan border during Partition.",
+        "style": {
+          "query": "Partition of India 1947 refugees",
+          "caption": "The great migration",
+          "sublabel": "Punjab · 1947"
+        },
+        "assets": [
+          {
+            "ref": "assets/asset-test/s02-refugees.jpg",
+            "kind": "image",
+            "source": "wikimedia",
+            "license": {
+              "type": "CC BY",
+              "attributionRequired": true,
+              "attributionText": "shankar s. · CC BY 2.0 · via Wikimedia Commons"
+            }
+          }
+        ]
+      },
+      "sources": []
+    }
+  ],
+  "status": "draft"
+}

@@ -1,0 +1,129 @@
+{
+  "id": "map-modes-showcase",
+  "channelId": "documentary-dark",
+  "topic": "Map Modes Showcase",
+  "thesis": "Demonstrates every supported map mode.",
+  "status": "rendered",
+  "scenes": [
+    {
+      "id": "m1-locator",
+      "narration": "LOCATOR — establish a place.",
+      "visual": {
+        "type": "map",
+        "directive": "Locator on Afghanistan.",
+        "style": {
+          "map": {
+            "mode": "locator",
+            "center": [66, 34], "scale": 1300,
+            "camera": { "keyframes": [ { "atMs": 0, "center": [66, 34], "scale": 650 }, { "atMs": 1600, "center": [66, 34], "scale": 1300 } ] },
+            "highlights": [ { "iso": "004", "color": "primary", "opacity": 0.7 } ],
+            "markers": [ { "position": [66.5, 34.2], "label": "AFGHANISTAN", "sublabel": "Soviet target · 1979", "atMs": 1700, "color": "primary" } ]
+          }
+        }
+      },
+      "sources": [], "durationMs": 6000
+    },
+    {
+      "id": "m2-tour",
+      "narration": "TOUR — hop between places as they are named.",
+      "visual": {
+        "type": "map",
+        "directive": "Tour Kabul, Kandahar, Herat.",
+        "style": {
+          "map": {
+            "mode": "tour",
+            "center": [65.7, 33.5], "scale": 1900,
+            "camera": { "keyframes": [ { "atMs": 0, "center": [66, 34], "scale": 700 }, { "atMs": 1200, "center": [69.17, 34.53], "scale": 2200 }, { "atMs": 3200, "center": [65.7, 31.6], "scale": 2200 }, { "atMs": 5000, "center": [62.2, 34.34], "scale": 2200 } ] },
+            "highlights": [ { "iso": "004", "color": "accent", "opacity": 0.4 } ],
+            "markers": [
+              { "position": [69.17, 34.53], "label": "KABUL", "atMs": 1300, "color": "primary" },
+              { "position": [65.7, 31.6], "label": "KANDAHAR", "atMs": 3300, "color": "accent" },
+              { "position": [62.2, 34.34], "label": "HERAT", "atMs": 5100, "color": "accent" }
+            ]
+          }
+        }
+      },
+      "sources": [], "durationMs": 7000
+    },
+    {
+      "id": "m3-route",
+      "narration": "ROUTE — an advance along a path.",
+      "visual": {
+        "type": "map",
+        "directive": "Soviet advance Termez to Kabul.",
+        "style": {
+          "map": {
+            "mode": "route",
+            "center": [68, 35.8], "scale": 2600,
+            "camera": { "keyframes": [ { "atMs": 0, "center": [68, 35.8], "scale": 1500 }, { "atMs": 1500, "center": [68, 35.8], "scale": 2600 } ] },
+            "highlights": [ { "iso": "004", "color": "text", "opacity": 0.18 } ],
+            "route": { "points": [ [67.28, 37.22], [67.11, 36.71], [68.5, 35.6], [69.17, 34.53] ], "atMs": 1200, "durationMs": 4500, "color": "primary", "label": "Soviet Advance · Dec 1979" }
+          }
+        }
+      },
+      "sources": [], "durationMs": 7000
+    },
+    {
+      "id": "m4-compare",
+      "narration": "COMPARE — two sides contrasted.",
+      "visual": {
+        "type": "map",
+        "directive": "India vs Pakistan.",
+        "style": {
+          "map": {
+            "mode": "compare",
+            "center": [74, 28], "scale": 850,
+            "camera": { "keyframes": [ { "atMs": 0, "center": [74, 28], "scale": 600 }, { "atMs": 1300, "center": [74, 28], "scale": 850 } ] },
+            "highlights": [ { "iso": "356", "color": "accent", "opacity": 0.5 }, { "iso": "586", "color": "primary", "opacity": 0.55 } ],
+            "sideLabels": [ { "text": "INDIA", "color": "accent" }, { "text": "PAKISTAN", "color": "primary" } ]
+          }
+        }
+      },
+      "sources": [], "durationMs": 6000
+    },
+    {
+      "id": "m5-flows",
+      "narration": "FLOWS — arrows from a source to targets.",
+      "visual": {
+        "type": "map",
+        "directive": "ISI arming the mujahideen.",
+        "style": {
+          "map": {
+            "mode": "flows",
+            "center": [69, 33.5], "scale": 1500,
+            "camera": { "keyframes": [ { "atMs": 0, "center": [69, 33.5], "scale": 1000 }, { "atMs": 1300, "center": [69, 33.5], "scale": 1500 } ] },
+            "highlights": [ { "iso": "004", "color": "primary", "opacity": 0.4 } ],
+            "markers": [ { "position": [73.06, 33.68], "label": "ISI", "sublabel": "Islamabad", "atMs": 300, "color": "accent" } ],
+            "flows": [
+              { "from": [73.06, 33.68], "to": [69.17, 34.53], "atMs": 1200, "color": "accent", "label": "Kabul" },
+              { "from": [73.06, 33.68], "to": [65.7, 31.6], "atMs": 2600, "color": "accent", "label": "Kandahar" }
+            ]
+          }
+        }
+      },
+      "sources": [], "durationMs": 6000
+    },
+    {
+      "id": "m6-spread",
+      "narration": "SPREAD — territory over time.",
+      "visual": {
+        "type": "map",
+        "directive": "Formation of the USSR.",
+        "style": {
+          "map": {
+            "mode": "spread",
+            "center": [65, 48], "scale": 360,
+            "camera": { "keyframes": [ { "atMs": 0, "center": [65, 48], "scale": 360 } ] },
+            "steps": [
+              { "iso": "643", "atMs": 1000, "color": "primary", "dateLabel": "1922" },
+              { "iso": "860", "atMs": 2600, "color": "accent", "dateLabel": "1924" },
+              { "iso": "762", "atMs": 4000, "color": "accent", "dateLabel": "1929" },
+              { "iso": "398", "atMs": 5400, "color": "accent", "dateLabel": "1936" }
+            ]
+          }
+        }
+      },
+      "sources": [], "durationMs": 7000
+    }
+  ]
+}

@@ -1,0 +1,2639 @@
+{
+  "id": "sb-generated-how-the-british-partition-created-kashmir",
+  "channelId": "documentary-dark",
+  "topic": "How the British Partition created Kashmir",
+  "thesis": "Borders drawn in haste",
+  "scenes": [
+    {
+      "id": "s01-the-unseen-wound",
+      "narration": "Look at Kashmir today. A land locked in conflict. A flashpoint for nuclear powers. This isn't ancient hatred. This is the scar left by a pen, wielded by a man who spent mere weeks on the subcontinent. His name was Cyril Radcliffe. And his hasty border-drawing would ignite a conflict that burns to this day.",
+      "visual": {
+        "type": "titleCard",
+        "directive": "Opening title card with kinetic typography. The words 'Kashmir' and 'Conflict' are prominent, with 'drawn by Radcliffe' appearing with a sense of unease. A subtle visual effect suggests a tear or a wound across the text.",
+        "style": {
+          "eyebrow": "The British Empire",
+          "title": "The Unseen Wound\nof Kashmir",
+          "subtitle": "How a rushed border ignited a century of conflict."
+        },
+        "overlays": [
+          {
+            "kind": "image",
+            "atMs": 830,
+            "durationMs": 3500,
+            "anchor": "topRight",
+            "src": "assets/sb-generated-how-the-british-partition-created-kashmir/s01-the-unseen-wound-ov0.jpg",
+            "subject": "Kashmir conflict satellite map",
+            "caption": "Kashmir — the disputed territory"
+          },
+          {
+            "kind": "image",
+            "atMs": 17690,
+            "durationMs": 3500,
+            "anchor": "bottomLeft",
+            "src": "assets/sb-generated-how-the-british-partition-created-kashmir/s01-the-unseen-wound-ov1.jpg",
+            "subject": "Cyril Radcliffe portrait",
+            "caption": "Cyril Radcliffe — border architect",
+            "attribution": "Elliott & Fry · CC BY 3.0 · via Wikimedia Commons"
+          },
+          {
+            "kind": "text",
+            "atMs": 6394,
+            "durationMs": 3000,
+            "anchor": "bottomRight",
+            "text": "Two nuclear powers. One border.",
+            "emphasis": true
+          }
+        ]
+      },
+      "sources": [
+        {
+          "claim": "Cyril Radcliffe was tasked with drawing the borders for India and Pakistan.",
+          "sourceUrl": "https://www.britannica.com/place/Radcliffe-Line",
+          "sourceTitle": "britannica.com"
+        },
+        {
+          "claim": "Radcliffe spent very little time in India before drawing the borders.",
+          "sourceUrl": "https://www.britannica.com/place/Radcliffe-Line",
+          "sourceTitle": "britannica.com"
+        },
+        {
+          "claim": "The drawing of borders led to significant conflict.",
+          "sourceUrl": ""
+        }
+      ],
+      "durationMs": 24146,
+      "audioRef": "audio/sb-generated-how-the-british-partition-created-kashmir/s01-the-unseen-wound.mp3",
+      "wordTimings": [
+        {
+          "word": "Look",
+          "startMs": 100,
+          "endMs": 587
+        },
+        {
+          "word": "at",
+          "startMs": 587,
+          "endMs": 830
+        },
+        {
+          "word": "Kashmir",
+          "startMs": 830,
+          "endMs": 1682
+        },
+        {
+          "word": "today",
+          "startMs": 1682,
+          "endMs": 2412
+        },
+        {
+          "word": "A",
+          "startMs": 2362,
+          "endMs": 2480
+        },
+        {
+          "word": "land",
+          "startMs": 2480,
+          "endMs": 2948
+        },
+        {
+          "word": "locked",
+          "startMs": 2948,
+          "endMs": 3650
+        },
+        {
+          "word": "in",
+          "startMs": 3650,
+          "endMs": 3884
+        },
+        {
+          "word": "conflict",
+          "startMs": 3884,
+          "endMs": 4938
+        },
+        {
+          "word": "A",
+          "startMs": 4938,
+          "endMs": 5042
+        },
+        {
+          "word": "flashpoint",
+          "startMs": 5042,
+          "endMs": 6082
+        },
+        {
+          "word": "for",
+          "startMs": 6082,
+          "endMs": 6394
+        },
+        {
+          "word": "nuclear",
+          "startMs": 6394,
+          "endMs": 7122
+        },
+        {
+          "word": "powers",
+          "startMs": 7122,
+          "endMs": 7850
+        },
+        {
+          "word": "This",
+          "startMs": 7850,
+          "endMs": 8263
+        },
+        {
+          "word": "isn't",
+          "startMs": 8263,
+          "endMs": 8779
+        },
+        {
+          "word": "ancient",
+          "startMs": 8779,
+          "endMs": 9502
+        },
+        {
+          "word": "hatred",
+          "startMs": 9502,
+          "endMs": 10225
+        },
+        {
+          "word": "This",
+          "startMs": 10225,
+          "endMs": 10551
+        },
+        {
+          "word": "is",
+          "startMs": 10551,
+          "endMs": 10715
+        },
+        {
+          "word": "the",
+          "startMs": 10715,
+          "endMs": 10959
+        },
+        {
+          "word": "scar",
+          "startMs": 10959,
+          "endMs": 11286
+        },
+        {
+          "word": "left",
+          "startMs": 11286,
+          "endMs": 11612
+        },
+        {
+          "word": "by",
+          "startMs": 11612,
+          "endMs": 11775
+        },
+        {
+          "word": "a",
+          "startMs": 11775,
+          "endMs": 11857
+        },
+        {
+          "word": "pen",
+          "startMs": 11857,
+          "endMs": 12183
+        },
+        {
+          "word": "wielded",
+          "startMs": 12183,
+          "endMs": 12755
+        },
+        {
+          "word": "by",
+          "startMs": 12755,
+          "endMs": 12918
+        },
+        {
+          "word": "a",
+          "startMs": 12918,
+          "endMs": 12999
+        },
+        {
+          "word": "man",
+          "startMs": 12999,
+          "endMs": 13244
+        },
+        {
+          "word": "who",
+          "startMs": 13244,
+          "endMs": 13489
+        },
+        {
+          "word": "spent",
+          "startMs": 13489,
+          "endMs": 13897
+        },
+        {
+          "word": "mere",
+          "startMs": 13897,
+          "endMs": 14223
+        },
+        {
+          "word": "weeks",
+          "startMs": 14223,
+          "endMs": 14631
+        },
+        {
+          "word": "on",
+          "startMs": 14631,
+          "endMs": 14794
+        },
+        {
+          "word": "the",
+          "startMs": 14794,
+          "endMs": 15039
+        },
+        {
+          "word": "subcontinent",
+          "startMs": 15039,
+          "endMs": 16100
+        },
+        {
+          "word": "His",
+          "startMs": 16100,
+          "endMs": 16418
+        },
+        {
+          "word": "name",
+          "startMs": 16418,
+          "endMs": 16842
+        },
+        {
+          "word": "was",
+          "startMs": 16842,
+          "endMs": 17160
+        },
+        {
+          "word": "Cyril",
+          "startMs": 17160,
+          "endMs": 17690
+        },
+        {
+          "word": "Radcliffe",
+          "startMs": 17690,
+          "endMs": 18750
+        },
+        {
+          "word": "And",
+          "startMs": 18750,
+          "endMs": 18969
+        },
+        {
+          "word": "his",
+          "startMs": 18969,
+          "endMs": 19188
+        },
+        {
+          "word": "hasty",
+          "startMs": 19188,
+          "endMs": 19554
+        },
+        {
+          "word": "border-drawing",
+          "startMs": 19554,
+          "endMs": 20576
+        },
+        {
+          "word": "would",
+          "startMs": 20576,
+          "endMs": 20941
+        },
+        {
+          "word": "ignite",
+          "startMs": 20941,
+          "endMs": 21380
+        },
+        {
+          "word": "a",
+          "startMs": 21380,
+          "endMs": 21453
+        },
+        {
+          "word": "conflict",
+          "startMs": 21453,
+          "endMs": 22037
+        },
+        {
+          "word": "that",
+          "startMs": 22037,
+          "endMs": 22329
+        },
+        {
+          "word": "burns",
+          "startMs": 22329,
+          "endMs": 22695
+        },
+        {
+          "word": "to",
+          "startMs": 22695,
+          "endMs": 22841
+        },
+        {
+          "word": "this",
+          "startMs": 22841,
+          "endMs": 23133
+        },
+        {
+          "word": "day",
+          "startMs": 23133,
+          "endMs": 23425
+        }
+      ]
+    },
+    {
+      "id": "s02-the-great-game-ends",
+      "narration": "The year is 1947. The British Empire, weakened by World War II, is finally leaving India. For centuries, they had played the 'Great Game' in Central Asia, but now their grandest prize was slipping away. They needed to divide and depart, quickly.",
+      "visual": {
+        "type": "timeline",
+        "directive": "A timeline visually representing the end of British rule. Key dates like WWII's end and India's independence are highlighted. The British Union Jack fades out, replaced by the flags of India and Pakistan.",
+        "style": {
+          "heading": "The End of an Era",
+          "events": [
+            {
+              "date": "1945",
+              "title": "World War II Ends",
+              "description": "Weakens British Imperial power."
+            },
+            {
+              "date": "August 15, 1947",
+              "title": "Independence of India",
+              "description": "British rule concludes."
+            },
+            {
+              "date": "August 14, 1947",
+              "title": "Creation of Pakistan",
+              "description": "Partition officially begins."
+            }
+          ]
+        },
+        "overlays": [
+          {
+            "kind": "image",
+            "atMs": 1892,
+            "durationMs": 3500,
+            "anchor": "topRight",
+            "src": "assets/sb-generated-how-the-british-partition-created-kashmir/s02-the-great-game-ends-ov0.jpg",
+            "subject": "India independence 1947 ceremony",
+            "caption": "August 1947 — British India ends"
+          },
+          {
+            "kind": "image",
+            "atMs": 10908,
+            "durationMs": 3500,
+            "anchor": "bottomLeft",
+            "src": "assets/sb-generated-how-the-british-partition-created-kashmir/s02-the-great-game-ends-ov1.jpg",
+            "subject": "Great Game Central Asia British map",
+            "caption": "The Great Game — British imperial rivalry"
+          },
+          {
+            "kind": "text",
+            "atMs": 17964,
+            "durationMs": 2500,
+            "anchor": "bottomRight",
+            "text": "Divide. Depart. Quickly.",
+            "emphasis": true
+          }
+        ]
+      },
+      "sources": [
+        {
+          "claim": "The British Empire was weakened by World War II.",
+          "sourceUrl": "https://www.iwm.org.uk/history/cold-war/end-of-empire",
+          "sourceTitle": "iwm.org.uk"
+        },
+        {
+          "claim": "The British left India in 1947.",
+          "sourceUrl": "https://www.britannica.com/event/Partition-of-India",
+          "sourceTitle": "britannica.com"
+        }
+      ],
+      "durationMs": 19418,
+      "audioRef": "audio/sb-generated-how-the-british-partition-created-kashmir/s02-the-great-game-ends.mp3",
+      "wordTimings": [
+        {
+          "word": "The",
+          "startMs": 100,
+          "endMs": 697
+        },
+        {
+          "word": "year",
+          "startMs": 697,
+          "endMs": 1494
+        },
+        {
+          "word": "is",
+          "startMs": 1494,
+          "endMs": 1892
+        },
+        {
+          "word": "1947",
+          "startMs": 1892,
+          "endMs": 2888
+        },
+        {
+          "word": "The",
+          "startMs": 2838,
+          "endMs": 3108
+        },
+        {
+          "word": "British",
+          "startMs": 3108,
+          "endMs": 3740
+        },
+        {
+          "word": "Empire",
+          "startMs": 3740,
+          "endMs": 4371
+        },
+        {
+          "word": "weakened",
+          "startMs": 4371,
+          "endMs": 5093
+        },
+        {
+          "word": "by",
+          "startMs": 5093,
+          "endMs": 5273
+        },
+        {
+          "word": "World",
+          "startMs": 5273,
+          "endMs": 5724
+        },
+        {
+          "word": "War",
+          "startMs": 5724,
+          "endMs": 5995
+        },
+        {
+          "word": "II",
+          "startMs": 5995,
+          "endMs": 6265
+        },
+        {
+          "word": "is",
+          "startMs": 6265,
+          "endMs": 6446
+        },
+        {
+          "word": "finally",
+          "startMs": 6446,
+          "endMs": 7077
+        },
+        {
+          "word": "leaving",
+          "startMs": 7077,
+          "endMs": 7709
+        },
+        {
+          "word": "India",
+          "startMs": 7709,
+          "endMs": 8250
+        },
+        {
+          "word": "For",
+          "startMs": 8250,
+          "endMs": 8478
+        },
+        {
+          "word": "centuries",
+          "startMs": 8478,
+          "endMs": 9237
+        },
+        {
+          "word": "they",
+          "startMs": 9237,
+          "endMs": 9541
+        },
+        {
+          "word": "had",
+          "startMs": 9541,
+          "endMs": 9769
+        },
+        {
+          "word": "played",
+          "startMs": 9769,
+          "endMs": 10224
+        },
+        {
+          "word": "the",
+          "startMs": 10224,
+          "endMs": 10452
+        },
+        {
+          "word": "Great",
+          "startMs": 10452,
+          "endMs": 10908
+        },
+        {
+          "word": "Game",
+          "startMs": 10908,
+          "endMs": 11287
+        },
+        {
+          "word": "in",
+          "startMs": 11287,
+          "endMs": 11439
+        },
+        {
+          "word": "Central",
+          "startMs": 11439,
+          "endMs": 11971
+        },
+        {
+          "word": "Asia",
+          "startMs": 11971,
+          "endMs": 12350
+        },
+        {
+          "word": "but",
+          "startMs": 12350,
+          "endMs": 12578
+        },
+        {
+          "word": "now",
+          "startMs": 12578,
+          "endMs": 12806
+        },
+        {
+          "word": "their",
+          "startMs": 12806,
+          "endMs": 13186
+        },
+        {
+          "word": "grandest",
+          "startMs": 13186,
+          "endMs": 13793
+        },
+        {
+          "word": "prize",
+          "startMs": 13793,
+          "endMs": 14173
+        },
+        {
+          "word": "was",
+          "startMs": 14173,
+          "endMs": 14400
+        },
+        {
+          "word": "slipping",
+          "startMs": 14400,
+          "endMs": 15008
+        },
+        {
+          "word": "away",
+          "startMs": 15008,
+          "endMs": 15388
+        },
+        {
+          "word": "They",
+          "startMs": 15388,
+          "endMs": 15756
+        },
+        {
+          "word": "needed",
+          "startMs": 15756,
+          "endMs": 16308
+        },
+        {
+          "word": "to",
+          "startMs": 16308,
+          "endMs": 16492
+        },
+        {
+          "word": "divide",
+          "startMs": 16492,
+          "endMs": 17044
+        },
+        {
+          "word": "and",
+          "startMs": 17044,
+          "endMs": 17320
+        },
+        {
+          "word": "depart",
+          "startMs": 17320,
+          "endMs": 17964
+        },
+        {
+          "word": "quickly",
+          "startMs": 17964,
+          "endMs": 18700
+        }
+      ]
+    },
+    {
+      "id": "s03-the-princely-states-dilemma",
+      "narration": "But India wasn't just British territory. Over 500 princely states, ruled by local Maharajas, were also part of the equation. The British declared these states could accede to either India or Pakistan, or remain independent. This decision would shape the fate of millions.",
+      "visual": {
+        "type": "map",
+        "directive": "A map of pre-partition India showing the vast number of princely states as distinct entities within the larger British Indian territory. Small icons representing rulers are scattered across the map.",
+        "style": {
+          "map": {
+            "mode": "compare",
+            "center": [
+              80.77047015,
+              26.34097745
+            ],
+            "scale": 2206,
+            "camera": {
+              "keyframes": [
+                {
+                  "atMs": 0,
+                  "center": [
+                    80.77047015,
+                    26.34097745
+                  ],
+                  "scale": 1544
+                },
+                {
+                  "atMs": 4393,
+                  "center": [
+                    80.77047015,
+                    26.34097745
+                  ],
+                  "scale": 2206
+                }
+              ]
+            },
+            "highlights": [
+              {
+                "iso": "356",
+                "color": "primary",
+                "opacity": 0.7
+              },
+              {
+                "iso": "586",
+                "color": "accent",
+                "opacity": 0.5
+              },
+              {
+                "iso": "50",
+                "color": "accent",
+                "opacity": 0.5
+              }
+            ],
+            "sideLabels": [
+              {
+                "text": "India",
+                "color": "primary"
+              },
+              {
+                "text": "Pakistan",
+                "color": "accent"
+              },
+              {
+                "text": "Bangladesh (then East Bengal)",
+                "color": "accent"
+              }
+            ]
+          }
+        },
+        "overlays": [
+          {
+            "kind": "text",
+            "atMs": 3563,
+            "durationMs": 3000,
+            "anchor": "topRight",
+            "text": "Over 500 princely states",
+            "emphasis": true
+          },
+          {
+            "kind": "image",
+            "atMs": 6284,
+            "durationMs": 3500,
+            "anchor": "bottomLeft",
+            "src": "assets/sb-generated-how-the-british-partition-created-kashmir/s03-the-princely-states-dilemma-ov1.jpg",
+            "subject": "Indian Maharaja princely state ruler",
+            "caption": "Local rulers — Maharajas of the princely states"
+          },
+          {
+            "kind": "text",
+            "atMs": 15025,
+            "durationMs": 2800,
+            "anchor": "bottomRight",
+            "text": "India. Pakistan. Or independence.",
+            "emphasis": true
+          }
+        ]
+      },
+      "sources": [
+        {
+          "claim": "India comprised over 500 princely states before partition.",
+          "sourceUrl": "https://en.wikipedia.org/wiki/List_of_princely_states_of_British_India_(by_region)",
+          "sourceTitle": "wikipedia.org"
+        },
+        {
+          "claim": "Princely states were given the option to accede to India, Pakistan, or remain independent.",
+          "sourceUrl": "https://en.wikipedia.org/wiki/Indian_Independence_Act_1947",
+          "sourceTitle": "wikipedia.org"
+        }
+      ],
+      "durationMs": 19970,
+      "audioRef": "audio/sb-generated-how-the-british-partition-created-kashmir/s03-the-princely-states-dilemma.mp3",
+      "wordTimings": [
+        {
+          "word": "But",
+          "startMs": 100,
+          "endMs": 370
+        },
+        {
+          "word": "India",
+          "startMs": 370,
+          "endMs": 820
+        },
+        {
+          "word": "wasn't",
+          "startMs": 820,
+          "endMs": 1360
+        },
+        {
+          "word": "just",
+          "startMs": 1360,
+          "endMs": 1720
+        },
+        {
+          "word": "British",
+          "startMs": 1720,
+          "endMs": 2350
+        },
+        {
+          "word": "territory",
+          "startMs": 2350,
+          "endMs": 3250
+        },
+        {
+          "word": "Over",
+          "startMs": 3200,
+          "endMs": 3563
+        },
+        {
+          "word": "500",
+          "startMs": 3563,
+          "endMs": 3835
+        },
+        {
+          "word": "princely",
+          "startMs": 3835,
+          "endMs": 4561
+        },
+        {
+          "word": "states",
+          "startMs": 4561,
+          "endMs": 5196
+        },
+        {
+          "word": "ruled",
+          "startMs": 5196,
+          "endMs": 5649
+        },
+        {
+          "word": "by",
+          "startMs": 5649,
+          "endMs": 5831
+        },
+        {
+          "word": "local",
+          "startMs": 5831,
+          "endMs": 6284
+        },
+        {
+          "word": "Maharajas",
+          "startMs": 6284,
+          "endMs": 7191
+        },
+        {
+          "word": "were",
+          "startMs": 7191,
+          "endMs": 7554
+        },
+        {
+          "word": "also",
+          "startMs": 7554,
+          "endMs": 7917
+        },
+        {
+          "word": "part",
+          "startMs": 7917,
+          "endMs": 8280
+        },
+        {
+          "word": "of",
+          "startMs": 8280,
+          "endMs": 8461
+        },
+        {
+          "word": "the",
+          "startMs": 8461,
+          "endMs": 8734
+        },
+        {
+          "word": "equation",
+          "startMs": 8734,
+          "endMs": 9550
+        },
+        {
+          "word": "The",
+          "startMs": 9550,
+          "endMs": 9778
+        },
+        {
+          "word": "British",
+          "startMs": 9778,
+          "endMs": 10310
+        },
+        {
+          "word": "declared",
+          "startMs": 10310,
+          "endMs": 10919
+        },
+        {
+          "word": "these",
+          "startMs": 10919,
+          "endMs": 11299
+        },
+        {
+          "word": "states",
+          "startMs": 11299,
+          "endMs": 11755
+        },
+        {
+          "word": "could",
+          "startMs": 11755,
+          "endMs": 12135
+        },
+        {
+          "word": "accede",
+          "startMs": 12135,
+          "endMs": 12592
+        },
+        {
+          "word": "to",
+          "startMs": 12592,
+          "endMs": 12744
+        },
+        {
+          "word": "either",
+          "startMs": 12744,
+          "endMs": 13200
+        },
+        {
+          "word": "India",
+          "startMs": 13200,
+          "endMs": 13580
+        },
+        {
+          "word": "or",
+          "startMs": 13580,
+          "endMs": 13732
+        },
+        {
+          "word": "Pakistan",
+          "startMs": 13732,
+          "endMs": 14417
+        },
+        {
+          "word": "or",
+          "startMs": 14417,
+          "endMs": 14569
+        },
+        {
+          "word": "remain",
+          "startMs": 14569,
+          "endMs": 15025
+        },
+        {
+          "word": "independent",
+          "startMs": 15025,
+          "endMs": 15938
+        },
+        {
+          "word": "This",
+          "startMs": 15938,
+          "endMs": 16269
+        },
+        {
+          "word": "decision",
+          "startMs": 16269,
+          "endMs": 16931
+        },
+        {
+          "word": "would",
+          "startMs": 16931,
+          "endMs": 17345
+        },
+        {
+          "word": "shape",
+          "startMs": 17345,
+          "endMs": 17759
+        },
+        {
+          "word": "the",
+          "startMs": 17759,
+          "endMs": 18008
+        },
+        {
+          "word": "fate",
+          "startMs": 18008,
+          "endMs": 18339
+        },
+        {
+          "word": "of",
+          "startMs": 18339,
+          "endMs": 18505
+        },
+        {
+          "word": "millions",
+          "startMs": 18505,
+          "endMs": 19250
+        }
+      ]
+    },
+    {
+      "id": "s04-radcliffe-arrives",
+      "narration": "Enter Cyril Radcliffe. A lawyer from London, with no prior experience of India. He was given just five weeks to draw the new borders for a subcontinent of 400 million people. His only tools? Maps, census data, and the urgent command of departing imperialists.",
+      "visual": {
+        "type": "comparison",
+        "directive": "Split screen. On one side, a portrait of Cyril Radcliffe looking somewhat out of place. On the other, a rapidly ticking clock superimposed over a map of India, emphasizing the limited time.",
+        "style": {
+          "heading": "The Man Who Drew the Line",
+          "left": {
+            "label": "Cyril Radcliffe",
+            "value": "0 days",
+            "description": "Lawyer from London with no prior experience of India",
+            "color": "primary"
+          },
+          "right": {
+            "label": "His Task",
+            "value": "5 weeks",
+            "description": "To partition a subcontinent of 400 million people",
+            "color": "accent"
+          }
+        },
+        "overlays": [
+          {
+            "kind": "image",
+            "atMs": 1244,
+            "durationMs": 3500,
+            "anchor": "topLeft",
+            "src": "assets/sb-generated-how-the-british-partition-created-kashmir/s04-radcliffe-arrives-ov0.png",
+            "subject": "Cyril Radcliffe barrister portrait",
+            "caption": "Cyril Radcliffe — barrister, border-drawer"
+          },
+          {
+            "kind": "stat",
+            "atMs": 11324,
+            "durationMs": 3000,
+            "anchor": "bottomRight",
+            "value": "400 million",
+            "label": "people affected by his lines"
+          },
+          {
+            "kind": "text",
+            "atMs": 7702,
+            "durationMs": 2800,
+            "anchor": "topRight",
+            "text": "Five weeks. No experience.",
+            "emphasis": true
+          }
+        ]
+      },
+      "sources": [
+        {
+          "claim": "Cyril Radcliffe was a lawyer with no prior experience of India.",
+          "sourceUrl": ""
+        },
+        {
+          "claim": "Radcliffe was given five weeks to draw the borders of India and Pakistan.",
+          "sourceUrl": ""
+        }
+      ],
+      "durationMs": 20546,
+      "audioRef": "audio/sb-generated-how-the-british-partition-created-kashmir/s04-radcliffe-arrives.mp3",
+      "wordTimings": [
+        {
+          "word": "Enter",
+          "startMs": 100,
+          "endMs": 672
+        },
+        {
+          "word": "Cyril",
+          "startMs": 672,
+          "endMs": 1244
+        },
+        {
+          "word": "Radcliffe",
+          "startMs": 1244,
+          "endMs": 2388
+        },
+        {
+          "word": "A",
+          "startMs": 2338,
+          "endMs": 2428
+        },
+        {
+          "word": "lawyer",
+          "startMs": 2428,
+          "endMs": 2972
+        },
+        {
+          "word": "from",
+          "startMs": 2972,
+          "endMs": 3335
+        },
+        {
+          "word": "London",
+          "startMs": 3335,
+          "endMs": 3970
+        },
+        {
+          "word": "with",
+          "startMs": 3970,
+          "endMs": 4333
+        },
+        {
+          "word": "no",
+          "startMs": 4333,
+          "endMs": 4514
+        },
+        {
+          "word": "prior",
+          "startMs": 4514,
+          "endMs": 4968
+        },
+        {
+          "word": "experience",
+          "startMs": 4968,
+          "endMs": 5874
+        },
+        {
+          "word": "of",
+          "startMs": 5874,
+          "endMs": 6056
+        },
+        {
+          "word": "India",
+          "startMs": 6056,
+          "endMs": 6600
+        },
+        {
+          "word": "He",
+          "startMs": 6600,
+          "endMs": 6757
+        },
+        {
+          "word": "was",
+          "startMs": 6757,
+          "endMs": 6994
+        },
+        {
+          "word": "given",
+          "startMs": 6994,
+          "endMs": 7387
+        },
+        {
+          "word": "just",
+          "startMs": 7387,
+          "endMs": 7702
+        },
+        {
+          "word": "five",
+          "startMs": 7702,
+          "endMs": 8017
+        },
+        {
+          "word": "weeks",
+          "startMs": 8017,
+          "endMs": 8411
+        },
+        {
+          "word": "to",
+          "startMs": 8411,
+          "endMs": 8568
+        },
+        {
+          "word": "draw",
+          "startMs": 8568,
+          "endMs": 8883
+        },
+        {
+          "word": "the",
+          "startMs": 8883,
+          "endMs": 9119
+        },
+        {
+          "word": "new",
+          "startMs": 9119,
+          "endMs": 9356
+        },
+        {
+          "word": "borders",
+          "startMs": 9356,
+          "endMs": 9907
+        },
+        {
+          "word": "for",
+          "startMs": 9907,
+          "endMs": 10143
+        },
+        {
+          "word": "a",
+          "startMs": 10143,
+          "endMs": 10222
+        },
+        {
+          "word": "subcontinent",
+          "startMs": 10222,
+          "endMs": 11167
+        },
+        {
+          "word": "of",
+          "startMs": 11167,
+          "endMs": 11324
+        },
+        {
+          "word": "400",
+          "startMs": 11324,
+          "endMs": 11560
+        },
+        {
+          "word": "million",
+          "startMs": 11560,
+          "endMs": 12111
+        },
+        {
+          "word": "people",
+          "startMs": 12111,
+          "endMs": 12662
+        },
+        {
+          "word": "His",
+          "startMs": 12662,
+          "endMs": 13107
+        },
+        {
+          "word": "only",
+          "startMs": 13107,
+          "endMs": 13699
+        },
+        {
+          "word": "tools",
+          "startMs": 13699,
+          "endMs": 14588
+        },
+        {
+          "word": "Maps",
+          "startMs": 14588,
+          "endMs": 15031
+        },
+        {
+          "word": "census",
+          "startMs": 15031,
+          "endMs": 15564
+        },
+        {
+          "word": "data",
+          "startMs": 15564,
+          "endMs": 16008
+        },
+        {
+          "word": "and",
+          "startMs": 16008,
+          "endMs": 16274
+        },
+        {
+          "word": "the",
+          "startMs": 16274,
+          "endMs": 16540
+        },
+        {
+          "word": "urgent",
+          "startMs": 16540,
+          "endMs": 17073
+        },
+        {
+          "word": "command",
+          "startMs": 17073,
+          "endMs": 17694
+        },
+        {
+          "word": "of",
+          "startMs": 17694,
+          "endMs": 17872
+        },
+        {
+          "word": "departing",
+          "startMs": 17872,
+          "endMs": 18671
+        },
+        {
+          "word": "imperialists",
+          "startMs": 18671,
+          "endMs": 19825
+        }
+      ]
+    },
+    {
+      "id": "s05-the-two-lines",
+      "narration": "Radcliffe's task was to divide Punjab and Bengal. The criteria were simple: geography and population demographics. Muslim-majority areas would go to Pakistan, Hindu-majority areas to India. But the reality on the ground was far messier. Rivers, villages, and communities were split arbitrarily.",
+      "visual": {
+        "type": "map",
+        "directive": "Animated map showing the Punjab region. A red line (Radcliffe Line) is drawn, cutting through agricultural land, villages, and even homes. Census data overlays highlight the mixed populations.",
+        "style": {
+          "map": {
+            "mode": "compare",
+            "center": [
+              73.75024205,
+              30.964660549999998
+            ],
+            "scale": 4200,
+            "camera": {
+              "keyframes": [
+                {
+                  "atMs": 0,
+                  "center": [
+                    73.75024205,
+                    30.964660549999998
+                  ],
+                  "scale": 2940
+                },
+                {
+                  "atMs": 5096,
+                  "center": [
+                    73.75024205,
+                    30.964660549999998
+                  ],
+                  "scale": 4200
+                }
+              ]
+            },
+            "highlights": [
+              {
+                "iso": "356",
+                "color": "primary",
+                "opacity": 0.7
+              },
+              {
+                "iso": "586",
+                "color": "accent",
+                "opacity": 0.5
+              }
+            ],
+            "sideLabels": [
+              {
+                "text": "Indian Punjab",
+                "color": "primary"
+              },
+              {
+                "text": "Pakistani Punjab",
+                "color": "accent"
+              }
+            ]
+          }
+        },
+        "overlays": [
+          {
+            "kind": "image",
+            "atMs": 2522,
+            "durationMs": 3500,
+            "anchor": "topRight",
+            "src": "assets/sb-generated-how-the-british-partition-created-kashmir/s05-the-two-lines-ov0.jpg",
+            "subject": "Punjab partition Radcliffe Line map",
+            "caption": "Punjab — divided by the Radcliffe Line"
+          },
+          {
+            "kind": "image",
+            "atMs": 3360,
+            "durationMs": 3500,
+            "anchor": "bottomLeft",
+            "src": "assets/sb-generated-how-the-british-partition-created-kashmir/s05-the-two-lines-ov1.jpg",
+            "subject": "Bengal partition 1947 map",
+            "caption": "Bengal — also split by Radcliffe's pen"
+          },
+          {
+            "kind": "text",
+            "atMs": 21374,
+            "durationMs": 3000,
+            "anchor": "bottomRight",
+            "text": "Villages. Homes. Split in two.",
+            "emphasis": true
+          }
+        ]
+      },
+      "sources": [
+        {
+          "claim": "Radcliffe was tasked with dividing Punjab and Bengal.",
+          "sourceUrl": ""
+        },
+        {
+          "claim": "The division was based on Muslim-majority and Hindu-majority areas.",
+          "sourceUrl": "https://en.wikipedia.org/wiki/Partition_of_India",
+          "sourceTitle": "wikipedia.org"
+        },
+        {
+          "claim": "The borders split villages and communities.",
+          "sourceUrl": ""
+        }
+      ],
+      "durationMs": 23162,
+      "audioRef": "audio/sb-generated-how-the-british-partition-created-kashmir/s05-the-two-lines.mp3",
+      "wordTimings": [
+        {
+          "word": "Radcliffe's",
+          "startMs": 100,
+          "endMs": 1125
+        },
+        {
+          "word": "task",
+          "startMs": 1125,
+          "endMs": 1497
+        },
+        {
+          "word": "was",
+          "startMs": 1497,
+          "endMs": 1777
+        },
+        {
+          "word": "to",
+          "startMs": 1777,
+          "endMs": 1963
+        },
+        {
+          "word": "divide",
+          "startMs": 1963,
+          "endMs": 2522
+        },
+        {
+          "word": "Punjab",
+          "startMs": 2522,
+          "endMs": 3081
+        },
+        {
+          "word": "and",
+          "startMs": 3081,
+          "endMs": 3360
+        },
+        {
+          "word": "Bengal",
+          "startMs": 3360,
+          "endMs": 4012
+        },
+        {
+          "word": "The",
+          "startMs": 3962,
+          "endMs": 4227
+        },
+        {
+          "word": "criteria",
+          "startMs": 4227,
+          "endMs": 4932
+        },
+        {
+          "word": "were",
+          "startMs": 4932,
+          "endMs": 5285
+        },
+        {
+          "word": "simple",
+          "startMs": 5285,
+          "endMs": 5902
+        },
+        {
+          "word": "geography",
+          "startMs": 5902,
+          "endMs": 6695
+        },
+        {
+          "word": "and",
+          "startMs": 6695,
+          "endMs": 6960
+        },
+        {
+          "word": "population",
+          "startMs": 6960,
+          "endMs": 7841
+        },
+        {
+          "word": "demographics",
+          "startMs": 7841,
+          "endMs": 8988
+        },
+        {
+          "word": "Muslim-majority",
+          "startMs": 8988,
+          "endMs": 10257
+        },
+        {
+          "word": "areas",
+          "startMs": 10257,
+          "endMs": 10680
+        },
+        {
+          "word": "would",
+          "startMs": 10680,
+          "endMs": 11103
+        },
+        {
+          "word": "go",
+          "startMs": 11103,
+          "endMs": 11272
+        },
+        {
+          "word": "to",
+          "startMs": 11272,
+          "endMs": 11441
+        },
+        {
+          "word": "Pakistan",
+          "startMs": 11441,
+          "endMs": 12203
+        },
+        {
+          "word": "Hindu-majority",
+          "startMs": 12203,
+          "endMs": 13388
+        },
+        {
+          "word": "areas",
+          "startMs": 13388,
+          "endMs": 13811
+        },
+        {
+          "word": "to",
+          "startMs": 13811,
+          "endMs": 13980
+        },
+        {
+          "word": "India",
+          "startMs": 13980,
+          "endMs": 14488
+        },
+        {
+          "word": "But",
+          "startMs": 14488,
+          "endMs": 14755
+        },
+        {
+          "word": "the",
+          "startMs": 14755,
+          "endMs": 15022
+        },
+        {
+          "word": "reality",
+          "startMs": 15022,
+          "endMs": 15646
+        },
+        {
+          "word": "on",
+          "startMs": 15646,
+          "endMs": 15825
+        },
+        {
+          "word": "the",
+          "startMs": 15825,
+          "endMs": 16092
+        },
+        {
+          "word": "ground",
+          "startMs": 16092,
+          "endMs": 16627
+        },
+        {
+          "word": "was",
+          "startMs": 16627,
+          "endMs": 16894
+        },
+        {
+          "word": "far",
+          "startMs": 16894,
+          "endMs": 17162
+        },
+        {
+          "word": "messier",
+          "startMs": 17162,
+          "endMs": 17875
+        },
+        {
+          "word": "Rivers",
+          "startMs": 17875,
+          "endMs": 18503
+        },
+        {
+          "word": "villages",
+          "startMs": 18503,
+          "endMs": 19310
+        },
+        {
+          "word": "and",
+          "startMs": 19310,
+          "endMs": 19579
+        },
+        {
+          "word": "communities",
+          "startMs": 19579,
+          "endMs": 20566
+        },
+        {
+          "word": "were",
+          "startMs": 20566,
+          "endMs": 20925
+        },
+        {
+          "word": "split",
+          "startMs": 20925,
+          "endMs": 21374
+        },
+        {
+          "word": "arbitrarily",
+          "startMs": 21374,
+          "endMs": 22450
+        }
+      ]
+    },
+    {
+      "id": "s06-kashmir-the-contested-prize",
+      "narration": "Kashmir, a Muslim-majority princely state in the Himalayas, presented a unique problem. Its ruler, Maharaja Hari Singh, was Hindu. India and Pakistan both claimed it. Pakistan argued it should join them based on its Muslim majority. India argued its ruler's accession was paramount. Radcliffe's commission, focused on Punjab and Bengal, had no clear directive for Kashmir itself.",
+      "visual": {
+        "type": "map",
+        "directive": "A map highlighting the geographical location of Kashmir. Arrows point from both India and Pakistan towards Kashmir, indicating competing claims. A small icon of a Hindu ruler is placed over Kashmir, contrasted with the surrounding Muslim majority.",
+        "style": {
+          "map": {
+            "mode": "flows",
+            "center": [
+              74.9576209,
+              28.008022250000003
+            ],
+            "scale": 1837,
+            "camera": {
+              "keyframes": [
+                {
+                  "atMs": 0,
+                  "center": [
+                    74.9576209,
+                    28.008022250000003
+                  ],
+                  "scale": 1286
+                },
+                {
+                  "atMs": 6321,
+                  "center": [
+                    74.9576209,
+                    28.008022250000003
+                  ],
+                  "scale": 1837
+                }
+              ]
+            },
+            "highlights": [
+              {
+                "iso": "356",
+                "color": "text",
+                "opacity": 0.22
+              },
+              {
+                "iso": "586",
+                "color": "text",
+                "opacity": 0.22
+              }
+            ],
+            "flows": [
+              {
+                "from": [
+                  75.1629584,
+                  33.6649297
+                ],
+                "to": [
+                  78.6677428,
+                  22.3511148
+                ],
+                "atMs": 10038,
+                "color": "accent",
+                "label": "India claims Kashmir"
+              },
+              {
+                "from": [
+                  75.1629584,
+                  33.6649297
+                ],
+                "to": [
+                  71.247499,
+                  30.3308401
+                ],
+                "atMs": 10851,
+                "color": "accent",
+                "label": "Pakistan claims Kashmir"
+              }
+            ],
+            "markers": [
+              {
+                "position": [
+                  75.1629584,
+                  33.6649297
+                ],
+                "label": "Kashmir",
+                "atMs": 300,
+                "color": "accent"
+              },
+              {
+                "position": [
+                  78.6677428,
+                  22.3511148
+                ],
+                "label": "India claims Kashmir",
+                "atMs": 10238,
+                "color": "primary"
+              },
+              {
+                "position": [
+                  71.247499,
+                  30.3308401
+                ],
+                "label": "Pakistan claims Kashmir",
+                "atMs": 11051,
+                "color": "primary"
+              }
+            ]
+          }
+        },
+        "overlays": [
+          {
+            "kind": "image",
+            "atMs": 7038,
+            "durationMs": 3500,
+            "anchor": "topRight",
+            "src": "assets/sb-generated-how-the-british-partition-created-kashmir/s06-kashmir-the-contested-prize-ov0.png",
+            "subject": "Maharaja Hari Singh Kashmir ruler",
+            "caption": "Maharaja Hari Singh — Kashmir's Hindu ruler"
+          },
+          {
+            "kind": "image",
+            "atMs": 3409,
+            "durationMs": 3500,
+            "anchor": "bottomLeft",
+            "src": "assets/sb-generated-how-the-british-partition-created-kashmir/s06-kashmir-the-contested-prize-ov1.png",
+            "subject": "Kashmir Himalayas landscape valley",
+            "caption": "Kashmir — jewel of the Himalayas",
+            "attribution": "Generated · FLUX"
+          },
+          {
+            "kind": "text",
+            "atMs": 20202,
+            "durationMs": 2800,
+            "anchor": "bottomRight",
+            "text": "Majority vs. ruler's choice.",
+            "emphasis": true
+          }
+        ]
+      },
+      "sources": [
+        {
+          "claim": "Kashmir was a Muslim-majority princely state ruled by a Hindu Maharaja.",
+          "sourceUrl": ""
+        },
+        {
+          "claim": "Both India and Pakistan claimed Kashmir.",
+          "sourceUrl": ""
+        },
+        {
+          "claim": "Pakistan's claim was based on Muslim majority, India's on the ruler's accession.",
+          "sourceUrl": ""
+        }
+      ],
+      "durationMs": 28730,
+      "audioRef": "audio/sb-generated-how-the-british-partition-created-kashmir/s06-kashmir-the-contested-prize.mp3",
+      "wordTimings": [
+        {
+          "word": "Kashmir",
+          "startMs": 100,
+          "endMs": 730
+        },
+        {
+          "word": "a",
+          "startMs": 730,
+          "endMs": 809
+        },
+        {
+          "word": "Muslim-majority",
+          "startMs": 809,
+          "endMs": 1991
+        },
+        {
+          "word": "princely",
+          "startMs": 1991,
+          "endMs": 2621
+        },
+        {
+          "word": "state",
+          "startMs": 2621,
+          "endMs": 3015
+        },
+        {
+          "word": "in",
+          "startMs": 3015,
+          "endMs": 3173
+        },
+        {
+          "word": "the",
+          "startMs": 3173,
+          "endMs": 3409
+        },
+        {
+          "word": "Himalayas",
+          "startMs": 3409,
+          "endMs": 4197
+        },
+        {
+          "word": "presented",
+          "startMs": 4197,
+          "endMs": 4906
+        },
+        {
+          "word": "a",
+          "startMs": 4906,
+          "endMs": 4985
+        },
+        {
+          "word": "unique",
+          "startMs": 4985,
+          "endMs": 5457
+        },
+        {
+          "word": "problem",
+          "startMs": 5457,
+          "endMs": 6088
+        },
+        {
+          "word": "Its",
+          "startMs": 6038,
+          "endMs": 6371
+        },
+        {
+          "word": "ruler",
+          "startMs": 6371,
+          "endMs": 7038
+        },
+        {
+          "word": "Maharaja",
+          "startMs": 7038,
+          "endMs": 7926
+        },
+        {
+          "word": "Hari",
+          "startMs": 7926,
+          "endMs": 8371
+        },
+        {
+          "word": "Singh",
+          "startMs": 8371,
+          "endMs": 9038
+        },
+        {
+          "word": "was",
+          "startMs": 9038,
+          "endMs": 9371
+        },
+        {
+          "word": "Hindu",
+          "startMs": 9371,
+          "endMs": 10038
+        },
+        {
+          "word": "India",
+          "startMs": 10038,
+          "endMs": 10546
+        },
+        {
+          "word": "and",
+          "startMs": 10546,
+          "endMs": 10851
+        },
+        {
+          "word": "Pakistan",
+          "startMs": 10851,
+          "endMs": 11664
+        },
+        {
+          "word": "both",
+          "startMs": 11664,
+          "endMs": 12071
+        },
+        {
+          "word": "claimed",
+          "startMs": 12071,
+          "endMs": 12782
+        },
+        {
+          "word": "it",
+          "startMs": 12782,
+          "endMs": 13088
+        },
+        {
+          "word": "Pakistan",
+          "startMs": 13088,
+          "endMs": 13709
+        },
+        {
+          "word": "argued",
+          "startMs": 13709,
+          "endMs": 14176
+        },
+        {
+          "word": "it",
+          "startMs": 14176,
+          "endMs": 14331
+        },
+        {
+          "word": "should",
+          "startMs": 14331,
+          "endMs": 14798
+        },
+        {
+          "word": "join",
+          "startMs": 14798,
+          "endMs": 15108
+        },
+        {
+          "word": "them",
+          "startMs": 15108,
+          "endMs": 15419
+        },
+        {
+          "word": "based",
+          "startMs": 15419,
+          "endMs": 15808
+        },
+        {
+          "word": "on",
+          "startMs": 15808,
+          "endMs": 15963
+        },
+        {
+          "word": "its",
+          "startMs": 15963,
+          "endMs": 16197
+        },
+        {
+          "word": "Muslim",
+          "startMs": 16197,
+          "endMs": 16663
+        },
+        {
+          "word": "majority",
+          "startMs": 16663,
+          "endMs": 17362
+        },
+        {
+          "word": "India",
+          "startMs": 17362,
+          "endMs": 17793
+        },
+        {
+          "word": "argued",
+          "startMs": 17793,
+          "endMs": 18309
+        },
+        {
+          "word": "its",
+          "startMs": 18309,
+          "endMs": 18567
+        },
+        {
+          "word": "ruler's",
+          "startMs": 18567,
+          "endMs": 19169
+        },
+        {
+          "word": "accession",
+          "startMs": 19169,
+          "endMs": 19944
+        },
+        {
+          "word": "was",
+          "startMs": 19944,
+          "endMs": 20202
+        },
+        {
+          "word": "paramount",
+          "startMs": 20202,
+          "endMs": 21062
+        },
+        {
+          "word": "Radcliffe's",
+          "startMs": 21062,
+          "endMs": 21984
+        },
+        {
+          "word": "commission",
+          "startMs": 21984,
+          "endMs": 22905
+        },
+        {
+          "word": "focused",
+          "startMs": 22905,
+          "endMs": 23491
+        },
+        {
+          "word": "on",
+          "startMs": 23491,
+          "endMs": 23658
+        },
+        {
+          "word": "Punjab",
+          "startMs": 23658,
+          "endMs": 24161
+        },
+        {
+          "word": "and",
+          "startMs": 24161,
+          "endMs": 24412
+        },
+        {
+          "word": "Bengal",
+          "startMs": 24412,
+          "endMs": 24998
+        },
+        {
+          "word": "had",
+          "startMs": 24998,
+          "endMs": 25249
+        },
+        {
+          "word": "no",
+          "startMs": 25249,
+          "endMs": 25417
+        },
+        {
+          "word": "clear",
+          "startMs": 25417,
+          "endMs": 25835
+        },
+        {
+          "word": "directive",
+          "startMs": 25835,
+          "endMs": 26589
+        },
+        {
+          "word": "for",
+          "startMs": 26589,
+          "endMs": 26840
+        },
+        {
+          "word": "Kashmir",
+          "startMs": 26840,
+          "endMs": 27426
+        },
+        {
+          "word": "itself",
+          "startMs": 27426,
+          "endMs": 28012
+        }
+      ]
+    },
+    {
+      "id": "s07-the-unleashed-fury",
+      "narration": "When the lines were finally revealed, disaster struck. Millions found themselves on the wrong side of a border they never wanted. This sparked one of the largest human migrations in history, accompanied by horrific violence. Hindus and Sikhs fleeing Pakistan, Muslims fleeing India. Over a million people died in the ensuing riots and massacres.",
+      "visual": {
+        "type": "stat",
+        "directive": "A stark, large number representing the death toll. Surrounding it, animated silhouettes of people fleeing across a dividing line, conveying mass displacement and violence.",
+        "style": {
+          "label": "Lives lost",
+          "context": "Killed in the riots and massacres following Partition, 1947",
+          "mode": "bigStat",
+          "numericValue": 1000000,
+          "valueSuffix": "+",
+          "accentColor": "primary"
+        },
+        "overlays": [
+          {
+            "kind": "image",
+            "atMs": 4853,
+            "durationMs": 3500,
+            "anchor": "topRight",
+            "src": "assets/sb-generated-how-the-british-partition-created-kashmir/s07-the-unleashed-fury-ov0.jpg",
+            "subject": "Partition India 1947 refugees migration",
+            "caption": "Millions displaced — the largest migration in history",
+            "attribution": "shankar s. · CC BY 2.0 · via Wikimedia Commons"
+          },
+          {
+            "kind": "image",
+            "atMs": 13879,
+            "durationMs": 3500,
+            "anchor": "bottomLeft",
+            "src": "assets/sb-generated-how-the-british-partition-created-kashmir/s07-the-unleashed-fury-ov1.jpg",
+            "subject": "Partition 1947 riots massacre historical",
+            "caption": "Sectarian violence swept both sides of the border",
+            "attribution": "Jorge Láscar from Australia · CC BY 2.0 · via Wikimedia Commons"
+          },
+          {
+            "kind": "text",
+            "atMs": 19518,
+            "durationMs": 3000,
+            "anchor": "bottomRight",
+            "text": "Over a million dead.",
+            "emphasis": true
+          }
+        ]
+      },
+      "sources": [
+        {
+          "claim": "Partition led to widespread violence and massacres.",
+          "sourceUrl": ""
+        },
+        {
+          "claim": "Over one million people died during the Partition.",
+          "sourceUrl": ""
+        },
+        {
+          "claim": "The Partition caused one of the largest human migrations in history.",
+          "sourceUrl": ""
+        }
+      ],
+      "durationMs": 24266,
+      "audioRef": "audio/sb-generated-how-the-british-partition-created-kashmir/s07-the-unleashed-fury.mp3",
+      "wordTimings": [
+        {
+          "word": "When",
+          "startMs": 100,
+          "endMs": 436
+        },
+        {
+          "word": "the",
+          "startMs": 436,
+          "endMs": 688
+        },
+        {
+          "word": "lines",
+          "startMs": 688,
+          "endMs": 1109
+        },
+        {
+          "word": "were",
+          "startMs": 1109,
+          "endMs": 1445
+        },
+        {
+          "word": "finally",
+          "startMs": 1445,
+          "endMs": 2033
+        },
+        {
+          "word": "revealed",
+          "startMs": 2033,
+          "endMs": 2789
+        },
+        {
+          "word": "disaster",
+          "startMs": 2789,
+          "endMs": 3462
+        },
+        {
+          "word": "struck",
+          "startMs": 3462,
+          "endMs": 4050
+        },
+        {
+          "word": "Millions",
+          "startMs": 4000,
+          "endMs": 4582
+        },
+        {
+          "word": "found",
+          "startMs": 4582,
+          "endMs": 4946
+        },
+        {
+          "word": "themselves",
+          "startMs": 4946,
+          "endMs": 5674
+        },
+        {
+          "word": "on",
+          "startMs": 5674,
+          "endMs": 5820
+        },
+        {
+          "word": "the",
+          "startMs": 5820,
+          "endMs": 6038
+        },
+        {
+          "word": "wrong",
+          "startMs": 6038,
+          "endMs": 6402
+        },
+        {
+          "word": "side",
+          "startMs": 6402,
+          "endMs": 6693
+        },
+        {
+          "word": "of",
+          "startMs": 6693,
+          "endMs": 6839
+        },
+        {
+          "word": "a",
+          "startMs": 6839,
+          "endMs": 6911
+        },
+        {
+          "word": "border",
+          "startMs": 6911,
+          "endMs": 7348
+        },
+        {
+          "word": "they",
+          "startMs": 7348,
+          "endMs": 7639
+        },
+        {
+          "word": "never",
+          "startMs": 7639,
+          "endMs": 8003
+        },
+        {
+          "word": "wanted",
+          "startMs": 8003,
+          "endMs": 8512
+        },
+        {
+          "word": "This",
+          "startMs": 8512,
+          "endMs": 8811
+        },
+        {
+          "word": "sparked",
+          "startMs": 8811,
+          "endMs": 9332
+        },
+        {
+          "word": "one",
+          "startMs": 9332,
+          "endMs": 9556
+        },
+        {
+          "word": "of",
+          "startMs": 9556,
+          "endMs": 9705
+        },
+        {
+          "word": "the",
+          "startMs": 9705,
+          "endMs": 9929
+        },
+        {
+          "word": "largest",
+          "startMs": 9929,
+          "endMs": 10450
+        },
+        {
+          "word": "human",
+          "startMs": 10450,
+          "endMs": 10823
+        },
+        {
+          "word": "migrations",
+          "startMs": 10823,
+          "endMs": 11569
+        },
+        {
+          "word": "in",
+          "startMs": 11569,
+          "endMs": 11718
+        },
+        {
+          "word": "history",
+          "startMs": 11718,
+          "endMs": 12314
+        },
+        {
+          "word": "accompanied",
+          "startMs": 12314,
+          "endMs": 13134
+        },
+        {
+          "word": "by",
+          "startMs": 13134,
+          "endMs": 13283
+        },
+        {
+          "word": "horrific",
+          "startMs": 13283,
+          "endMs": 13879
+        },
+        {
+          "word": "violence",
+          "startMs": 13879,
+          "endMs": 14550
+        },
+        {
+          "word": "Hindus",
+          "startMs": 14550,
+          "endMs": 15094
+        },
+        {
+          "word": "and",
+          "startMs": 15094,
+          "endMs": 15367
+        },
+        {
+          "word": "Sikhs",
+          "startMs": 15367,
+          "endMs": 15820
+        },
+        {
+          "word": "fleeing",
+          "startMs": 15820,
+          "endMs": 16456
+        },
+        {
+          "word": "Pakistan",
+          "startMs": 16456,
+          "endMs": 17272
+        },
+        {
+          "word": "Muslims",
+          "startMs": 17272,
+          "endMs": 17908
+        },
+        {
+          "word": "fleeing",
+          "startMs": 17908,
+          "endMs": 18543
+        },
+        {
+          "word": "India",
+          "startMs": 18543,
+          "endMs": 19088
+        },
+        {
+          "word": "Over",
+          "startMs": 19088,
+          "endMs": 19432
+        },
+        {
+          "word": "a",
+          "startMs": 19432,
+          "endMs": 19518
+        },
+        {
+          "word": "million",
+          "startMs": 19518,
+          "endMs": 20120
+        },
+        {
+          "word": "people",
+          "startMs": 20120,
+          "endMs": 20637
+        },
+        {
+          "word": "died",
+          "startMs": 20637,
+          "endMs": 20981
+        },
+        {
+          "word": "in",
+          "startMs": 20981,
+          "endMs": 21153
+        },
+        {
+          "word": "the",
+          "startMs": 21153,
+          "endMs": 21411
+        },
+        {
+          "word": "ensuing",
+          "startMs": 21411,
+          "endMs": 22013
+        },
+        {
+          "word": "riots",
+          "startMs": 22013,
+          "endMs": 22444
+        },
+        {
+          "word": "and",
+          "startMs": 22444,
+          "endMs": 22702
+        },
+        {
+          "word": "massacres",
+          "startMs": 22702,
+          "endMs": 23562
+        }
+      ]
+    },
+    {
+      "id": "s08-the-pattern-of-division",
+      "narration": "This isn't just a tragedy of division. It's a pattern. A pattern of imperial powers creating artificial borders based on simplistic logic, ignoring the complex realities of local populations, and leaving behind a legacy of instability. The Radcliffe Line, drawn in haste, became the enduring, bloody boundary that defined Kashmir's fate.",
+      "visual": {
+        "type": "titleCard",
+        "directive": "A powerful closing title card. The Radcliffe Line from the map scene is visible, but now it's fractured and bleeding into the present-day map of Kashmir, showing ongoing conflict. The text emphasizes the 'pattern' and the 'hasty' nature of the division.",
+        "style": {
+          "eyebrow": "The Legacy of Empire",
+          "title": "This Isn't a Tragedy.\nIt's a Pattern.",
+          "subtitle": "The hasty lines drawn in 1947 continue to define conflict today."
+        },
+        "overlays": [
+          {
+            "kind": "image",
+            "atMs": 3552,
+            "durationMs": 3500,
+            "anchor": "topRight",
+            "src": "assets/sb-generated-how-the-british-partition-created-kashmir/s08-the-pattern-of-division-ov0.jpg",
+            "subject": "British Empire colonial borders map Africa",
+            "caption": "A pattern — imperial borders drawn in haste"
+          },
+          {
+            "kind": "image",
+            "atMs": 16003,
+            "durationMs": 3500,
+            "anchor": "bottomLeft",
+            "src": "assets/sb-generated-how-the-british-partition-created-kashmir/s08-the-pattern-of-division-ov1.jpg",
+            "subject": "Radcliffe Line Kashmir border modern map",
+            "caption": "The Radcliffe Line — Kashmir's enduring wound"
+          },
+          {
+            "kind": "text",
+            "atMs": 17690,
+            "durationMs": 3000,
+            "anchor": "bottomRight",
+            "text": "Drawn in weeks. Bleeds for decades.",
+            "emphasis": true
+          }
+        ]
+      },
+      "sources": [
+        {
+          "claim": "Artificial borders drawn by imperial powers can lead to long-term instability.",
+          "sourceUrl": ""
+        },
+        {
+          "claim": "The Radcliffe Line is a primary cause of the ongoing Kashmir conflict.",
+          "sourceUrl": ""
+        }
+      ],
+      "durationMs": 23450,
+      "audioRef": "audio/sb-generated-how-the-british-partition-created-kashmir/s08-the-pattern-of-division.mp3",
+      "wordTimings": [
+        {
+          "word": "This",
+          "startMs": 100,
+          "endMs": 458
+        },
+        {
+          "word": "isn't",
+          "startMs": 458,
+          "endMs": 905
+        },
+        {
+          "word": "just",
+          "startMs": 905,
+          "endMs": 1263
+        },
+        {
+          "word": "a",
+          "startMs": 1263,
+          "endMs": 1352
+        },
+        {
+          "word": "tragedy",
+          "startMs": 1352,
+          "endMs": 1979
+        },
+        {
+          "word": "of",
+          "startMs": 1979,
+          "endMs": 2157
+        },
+        {
+          "word": "division",
+          "startMs": 2157,
+          "endMs": 2962
+        },
+        {
+          "word": "It's",
+          "startMs": 2912,
+          "endMs": 3424
+        },
+        {
+          "word": "a",
+          "startMs": 3424,
+          "endMs": 3552
+        },
+        {
+          "word": "pattern",
+          "startMs": 3552,
+          "endMs": 4575
+        },
+        {
+          "word": "A",
+          "startMs": 4575,
+          "endMs": 4647
+        },
+        {
+          "word": "pattern",
+          "startMs": 4647,
+          "endMs": 5152
+        },
+        {
+          "word": "of",
+          "startMs": 5152,
+          "endMs": 5297
+        },
+        {
+          "word": "imperial",
+          "startMs": 5297,
+          "endMs": 5874
+        },
+        {
+          "word": "powers",
+          "startMs": 5874,
+          "endMs": 6307
+        },
+        {
+          "word": "creating",
+          "startMs": 6307,
+          "endMs": 6885
+        },
+        {
+          "word": "artificial",
+          "startMs": 6885,
+          "endMs": 7606
+        },
+        {
+          "word": "borders",
+          "startMs": 7606,
+          "endMs": 8112
+        },
+        {
+          "word": "based",
+          "startMs": 8112,
+          "endMs": 8473
+        },
+        {
+          "word": "on",
+          "startMs": 8473,
+          "endMs": 8617
+        },
+        {
+          "word": "simplistic",
+          "startMs": 8617,
+          "endMs": 9339
+        },
+        {
+          "word": "logic",
+          "startMs": 9339,
+          "endMs": 9772
+        },
+        {
+          "word": "ignoring",
+          "startMs": 9772,
+          "endMs": 10349
+        },
+        {
+          "word": "the",
+          "startMs": 10349,
+          "endMs": 10566
+        },
+        {
+          "word": "complex",
+          "startMs": 10566,
+          "endMs": 11071
+        },
+        {
+          "word": "realities",
+          "startMs": 11071,
+          "endMs": 11721
+        },
+        {
+          "word": "of",
+          "startMs": 11721,
+          "endMs": 11865
+        },
+        {
+          "word": "local",
+          "startMs": 11865,
+          "endMs": 12226
+        },
+        {
+          "word": "populations",
+          "startMs": 12226,
+          "endMs": 13092
+        },
+        {
+          "word": "and",
+          "startMs": 13092,
+          "endMs": 13308
+        },
+        {
+          "word": "leaving",
+          "startMs": 13308,
+          "endMs": 13814
+        },
+        {
+          "word": "behind",
+          "startMs": 13814,
+          "endMs": 14247
+        },
+        {
+          "word": "a",
+          "startMs": 14247,
+          "endMs": 14319
+        },
+        {
+          "word": "legacy",
+          "startMs": 14319,
+          "endMs": 14752
+        },
+        {
+          "word": "of",
+          "startMs": 14752,
+          "endMs": 14896
+        },
+        {
+          "word": "instability",
+          "startMs": 14896,
+          "endMs": 15763
+        },
+        {
+          "word": "The",
+          "startMs": 15762,
+          "endMs": 16003
+        },
+        {
+          "word": "Radcliffe",
+          "startMs": 16003,
+          "endMs": 16726
+        },
+        {
+          "word": "Line",
+          "startMs": 16726,
+          "endMs": 17128
+        },
+        {
+          "word": "drawn",
+          "startMs": 17128,
+          "endMs": 17529
+        },
+        {
+          "word": "in",
+          "startMs": 17529,
+          "endMs": 17690
+        },
+        {
+          "word": "haste",
+          "startMs": 17690,
+          "endMs": 18172
+        },
+        {
+          "word": "became",
+          "startMs": 18172,
+          "endMs": 18654
+        },
+        {
+          "word": "the",
+          "startMs": 18654,
+          "endMs": 18895
+        },
+        {
+          "word": "enduring",
+          "startMs": 18895,
+          "endMs": 19618
+        },
+        {
+          "word": "bloody",
+          "startMs": 19618,
+          "endMs": 20100
+        },
+        {
+          "word": "boundary",
+          "startMs": 20100,
+          "endMs": 20742
+        },
+        {
+          "word": "that",
+          "startMs": 20742,
+          "endMs": 21063
+        },
+        {
+          "word": "defined",
+          "startMs": 21063,
+          "endMs": 21626
+        },
+        {
+          "word": "Kashmir's",
+          "startMs": 21626,
+          "endMs": 22348
+        },
+        {
+          "word": "fate",
+          "startMs": 22348,
+          "endMs": 22750
+        }
+      ]
+    }
+  ],
+  "status": "draft"
+}

@@ -1,0 +1,101 @@
+import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { resolve, join } from "node:path";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
+import { tmpdir } from "node:os";
+import { StoryboardSchema } from "../schema/storyboard.js";
+
+const execFileP = promisify(execFile);
+
+// Draft voiceover stage (build brief §8): generate narration audio per scene
+// with edge-tts (free Microsoft TTS — the cheap draft voice; ElevenLabs is the
+// final voice later), measure each clip, and DERIVE each scene's durationMs
+// from its narration length. Audio lands in Remotion's public/ so the renderer
+// muxes it natively via <Audio>.
+
+type Args = { input?: string; out?: string; voice: string; padMs: number };
+
+function parseArgs(argv: string[]): Args {
+  const args: Args = { voice: "en-US-ChristopherNeural", padMs: 650 };
+  const positional: string[] = [];
+  for (let i = 0; i < argv.length; i++) {
+    const raw = argv[i];
+    const eq = raw.startsWith("--") ? raw.indexOf("=") : -1;
+    const key = eq >= 0 ? raw.slice(0, eq) : raw;
+    const val = eq >= 0 ? raw.slice(eq + 1) : argv[i + 1];
+    if (key === "--out") { args.out = val; if (eq < 0) i++; }
+    else if (key === "--voice") { args.voice = val; if (eq < 0) i++; }
+    else if (key === "--pad") { args.padMs = Number(val); if (eq < 0) i++; }
+    else if (!raw.startsWith("--")) positional.push(raw);
+  }
+  args.input = positional[0];
+  return args;
+}
+
+type WordTiming = { word: string; startMs: number; endMs: number };
+
+const HELPER = resolve(process.cwd(), "..", "scripts", "edge_tts_words.py");
+
+/** Generates mp3 + per-word timings via the python edge-tts helper. */
+async function ttsToFile(
+  text: string,
+  voice: string,
+  outFile: string
+): Promise<WordTiming[]> {
+  const txt = join(tmpdir(), `vo-${Math.random().toString(36).slice(2)}.txt`);
+  const timingsFile = join(tmpdir(), `vo-${Math.random().toString(36).slice(2)}.json`);
+  await writeFile(txt, text, "utf8");
+  await execFileP(
+    "python",
+    [HELPER, "--text-file", txt, "--voice", voice, "--out-audio", outFile, "--out-timings", timingsFile],
+    { maxBuffer: 1024 * 1024 * 16 }
+  );
+  const parsed = JSON.parse(await readFile(timingsFile, "utf8"));
+  return parsed.words ?? [];
+}
+
+async function durationMs(file: string): Promise<number> {
+  const { stdout } = await execFileP("ffprobe", [
+    "-v", "error", "-show_entries", "format=duration",
+    "-of", "default=noprint_wrappers=1:nokey=1", file,
+  ]);
+  return Math.round(parseFloat(stdout.trim()) * 1000);
+}
+
+async function main() {
+  const args = parseArgs(process.argv.slice(2));
+  if (!args.input) {
+    console.error("Usage: npx tsx src/cli/voiceover.ts <storyboard.json> [--voice=en-US-ChristopherNeural] [--pad=650] [--out=path]");
+    process.exit(1);
+  }
+
+  const inPath = resolve(args.input);
+  const outPath = resolve(args.out ?? args.input);
+  const sb = StoryboardSchema.parse(JSON.parse(await readFile(inPath, "utf8")));
+
+  const publicDir = resolve(process.cwd(), "..", "remotion", "public");
+  const audioDir = join(publicDir, "audio", sb.id);
+  await mkdir(audioDir, { recursive: true });
+
+  console.error(`Generating voiceover for "${sb.topic}" (voice: ${args.voice}) ...\n`);
+  let total = 0;
+  for (const scene of sb.scenes) {
+    const file = join(audioDir, `${scene.id}.mp3`);
+    const words = await ttsToFile(scene.narration, args.voice, file);
+    const ms = await durationMs(file);
+    scene.durationMs = ms + args.padMs;
+    scene.audioRef = `audio/${sb.id}/${scene.id}.mp3`;
+    if (words.length) scene.wordTimings = words;
+    total += scene.durationMs;
+    console.error(`  ✓ ${scene.id.padEnd(34)} ${(scene.durationMs / 1000).toFixed(1)}s · ${words.length} words`);
+  }
+
+  const validated = StoryboardSchema.parse(sb);
+  await writeFile(outPath, JSON.stringify(validated, null, 2) + "\n", "utf8");
+  console.error(`\n✓ Voiced ${sb.scenes.length} scenes · total ${(total / 1000).toFixed(1)}s → ${outPath}`);
+}
+
+main().catch((err) => {
+  console.error("\n✗ Voiceover failed:\n" + (err as Error).message);
+  process.exit(1);
+});

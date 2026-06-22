@@ -1,0 +1,219 @@
+{
+  "id": "sb-phase1-soviet-afghan-full",
+  "channelId": "documentary-dark",
+  "topic": "Who Won the Soviet-Afghan War",
+  "thesis": "The Soviet-Afghan War created the conditions for its own aftermath. The same networks that defeated the Soviets became the enemy America spent forty years fighting. Victory and defeat are the same word, spoken by different people at different times.",
+  "scenes": [
+    {
+      "id": "s01-title",
+      "narration": "In 1989, the last Soviet soldier crossed the bridge out of Afghanistan. America called it a Cold War victory. Pakistan called it strategic genius. The mujahideen called it God's triumph. Twelve years later, those same mujahideen flew planes into the World Trade Center.",
+      "visual": {
+        "type": "titleCard",
+        "directive": "Full-screen editorial title card. Dark. Syne 800 display type. Red on second line.",
+        "style": {
+          "eyebrow": "GEOPOLITICS · 1979–2021",
+          "title": "WHO WON THE\nSOVIET-AFGHAN WAR",
+          "subtitle": "Four stories. One pattern. Forty years of consequences."
+        }
+      },
+      "sources": [],
+      "durationMs": 5000
+    },
+    {
+      "id": "s02-map-invasion",
+      "narration": "December 1979. Soviet tanks cross the Amu Darya river into Afghanistan. But the war didn't start in 1979. It started six months earlier — when the United States began secretly funding anti-communist fighters inside Afghanistan. This wasn't a defense. This was a trap.",
+      "visual": {
+        "type": "map",
+        "directive": "Central Asia. Afghanistan highlighted red. Soviet invasion route animating south from Amu Darya. Elevated labels.",
+        "style": {
+          "center": [65, 33],
+          "scale": 1380,
+          "cameraAnimation": {
+            "keyframes": [
+              { "atMs": 0,    "center": [64.0, 36.5], "scale": 640  },
+              { "atMs": 2800, "center": [65.0, 33.0], "scale": 1380 },
+              { "atMs": 5500, "center": [65.2, 35.0], "scale": 1420 }
+            ]
+          },
+          "highlightCountries": [
+            { "iso": "004", "name": "AFGHANISTAN", "color": "primary", "opacity": 0.92 },
+            { "iso": "398", "name": "KAZAKHSTAN",   "color": "accent",  "opacity": 0.28 },
+            { "iso": "860", "name": "UZBEKISTAN",   "color": "accent",  "opacity": 0.28 },
+            { "iso": "762", "name": "TAJIKISTAN",   "color": "accent",  "opacity": 0.28 },
+            { "iso": "795", "name": "TURKMENISTAN", "color": "accent",  "opacity": 0.28 },
+            { "iso": "643", "name": "RUSSIA",       "color": "accent",  "opacity": 0.14 },
+            { "iso": "586", "name": "PAKISTAN",     "color": "text",    "opacity": 0.18 }
+          ],
+          "labels": [
+            { "position": [67.7, 33.9], "text": "AFGHANISTAN", "sublabel": "Soviet Target · 1979", "enterAtMs": 1200 },
+            { "position": [59.0, 41.5], "text": "U.S.S.R.",    "sublabel": "Soviet Union",          "enterAtMs": 2600 },
+            { "position": [70.5, 30.2], "text": "PAKISTAN",    "sublabel": "CIA Staging Ground",    "enterAtMs": 4000 }
+          ],
+          "invasionRoute": {
+            "waypoints": [
+              [63.5, 37.8], [63.8, 37.0], [64.2, 36.2],
+              [65.0, 35.5], [65.8, 34.9], [66.5, 34.4], [67.0, 34.1]
+            ],
+            "enterAtMs": 5500,
+            "animDurationMs": 5000,
+            "color": "primary",
+            "label": "Soviet Advance · Dec 1979"
+          }
+        }
+      },
+      "sources": [
+        {
+          "claim": "Soviet forces crossed the Amu Darya river on December 25, 1979",
+          "sourceUrl": "https://en.wikipedia.org/wiki/Soviet%E2%80%93Afghan_War",
+          "sourceTitle": "Soviet–Afghan War — Wikipedia"
+        }
+      ],
+      "durationMs": 14000
+    },
+    {
+      "id": "s03-timeline-war",
+      "narration": "The war unfolded over a decade. But it was never just a war between two armies. It was an engineered trap that worked exactly as planned — and then kept working, long after anyone wanted it to.",
+      "visual": {
+        "type": "timeline",
+        "directive": "Key events of the Soviet-Afghan War and its aftermath, 1979–2001.",
+        "style": {
+          "heading": "The War — And What It Left Behind",
+          "events": [
+            { "date": "Jul 1979",  "title": "Operation Cyclone begins", "description": "Carter signs the first CIA directive funding Afghan mujahideen", "color": "accent" },
+            { "date": "Dec 1979",  "title": "Soviet invasion", "description": "125,000 troops cross the Amu Darya. The trap is sprung.", "color": "primary" },
+            { "date": "1980–86",   "title": "$3B flows through Pakistan's ISI", "description": "The largest covert operation in CIA history", "color": "accent" },
+            { "date": "1986",      "title": "Stinger missiles change the war", "description": "CIA supplies shoulder-fired anti-aircraft weapons — Soviet air superiority ends", "color": "primary" },
+            { "date": "Feb 1989",  "title": "Last Soviet troops withdraw", "description": "The Friendship Bridge. The mujahideen claim victory.", "color": "primary" },
+            { "date": "1991",      "title": "USSR collapses", "description": "Reagan-era officials take credit. Charlie Wilson gets a movie.", "color": "accent" },
+            { "date": "Sep 2001",  "title": "9/11", "description": "The network America built executes the deadliest attack on US soil", "color": "primary" }
+          ]
+        }
+      },
+      "sources": [
+        {
+          "claim": "The CIA's Operation Cyclone funnelled approximately $3 billion to Afghan mujahideen through Pakistan",
+          "sourceUrl": "https://en.wikipedia.org/wiki/Operation_Cyclone",
+          "sourceTitle": "Operation Cyclone — Wikipedia"
+        }
+      ],
+      "durationMs": 14000
+    },
+    {
+      "id": "s04-stat-cyclone",
+      "narration": "Six billion dollars. That's the total cost of Operation Cyclone — the CIA's covert program to arm and train Afghan fighters. Adjusted for inflation. The largest covert operation in CIA history. Channelled entirely through Pakistan's intelligence agency, the ISI.",
+      "visual": {
+        "type": "stat",
+        "directive": "Single large statistic — Operation Cyclone total cost.",
+        "style": {
+          "mode": "bigStat",
+          "valuePrefix": "$",
+          "numericValue": 6,
+          "valueSuffix": "B",
+          "label": "Operation Cyclone",
+          "context": "CIA funding to Afghan mujahideen · 1980–1989 · Inflation-adjusted · Channelled through Pakistan's ISI",
+          "accentColor": "accent"
+        }
+      },
+      "sources": [
+        {
+          "claim": "Total US covert aid to Afghan mujahideen estimated at $6 billion including Saudi match",
+          "sourceUrl": "https://en.wikipedia.org/wiki/Operation_Cyclone",
+          "sourceTitle": "Operation Cyclone — Wikipedia"
+        }
+      ],
+      "durationMs": 8000
+    },
+    {
+      "id": "s05-stat-cost",
+      "narration": "The official accounts say everyone won. Let's test that against what actually happened. The Soviets lost fifteen thousand soldiers and an empire. Pakistan suffered three million refugees, a Kalashnikov culture, and sixty thousand dead in the war on terror it helped start. And Afghanistan? Two million dead. Forty-five years of continuous war.",
+      "visual": {
+        "type": "stat",
+        "directive": "Bar chart showing the real cost of the war per actor.",
+        "style": {
+          "mode": "barChart",
+          "chartTitle": "Who paid the real cost",
+          "label": "Killed in the Soviet-Afghan War and its direct consequences",
+          "chartData": [
+            { "label": "Afghanistan",  "sublabel": "1979–present", "value": 2000000, "color": "primary" },
+            { "label": "Pakistan",     "sublabel": "War on Terror consequences", "value": 60000, "color": "primary" },
+            { "label": "Soviet Union", "sublabel": "1979–1989",   "value": 15000,   "color": "accent" },
+            { "label": "USA",          "sublabel": "9/11 + Afghanistan war", "value": 5425, "color": "accent" }
+          ]
+        }
+      },
+      "sources": [
+        {
+          "claim": "Estimates of Afghan deaths since 1979 range from 1.5 to 2 million",
+          "sourceUrl": "https://en.wikipedia.org/wiki/Soviet%E2%80%93Afghan_War",
+          "sourceTitle": "Soviet–Afghan War — Wikipedia"
+        },
+        {
+          "claim": "Pakistan lost approximately 60,000 people in the War on Terror",
+          "sourceUrl": "https://en.wikipedia.org/wiki/Pakistan_and_the_War_on_Terror",
+          "sourceTitle": "Pakistan and the War on Terror — Wikipedia"
+        }
+      ],
+      "durationMs": 12000
+    },
+    {
+      "id": "s06-timeline-pattern",
+      "narration": "Now here's the part I want you to sit with. Do you see the pattern? In 1953, America overthrew Iran's elected government. The Shah's collapse created America's enemy for forty years. In 1963, America backed the Ba'ath Party in Iraq. That same party produced Saddam Hussein, then the Iraq War, then ISIS. Build a proxy. Declare victory. Abandon them. Then go to war with them when they become tomorrow's enemy. It's the same playbook. Every time.",
+      "visual": {
+        "type": "timeline",
+        "directive": "The recurring pattern of US proxy creation and blowback, 1953–2021.",
+        "style": {
+          "heading": "The Pattern — Not A Tragedy. A Playbook.",
+          "events": [
+            { "date": "1953", "title": "Iran — Mossadegh overthrown", "description": "CIA installs the Shah. His fall in 1979 creates America's enemy for 40 years.", "color": "accent" },
+            { "date": "1963", "title": "Iraq — Ba'ath Party backed", "description": "Same party produces Saddam. Then the Iraq War. Then ISIS.", "color": "accent" },
+            { "date": "1979", "title": "Afghanistan — Operation Cyclone", "description": "Mujahideen built into a war machine. Then abandoned.", "color": "primary" },
+            { "date": "2001", "title": "America invades Afghanistan", "description": "Hunting the network it had created. $2 trillion. 20 years.", "color": "primary" },
+            { "date": "2011", "title": "Libya — rebels armed to remove Gaddafi", "description": "Those weapons end up arming jihadi networks across Africa.", "color": "accent" },
+            { "date": "2021", "title": "America's own bridge crossing", "description": "Defeated by the same fighters it had created. The pattern completes.", "color": "primary" }
+          ]
+        }
+      },
+      "sources": [
+        {
+          "claim": "The 1953 Iranian coup d'état was orchestrated by the CIA and British intelligence",
+          "sourceUrl": "https://en.wikipedia.org/wiki/1953_Iranian_coup_d%27%C3%A9tat",
+          "sourceTitle": "1953 Iranian coup d'état — Wikipedia"
+        }
+      ],
+      "durationMs": 14000
+    },
+    {
+      "id": "s07-stat-afghans",
+      "narration": "In the official accounts, everyone won. In reality, only one group of people lost everything. And they were the only people who never claimed victory in the first place. The Afghans.",
+      "visual": {
+        "type": "stat",
+        "directive": "Single devastating statistic — Afghan dead since 1979.",
+        "style": {
+          "mode": "bigStat",
+          "numericValue": 2000000,
+          "label": "Afghans killed since 1979",
+          "context": "The only people who never claimed victory in the first place.",
+          "accentColor": "primary"
+        }
+      },
+      "sources": [],
+      "durationMs": 9000
+    },
+    {
+      "id": "s08-close",
+      "narration": "This is why I called this a pattern, not a tragedy. Tragedies happen once. Patterns happen because we don't see them happening. Until we see the pattern, we will keep paying for it. The Afghans paid first. They won't be the last.",
+      "visual": {
+        "type": "titleCard",
+        "directive": "Closing title card. Dark. Stark. Final.",
+        "style": {
+          "eyebrow": "UNTIL WE SEE THE PATTERN",
+          "title": "WE WILL KEEP\nPAYING FOR IT",
+          "subtitle": "The Afghans paid first. They won't be the last."
+        }
+      },
+      "sources": [],
+      "durationMs": 7000
+    }
+  ],
+  "status": "draft"
+}

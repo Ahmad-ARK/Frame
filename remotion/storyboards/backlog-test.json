@@ -1,0 +1,894 @@
+{
+  "id": "backlog-modes-test",
+  "channelId": "documentary-dark",
+  "topic": "The Paper Trail of a Secret War",
+  "thesis": "It was all written down.",
+  "scenes": [
+    {
+      "id": "s1-headline",
+      "narration": "On the morning of September twelfth, one headline said it all: the United States had been attacked.",
+      "visual": {
+        "type": "newspaper",
+        "directive": "The front page the day after 9/11.",
+        "style": {
+          "newspaper": {
+            "mode": "headline",
+            "paper": "THE NEW YORK TIMES",
+            "headline": "U.S. ATTACKED",
+            "dek": "Hijacked jets destroy World Trade Center and hit Pentagon in day of terror",
+            "date": "September 12, 2001"
+          }
+        },
+        "overlays": [
+          {
+            "kind": "image",
+            "atMs": 5527,
+            "durationMs": 3500,
+            "anchor": "bottomRight",
+            "src": "assets/backlog-modes-test/s1-headline-ov0.jpg",
+            "subject": "World Trade Center 9/11 smoke",
+            "caption": "September 11, 2001",
+            "focal": {
+              "x": 0.5,
+              "y": 0.5833333333333334
+            }
+          },
+          {
+            "kind": "text",
+            "atMs": 2594,
+            "durationMs": 2500,
+            "anchor": "topLeft",
+            "text": "The day that changed everything",
+            "emphasis": true
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 6842,
+      "audioRef": "audio/backlog-modes-test/s1-headline.mp3",
+      "wordTimings": [
+        {
+          "word": "On",
+          "startMs": 100,
+          "endMs": 247
+        },
+        {
+          "word": "the",
+          "startMs": 247,
+          "endMs": 467
+        },
+        {
+          "word": "morning",
+          "startMs": 467,
+          "endMs": 980
+        },
+        {
+          "word": "of",
+          "startMs": 980,
+          "endMs": 1127
+        },
+        {
+          "word": "September",
+          "startMs": 1127,
+          "endMs": 1787
+        },
+        {
+          "word": "twelfth",
+          "startMs": 1787,
+          "endMs": 2374
+        },
+        {
+          "word": "one",
+          "startMs": 2374,
+          "endMs": 2594
+        },
+        {
+          "word": "headline",
+          "startMs": 2594,
+          "endMs": 3180
+        },
+        {
+          "word": "said",
+          "startMs": 3180,
+          "endMs": 3474
+        },
+        {
+          "word": "it",
+          "startMs": 3474,
+          "endMs": 3620
+        },
+        {
+          "word": "all",
+          "startMs": 3620,
+          "endMs": 3914
+        },
+        {
+          "word": "the",
+          "startMs": 3914,
+          "endMs": 4134
+        },
+        {
+          "word": "United",
+          "startMs": 4134,
+          "endMs": 4574
+        },
+        {
+          "word": "States",
+          "startMs": 4574,
+          "endMs": 5014
+        },
+        {
+          "word": "had",
+          "startMs": 5014,
+          "endMs": 5234
+        },
+        {
+          "word": "been",
+          "startMs": 5234,
+          "endMs": 5527
+        },
+        {
+          "word": "attacked",
+          "startMs": 5527,
+          "endMs": 6187
+        }
+      ]
+    },
+    {
+      "id": "s2-pressrun",
+      "narration": "Across the decade, the press tracked every turn: the invasion, the secret funding, and the final retreat.",
+      "visual": {
+        "type": "newspaper",
+        "directive": "A flurry of headlines across the years of the war.",
+        "style": {
+          "newspaper": {
+            "mode": "montage",
+            "items": [
+              {
+                "headline": "SOVIETS INVADE AFGHANISTAN",
+                "paper": "THE WASHINGTON POST",
+                "date": "December 28, 1979"
+              },
+              {
+                "headline": "CIA CHANNELS ARMS TO AFGHAN REBELS",
+                "paper": "THE NEW YORK TIMES",
+                "date": "February 14, 1980"
+              },
+              {
+                "headline": "U.S. FUNDING FOR MUJAHIDEEN REACHES $3 BILLION",
+                "paper": "THE WALL STREET JOURNAL",
+                "date": "March 9, 1985"
+              },
+              {
+                "headline": "LAST SOVIET TROOPS LEAVE AFGHANISTAN",
+                "paper": "THE GUARDIAN",
+                "date": "February 16, 1989"
+              }
+            ]
+          }
+        }
+      },
+      "sources": [],
+      "durationMs": 7826,
+      "audioRef": "audio/backlog-modes-test/s2-pressrun.mp3",
+      "wordTimings": [
+        {
+          "word": "Across",
+          "startMs": 100,
+          "endMs": 576
+        },
+        {
+          "word": "the",
+          "startMs": 576,
+          "endMs": 814
+        },
+        {
+          "word": "decade",
+          "startMs": 814,
+          "endMs": 1370
+        },
+        {
+          "word": "the",
+          "startMs": 1370,
+          "endMs": 1608
+        },
+        {
+          "word": "press",
+          "startMs": 1608,
+          "endMs": 2004
+        },
+        {
+          "word": "tracked",
+          "startMs": 2004,
+          "endMs": 2560
+        },
+        {
+          "word": "every",
+          "startMs": 2560,
+          "endMs": 2957
+        },
+        {
+          "word": "turn",
+          "startMs": 2957,
+          "endMs": 3354
+        },
+        {
+          "word": "the",
+          "startMs": 3354,
+          "endMs": 3592
+        },
+        {
+          "word": "invasion",
+          "startMs": 3592,
+          "endMs": 4306
+        },
+        {
+          "word": "the",
+          "startMs": 4306,
+          "endMs": 4544
+        },
+        {
+          "word": "secret",
+          "startMs": 4544,
+          "endMs": 5020
+        },
+        {
+          "word": "funding",
+          "startMs": 5020,
+          "endMs": 5655
+        },
+        {
+          "word": "and",
+          "startMs": 5655,
+          "endMs": 5893
+        },
+        {
+          "word": "the",
+          "startMs": 5893,
+          "endMs": 6131
+        },
+        {
+          "word": "final",
+          "startMs": 6131,
+          "endMs": 6528
+        },
+        {
+          "word": "retreat",
+          "startMs": 6528,
+          "endMs": 7162
+        }
+      ]
+    },
+    {
+      "id": "s3-memo",
+      "narration": "A 1979 White House memorandum laid out the plan in plain language, addressed to the President himself.",
+      "visual": {
+        "type": "document",
+        "directive": "Brzezinski's reconstructed memo to Carter.",
+        "style": {
+          "document": {
+            "mode": "typed",
+            "title": "MEMORANDUM",
+            "source": "WHITE HOUSE · NATIONAL SECURITY COUNCIL · 1979",
+            "lines": [
+              "TO: THE PRESIDENT",
+              "FROM: ZBIGNIEW BRZEZINSKI, NATIONAL SECURITY ADVISOR",
+              "DATE: DECEMBER 26, 1979",
+              "SUBJECT: REFLECTIONS ON SOVIET INTERVENTION IN AFGHANISTAN",
+              "",
+              "We now have the opportunity of giving to the USSR its Vietnam war.",
+              "For almost ten years, Moscow had to carry on a war unsupportable by",
+              "the government, a conflict that brought about the demoralization and",
+              "finally the breakup of the Soviet empire.",
+              "",
+              "We should covertly fund and arm Afghan resistance fighters",
+              "to bog down Soviet forces in a prolonged guerrilla campaign.",
+              "The opportunity is there. The question is whether we have the will."
+            ],
+            "highlight": "giving to the USSR its Vietnam war",
+            "stamp": "DECLASSIFIED",
+            "highlightAtMs": 2959
+          }
+        },
+        "overlays": [
+          {
+            "kind": "image",
+            "atMs": 1325,
+            "durationMs": 3500,
+            "anchor": "bottomRight",
+            "src": "assets/backlog-modes-test/s3-memo-ov0.jpg",
+            "subject": "Zbigniew Brzezinski portrait",
+            "caption": "Zbigniew Brzezinski, National Security Advisor",
+            "focal": {
+              "x": 0.35985104942450913,
+              "y": 0.4980099502487562
+            }
+          },
+          {
+            "kind": "image",
+            "atMs": 5736,
+            "durationMs": 3000,
+            "anchor": "topRight",
+            "src": "assets/backlog-modes-test/s3-memo-ov1.jpg",
+            "subject": "Jimmy Carter portrait 1979",
+            "caption": "President Jimmy Carter",
+            "focal": {
+              "x": 0.5,
+              "y": 0.5593703148425787
+            }
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 7778,
+      "audioRef": "audio/backlog-modes-test/s3-memo.mp3",
+      "wordTimings": [
+        {
+          "word": "A",
+          "startMs": 100,
+          "endMs": 182
+        },
+        {
+          "word": "1979",
+          "startMs": 182,
+          "endMs": 508
+        },
+        {
+          "word": "White",
+          "startMs": 508,
+          "endMs": 917
+        },
+        {
+          "word": "House",
+          "startMs": 917,
+          "endMs": 1325
+        },
+        {
+          "word": "memorandum",
+          "startMs": 1325,
+          "endMs": 2142
+        },
+        {
+          "word": "laid",
+          "startMs": 2142,
+          "endMs": 2469
+        },
+        {
+          "word": "out",
+          "startMs": 2469,
+          "endMs": 2714
+        },
+        {
+          "word": "the",
+          "startMs": 2714,
+          "endMs": 2959
+        },
+        {
+          "word": "plan",
+          "startMs": 2959,
+          "endMs": 3286
+        },
+        {
+          "word": "in",
+          "startMs": 3286,
+          "endMs": 3449
+        },
+        {
+          "word": "plain",
+          "startMs": 3449,
+          "endMs": 3858
+        },
+        {
+          "word": "language",
+          "startMs": 3858,
+          "endMs": 4593
+        },
+        {
+          "word": "addressed",
+          "startMs": 4593,
+          "endMs": 5328
+        },
+        {
+          "word": "to",
+          "startMs": 5328,
+          "endMs": 5491
+        },
+        {
+          "word": "the",
+          "startMs": 5491,
+          "endMs": 5736
+        },
+        {
+          "word": "President",
+          "startMs": 5736,
+          "endMs": 6472
+        },
+        {
+          "word": "himself",
+          "startMs": 6472,
+          "endMs": 7125
+        }
+      ]
+    },
+    {
+      "id": "s4-redacted",
+      "narration": "The field reports were heavily censored. But one line survived the black ink: the total disbursed exceeded three billion dollars.",
+      "visual": {
+        "type": "document",
+        "directive": "A redacted CIA field report with one line visible.",
+        "style": {
+          "document": {
+            "mode": "redacted",
+            "title": "FIELD REPORT",
+            "source": "CENTRAL INTELLIGENCE AGENCY · CLASSIFIED",
+            "lines": [
+              "████████████████████████████████████████████████████████",
+              "████████████████████████████████████████████████████████",
+              "████████████████████████████████████████████████████████",
+              "████████████████████████████████████████████████████████",
+              "The total disbursed exceeded three billion dollars.",
+              "████████████████████████████████████████████████████████",
+              "████████████████████████████████████████████████████████",
+              "████████████████████████████████████████████████████████"
+            ],
+            "highlight": "The total disbursed exceeded three billion dollars.",
+            "stamp": "CLASSIFIED",
+            "highlightAtMs": 7850
+          }
+        },
+        "overlays": [
+          {
+            "kind": "stat",
+            "atMs": 7850,
+            "durationMs": 4000,
+            "anchor": "bottomRight",
+            "value": "$3B",
+            "label": "total disbursed"
+          },
+          {
+            "kind": "text",
+            "atMs": 2291,
+            "durationMs": 3000,
+            "anchor": "topLeft",
+            "text": "Most evidence buried forever",
+            "emphasis": true
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 9770,
+      "audioRef": "audio/backlog-modes-test/s4-redacted.mp3",
+      "wordTimings": [
+        {
+          "word": "The",
+          "startMs": 100,
+          "endMs": 353
+        },
+        {
+          "word": "field",
+          "startMs": 353,
+          "endMs": 774
+        },
+        {
+          "word": "reports",
+          "startMs": 774,
+          "endMs": 1364
+        },
+        {
+          "word": "were",
+          "startMs": 1364,
+          "endMs": 1701
+        },
+        {
+          "word": "heavily",
+          "startMs": 1701,
+          "endMs": 2291
+        },
+        {
+          "word": "censored",
+          "startMs": 2291,
+          "endMs": 3050
+        },
+        {
+          "word": "But",
+          "startMs": 3000,
+          "endMs": 3242
+        },
+        {
+          "word": "one",
+          "startMs": 3242,
+          "endMs": 3485
+        },
+        {
+          "word": "line",
+          "startMs": 3485,
+          "endMs": 3808
+        },
+        {
+          "word": "survived",
+          "startMs": 3808,
+          "endMs": 4455
+        },
+        {
+          "word": "the",
+          "startMs": 4455,
+          "endMs": 4698
+        },
+        {
+          "word": "black",
+          "startMs": 4698,
+          "endMs": 5102
+        },
+        {
+          "word": "ink",
+          "startMs": 5102,
+          "endMs": 5425
+        },
+        {
+          "word": "the",
+          "startMs": 5425,
+          "endMs": 5668
+        },
+        {
+          "word": "total",
+          "startMs": 5668,
+          "endMs": 6072
+        },
+        {
+          "word": "disbursed",
+          "startMs": 6072,
+          "endMs": 6799
+        },
+        {
+          "word": "exceeded",
+          "startMs": 6799,
+          "endMs": 7446
+        },
+        {
+          "word": "three",
+          "startMs": 7446,
+          "endMs": 7850
+        },
+        {
+          "word": "billion",
+          "startMs": 7850,
+          "endMs": 8416
+        },
+        {
+          "word": "dollars",
+          "startMs": 8416,
+          "endMs": 9062
+        }
+      ]
+    },
+    {
+      "id": "s5-globe",
+      "narration": "Half a world away, in the mountains of Afghanistan, the trap was quietly set.",
+      "visual": {
+        "type": "globe",
+        "directive": "Locate Afghanistan on the globe.",
+        "style": {
+          "globe": {
+            "mode": "locator",
+            "center": [
+              66.2385139,
+              33.7680065
+            ],
+            "highlights": [
+              {
+                "iso": "4",
+                "color": "primary",
+                "opacity": 0.82
+              }
+            ],
+            "markers": [
+              {
+                "position": [
+                  69.416667,
+                  34.5
+                ],
+                "label": "Afghanistan",
+                "atMs": 1834
+              }
+            ]
+          }
+        },
+        "overlays": [
+          {
+            "kind": "image",
+            "atMs": 1834,
+            "durationMs": 3500,
+            "anchor": "bottomRight",
+            "src": "assets/backlog-modes-test/s5-globe-ov0.jpg",
+            "subject": "Hindu Kush mountains Afghanistan",
+            "caption": "The mountains of Afghanistan",
+            "focal": {
+              "x": 0.3541666666666667,
+              "y": 0.5
+            }
+          },
+          {
+            "kind": "text",
+            "atMs": 4696,
+            "durationMs": 3000,
+            "anchor": "topLeft",
+            "text": "Half a world away",
+            "emphasis": true
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 6314,
+      "audioRef": "audio/backlog-modes-test/s5-globe.mp3",
+      "wordTimings": [
+        {
+          "word": "Half",
+          "startMs": 100,
+          "endMs": 447
+        },
+        {
+          "word": "a",
+          "startMs": 447,
+          "endMs": 534
+        },
+        {
+          "word": "world",
+          "startMs": 534,
+          "endMs": 967
+        },
+        {
+          "word": "away",
+          "startMs": 967,
+          "endMs": 1401
+        },
+        {
+          "word": "in",
+          "startMs": 1401,
+          "endMs": 1574
+        },
+        {
+          "word": "the",
+          "startMs": 1574,
+          "endMs": 1834
+        },
+        {
+          "word": "mountains",
+          "startMs": 1834,
+          "endMs": 2615
+        },
+        {
+          "word": "of",
+          "startMs": 2615,
+          "endMs": 2788
+        },
+        {
+          "word": "Afghanistan",
+          "startMs": 2788,
+          "endMs": 3829
+        },
+        {
+          "word": "the",
+          "startMs": 3829,
+          "endMs": 4089
+        },
+        {
+          "word": "trap",
+          "startMs": 4089,
+          "endMs": 4436
+        },
+        {
+          "word": "was",
+          "startMs": 4436,
+          "endMs": 4696
+        },
+        {
+          "word": "quietly",
+          "startMs": 4696,
+          "endMs": 5303
+        },
+        {
+          "word": "set",
+          "startMs": 5303,
+          "endMs": 5650
+        }
+      ]
+    },
+    {
+      "id": "s6-flows",
+      "narration": "From Washington, the money flowed to Islamabad, and from there, onward to the fighters in Kabul.",
+      "visual": {
+        "type": "globe",
+        "directive": "Money flowing Washington to Islamabad to Kabul across the world.",
+        "style": {
+          "globe": {
+            "mode": "arcs",
+            "center": [
+              54.163535044008334,
+              35.385344942857145
+            ],
+            "highlights": [
+              {
+                "iso": "840",
+                "color": "primary",
+                "opacity": 0.82
+              },
+              {
+                "iso": "586",
+                "color": "primary",
+                "opacity": 0.82
+              },
+              {
+                "iso": "4",
+                "color": "primary",
+                "opacity": 0.82
+              }
+            ],
+            "markers": [
+              {
+                "position": [
+                  -77.0363849,
+                  38.8950982
+                ],
+                "label": "Washington",
+                "atMs": 418
+              },
+              {
+                "position": [
+                  73.2031156,
+                  33.6357394
+                ],
+                "label": "Islamabad",
+                "atMs": 2564
+              },
+              {
+                "position": [
+                  69.416667,
+                  34.5
+                ],
+                "label": "Kabul",
+                "atMs": 6061
+              }
+            ],
+            "arcs": [
+              {
+                "from": [
+                  -77.0363849,
+                  38.8950982
+                ],
+                "to": [
+                  73.2031156,
+                  33.6357394
+                ],
+                "atMs": 418,
+                "color": "accent",
+                "label": "CIA funds"
+              },
+              {
+                "from": [
+                  73.2031156,
+                  33.6357394
+                ],
+                "to": [
+                  69.416667,
+                  34.5
+                ],
+                "atMs": 2564,
+                "color": "accent",
+                "label": "Arms & money"
+              }
+            ]
+          }
+        },
+        "overlays": [
+          {
+            "kind": "stat",
+            "atMs": 1531,
+            "durationMs": 3500,
+            "anchor": "topLeft",
+            "value": "$3B",
+            "label": "funneled through Pakistan"
+          },
+          {
+            "kind": "image",
+            "atMs": 5266,
+            "durationMs": 3500,
+            "anchor": "bottomRight",
+            "src": "assets/backlog-modes-test/s6-flows-ov1.jpg",
+            "subject": "Mujahideen fighters Afghanistan 1980s",
+            "caption": "Afghan Mujahideen fighters",
+            "focal": {
+              "x": 0.5735131141485039,
+              "y": 0.5
+            }
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 7202,
+      "audioRef": "audio/backlog-modes-test/s6-flows.mp3",
+      "wordTimings": [
+        {
+          "word": "From",
+          "startMs": 100,
+          "endMs": 418
+        },
+        {
+          "word": "Washington",
+          "startMs": 418,
+          "endMs": 1292
+        },
+        {
+          "word": "the",
+          "startMs": 1292,
+          "endMs": 1531
+        },
+        {
+          "word": "money",
+          "startMs": 1531,
+          "endMs": 1928
+        },
+        {
+          "word": "flowed",
+          "startMs": 1928,
+          "endMs": 2405
+        },
+        {
+          "word": "to",
+          "startMs": 2405,
+          "endMs": 2564
+        },
+        {
+          "word": "Islamabad",
+          "startMs": 2564,
+          "endMs": 3358
+        },
+        {
+          "word": "and",
+          "startMs": 3358,
+          "endMs": 3597
+        },
+        {
+          "word": "from",
+          "startMs": 3597,
+          "endMs": 3915
+        },
+        {
+          "word": "there",
+          "startMs": 3915,
+          "endMs": 4392
+        },
+        {
+          "word": "onward",
+          "startMs": 4392,
+          "endMs": 4869
+        },
+        {
+          "word": "to",
+          "startMs": 4869,
+          "endMs": 5027
+        },
+        {
+          "word": "the",
+          "startMs": 5027,
+          "endMs": 5266
+        },
+        {
+          "word": "fighters",
+          "startMs": 5266,
+          "endMs": 5902
+        },
+        {
+          "word": "in",
+          "startMs": 5902,
+          "endMs": 6061
+        },
+        {
+          "word": "Kabul",
+          "startMs": 6061,
+          "endMs": 6538
+        }
+      ]
+    }
+  ],
+  "status": "draft"
+}

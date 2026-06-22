@@ -1,0 +1,917 @@
+{
+  "id": "data-modes-test",
+  "channelId": "documentary-dark",
+  "topic": "The Real Cost of Operation Cyclone",
+  "thesis": "The numbers tell the story.",
+  "scenes": [
+    {
+      "id": "s1-cyclone-cost",
+      "narration": "Six billion dollars. That is the total cost of Operation Cyclone, the largest covert program in the history of the CIA, adjusted for inflation.",
+      "visual": {
+        "type": "stat",
+        "directive": "The total cost of Operation Cyclone.",
+        "style": {
+          "data": {
+            "mode": "bigStat",
+            "value": 6,
+            "prefix": "$",
+            "suffix": "B",
+            "title": "The Price of a Covert War",
+            "context": "Total cost of Operation Cyclone — the largest covert CIA program in history, adjusted for inflation"
+          }
+        },
+        "overlays": [
+          {
+            "kind": "text",
+            "atMs": 490,
+            "durationMs": 3000,
+            "anchor": "topRight",
+            "text": "Largest CIA covert program ever",
+            "emphasis": true
+          },
+          {
+            "kind": "image",
+            "atMs": 8549,
+            "durationMs": 3500,
+            "anchor": "bottomRight",
+            "subject": "CIA headquarters Langley aerial",
+            "caption": "CIA headquarters, Langley, Virginia"
+          },
+          {
+            "kind": "stat",
+            "atMs": 9750,
+            "durationMs": 3000,
+            "anchor": "bottomLeft",
+            "value": "$6B",
+            "label": "Inflation-adjusted total"
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 11258,
+      "audioRef": "audio/data-modes-test/s1-cyclone-cost.mp3",
+      "wordTimings": [
+        {
+          "word": "Six",
+          "startMs": 100,
+          "endMs": 490
+        },
+        {
+          "word": "billion",
+          "startMs": 490,
+          "endMs": 1399
+        },
+        {
+          "word": "dollars",
+          "startMs": 1399,
+          "endMs": 2438
+        },
+        {
+          "word": "That",
+          "startMs": 2388,
+          "endMs": 2708
+        },
+        {
+          "word": "is",
+          "startMs": 2708,
+          "endMs": 2868
+        },
+        {
+          "word": "the",
+          "startMs": 2868,
+          "endMs": 3108
+        },
+        {
+          "word": "total",
+          "startMs": 3108,
+          "endMs": 3508
+        },
+        {
+          "word": "cost",
+          "startMs": 3508,
+          "endMs": 3828
+        },
+        {
+          "word": "of",
+          "startMs": 3828,
+          "endMs": 3988
+        },
+        {
+          "word": "Operation",
+          "startMs": 3988,
+          "endMs": 4708
+        },
+        {
+          "word": "Cyclone",
+          "startMs": 4708,
+          "endMs": 5348
+        },
+        {
+          "word": "the",
+          "startMs": 5348,
+          "endMs": 5588
+        },
+        {
+          "word": "largest",
+          "startMs": 5588,
+          "endMs": 6149
+        },
+        {
+          "word": "covert",
+          "startMs": 6149,
+          "endMs": 6629
+        },
+        {
+          "word": "program",
+          "startMs": 6629,
+          "endMs": 7189
+        },
+        {
+          "word": "in",
+          "startMs": 7189,
+          "endMs": 7349
+        },
+        {
+          "word": "the",
+          "startMs": 7349,
+          "endMs": 7589
+        },
+        {
+          "word": "history",
+          "startMs": 7589,
+          "endMs": 8149
+        },
+        {
+          "word": "of",
+          "startMs": 8149,
+          "endMs": 8309
+        },
+        {
+          "word": "the",
+          "startMs": 8309,
+          "endMs": 8549
+        },
+        {
+          "word": "CIA",
+          "startMs": 8549,
+          "endMs": 8869
+        },
+        {
+          "word": "adjusted",
+          "startMs": 8869,
+          "endMs": 9510
+        },
+        {
+          "word": "for",
+          "startMs": 9510,
+          "endMs": 9750
+        },
+        {
+          "word": "inflation",
+          "startMs": 9750,
+          "endMs": 10550
+        }
+      ]
+    },
+    {
+      "id": "s2-who-paid",
+      "narration": "The Soviets lost fifteen thousand soldiers. Afghanistan lost two million people. Set those two numbers next to each other and the asymmetry is staggering.",
+      "visual": {
+        "type": "stat",
+        "directive": "Soviet dead versus Afghan dead.",
+        "style": {
+          "data": {
+            "mode": "compare",
+            "title": "The True Cost of the War",
+            "items": [
+              {
+                "label": "Soviet Soldiers Killed",
+                "value": 15000,
+                "prefix": "",
+                "suffix": "",
+                "sublabel": "Military casualties",
+                "color": "accent"
+              },
+              {
+                "label": "Afghans Killed",
+                "value": 2000000,
+                "prefix": "",
+                "suffix": "",
+                "sublabel": "Total Afghan dead",
+                "color": "primary"
+              }
+            ]
+          }
+        },
+        "overlays": [
+          {
+            "kind": "stat",
+            "atMs": 1426,
+            "durationMs": 2800,
+            "anchor": "topLeft",
+            "value": "15,000",
+            "label": "Soviet soldiers lost"
+          },
+          {
+            "kind": "stat",
+            "atMs": 5457,
+            "durationMs": 3500,
+            "anchor": "topRight",
+            "value": "2,000,000",
+            "label": "Afghan lives lost"
+          },
+          {
+            "kind": "text",
+            "atMs": 9835,
+            "durationMs": 3000,
+            "anchor": "bottomRight",
+            "text": "133× more Afghans than Soviets",
+            "emphasis": true
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 12218,
+      "audioRef": "audio/data-modes-test/s2-who-paid.mp3",
+      "wordTimings": [
+        {
+          "word": "The",
+          "startMs": 100,
+          "endMs": 384
+        },
+        {
+          "word": "Soviets",
+          "startMs": 384,
+          "endMs": 1047
+        },
+        {
+          "word": "lost",
+          "startMs": 1047,
+          "endMs": 1426
+        },
+        {
+          "word": "fifteen",
+          "startMs": 1426,
+          "endMs": 2089
+        },
+        {
+          "word": "thousand",
+          "startMs": 2089,
+          "endMs": 2847
+        },
+        {
+          "word": "soldiers",
+          "startMs": 2847,
+          "endMs": 3700
+        },
+        {
+          "word": "Afghanistan",
+          "startMs": 3650,
+          "endMs": 4754
+        },
+        {
+          "word": "lost",
+          "startMs": 4754,
+          "endMs": 5156
+        },
+        {
+          "word": "two",
+          "startMs": 5156,
+          "endMs": 5457
+        },
+        {
+          "word": "million",
+          "startMs": 5457,
+          "endMs": 6160
+        },
+        {
+          "word": "people",
+          "startMs": 6160,
+          "endMs": 6862
+        },
+        {
+          "word": "Set",
+          "startMs": 6862,
+          "endMs": 7091
+        },
+        {
+          "word": "those",
+          "startMs": 7091,
+          "endMs": 7472
+        },
+        {
+          "word": "two",
+          "startMs": 7472,
+          "endMs": 7701
+        },
+        {
+          "word": "numbers",
+          "startMs": 7701,
+          "endMs": 8235
+        },
+        {
+          "word": "next",
+          "startMs": 8235,
+          "endMs": 8540
+        },
+        {
+          "word": "to",
+          "startMs": 8540,
+          "endMs": 8692
+        },
+        {
+          "word": "each",
+          "startMs": 8692,
+          "endMs": 8997
+        },
+        {
+          "word": "other",
+          "startMs": 8997,
+          "endMs": 9378
+        },
+        {
+          "word": "and",
+          "startMs": 9378,
+          "endMs": 9607
+        },
+        {
+          "word": "the",
+          "startMs": 9607,
+          "endMs": 9835
+        },
+        {
+          "word": "asymmetry",
+          "startMs": 9835,
+          "endMs": 10522
+        },
+        {
+          "word": "is",
+          "startMs": 10522,
+          "endMs": 10674
+        },
+        {
+          "word": "staggering",
+          "startMs": 10674,
+          "endMs": 11512
+        }
+      ]
+    },
+    {
+      "id": "s3-civilians",
+      "narration": "One in three of those killed were civilians, caught between the superpowers with nowhere to run.",
+      "visual": {
+        "type": "stat",
+        "directive": "The civilian share of the dead.",
+        "style": {
+          "data": {
+            "mode": "pictograph",
+            "title": "Civilian Deaths",
+            "percent": 33,
+            "iconLabel": "civilians among those killed",
+            "context": "1 in 3 killed were civilians — caught between superpowers with nowhere to run"
+          }
+        },
+        "overlays": [
+          {
+            "kind": "text",
+            "atMs": 100,
+            "durationMs": 3000,
+            "anchor": "topLeft",
+            "text": "1 in 3 were civilians",
+            "emphasis": true
+          },
+          {
+            "kind": "image",
+            "atMs": 3993,
+            "durationMs": 3500,
+            "anchor": "bottomRight",
+            "subject": "Afghan refugees 1980s",
+            "caption": "Afghan civilians displaced by the war"
+          },
+          {
+            "kind": "text",
+            "atMs": 5095,
+            "durationMs": 2500,
+            "anchor": "bottomLeft",
+            "text": "No refuge, no escape",
+            "emphasis": true
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 6698,
+      "audioRef": "audio/data-modes-test/s3-civilians.mp3",
+      "wordTimings": [
+        {
+          "word": "One",
+          "startMs": 100,
+          "endMs": 320
+        },
+        {
+          "word": "in",
+          "startMs": 320,
+          "endMs": 467
+        },
+        {
+          "word": "three",
+          "startMs": 467,
+          "endMs": 835
+        },
+        {
+          "word": "of",
+          "startMs": 835,
+          "endMs": 981
+        },
+        {
+          "word": "those",
+          "startMs": 981,
+          "endMs": 1349
+        },
+        {
+          "word": "killed",
+          "startMs": 1349,
+          "endMs": 1790
+        },
+        {
+          "word": "were",
+          "startMs": 1790,
+          "endMs": 2083
+        },
+        {
+          "word": "civilians",
+          "startMs": 2083,
+          "endMs": 2818
+        },
+        {
+          "word": "caught",
+          "startMs": 2818,
+          "endMs": 3259
+        },
+        {
+          "word": "between",
+          "startMs": 3259,
+          "endMs": 3773
+        },
+        {
+          "word": "the",
+          "startMs": 3773,
+          "endMs": 3993
+        },
+        {
+          "word": "superpowers",
+          "startMs": 3993,
+          "endMs": 4801
+        },
+        {
+          "word": "with",
+          "startMs": 4801,
+          "endMs": 5095
+        },
+        {
+          "word": "nowhere",
+          "startMs": 5095,
+          "endMs": 5609
+        },
+        {
+          "word": "to",
+          "startMs": 5609,
+          "endMs": 5756
+        },
+        {
+          "word": "run",
+          "startMs": 5756,
+          "endMs": 6050
+        }
+      ]
+    },
+    {
+      "id": "s4-where-money-went",
+      "narration": "Of the three billion dollars funneled through Pakistan, more than half bought weapons, a quarter funded training camps, and the rest covered logistics and bribes.",
+      "visual": {
+        "type": "chart",
+        "directive": "How the three billion was spent.",
+        "style": {
+          "data": {
+            "mode": "donut",
+            "title": "Where the $3B Went",
+            "context": "$3 Billion",
+            "slices": [
+              {
+                "label": "Weapons",
+                "value": 1500
+              },
+              {
+                "label": "Training Camps",
+                "value": 750
+              },
+              {
+                "label": "Logistics & Bribes",
+                "value": 750
+              }
+            ]
+          }
+        },
+        "overlays": [
+          {
+            "kind": "stat",
+            "atMs": 797,
+            "durationMs": 3000,
+            "anchor": "topLeft",
+            "value": "$3B",
+            "label": "Funneled through Pakistan"
+          },
+          {
+            "kind": "text",
+            "atMs": 4703,
+            "durationMs": 3000,
+            "anchor": "topRight",
+            "text": "Over half spent on arms",
+            "emphasis": true
+          },
+          {
+            "kind": "image",
+            "atMs": 6238,
+            "durationMs": 3500,
+            "anchor": "bottomRight",
+            "subject": "Mujahideen training camp 1980s",
+            "caption": "Mujahideen trained in Pakistani camps"
+          },
+          {
+            "kind": "text",
+            "atMs": 9237,
+            "durationMs": 2500,
+            "anchor": "bottomLeft",
+            "text": "Rest: logistics and bribes",
+            "emphasis": true
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 10394,
+      "audioRef": "audio/data-modes-test/s4-where-money-went.mp3",
+      "wordTimings": [
+        {
+          "word": "Of",
+          "startMs": 100,
+          "endMs": 239
+        },
+        {
+          "word": "the",
+          "startMs": 239,
+          "endMs": 449
+        },
+        {
+          "word": "three",
+          "startMs": 449,
+          "endMs": 797
+        },
+        {
+          "word": "billion",
+          "startMs": 797,
+          "endMs": 1286
+        },
+        {
+          "word": "dollars",
+          "startMs": 1286,
+          "endMs": 1774
+        },
+        {
+          "word": "funneled",
+          "startMs": 1774,
+          "endMs": 2332
+        },
+        {
+          "word": "through",
+          "startMs": 2332,
+          "endMs": 2820
+        },
+        {
+          "word": "Pakistan",
+          "startMs": 2820,
+          "endMs": 3448
+        },
+        {
+          "word": "more",
+          "startMs": 3448,
+          "endMs": 3727
+        },
+        {
+          "word": "than",
+          "startMs": 3727,
+          "endMs": 4006
+        },
+        {
+          "word": "half",
+          "startMs": 4006,
+          "endMs": 4285
+        },
+        {
+          "word": "bought",
+          "startMs": 4285,
+          "endMs": 4703
+        },
+        {
+          "word": "weapons",
+          "startMs": 4703,
+          "endMs": 5261
+        },
+        {
+          "word": "a",
+          "startMs": 5261,
+          "endMs": 5331
+        },
+        {
+          "word": "quarter",
+          "startMs": 5331,
+          "endMs": 5819
+        },
+        {
+          "word": "funded",
+          "startMs": 5819,
+          "endMs": 6238
+        },
+        {
+          "word": "training",
+          "startMs": 6238,
+          "endMs": 6796
+        },
+        {
+          "word": "camps",
+          "startMs": 6796,
+          "endMs": 7214
+        },
+        {
+          "word": "and",
+          "startMs": 7214,
+          "endMs": 7423
+        },
+        {
+          "word": "the",
+          "startMs": 7423,
+          "endMs": 7633
+        },
+        {
+          "word": "rest",
+          "startMs": 7633,
+          "endMs": 7912
+        },
+        {
+          "word": "covered",
+          "startMs": 7912,
+          "endMs": 8400
+        },
+        {
+          "word": "logistics",
+          "startMs": 8400,
+          "endMs": 9028
+        },
+        {
+          "word": "and",
+          "startMs": 9028,
+          "endMs": 9237
+        },
+        {
+          "word": "bribes",
+          "startMs": 9237,
+          "endMs": 9725
+        }
+      ]
+    },
+    {
+      "id": "s5-troop-levels",
+      "narration": "Soviet troop levels climbed from thirty thousand in 1979 to a hundred and fifteen thousand by 1985, held there for years, then collapsed to zero by 1989.",
+      "visual": {
+        "type": "chart",
+        "directive": "Soviet troop levels over the decade.",
+        "style": {
+          "data": {
+            "mode": "trend",
+            "title": "Soviet Troops in Afghanistan",
+            "points": [
+              {
+                "x": "1979",
+                "y": 30000
+              },
+              {
+                "x": "1980",
+                "y": 60000
+              },
+              {
+                "x": "1981",
+                "y": 85000
+              },
+              {
+                "x": "1982",
+                "y": 100000
+              },
+              {
+                "x": "1983",
+                "y": 108000
+              },
+              {
+                "x": "1984",
+                "y": 112000
+              },
+              {
+                "x": "1985",
+                "y": 115000
+              },
+              {
+                "x": "1986",
+                "y": 115000
+              },
+              {
+                "x": "1987",
+                "y": 115000
+              },
+              {
+                "x": "1988",
+                "y": 60000
+              },
+              {
+                "x": "1989",
+                "y": 0
+              }
+            ],
+            "accent": "primary"
+          }
+        },
+        "overlays": [
+          {
+            "kind": "stat",
+            "atMs": 2600,
+            "durationMs": 3000,
+            "anchor": "topLeft",
+            "value": "30,000",
+            "label": "Troops at invasion, 1979"
+          },
+          {
+            "kind": "stat",
+            "atMs": 4653,
+            "durationMs": 3000,
+            "anchor": "topRight",
+            "value": "115,000",
+            "label": "Peak troop levels, 1985"
+          },
+          {
+            "kind": "text",
+            "atMs": 9474,
+            "durationMs": 3500,
+            "anchor": "bottomRight",
+            "text": "Full withdrawal by 1989",
+            "emphasis": true
+          },
+          {
+            "kind": "image",
+            "atMs": 10456,
+            "durationMs": 3500,
+            "anchor": "bottomLeft",
+            "subject": "Soviet troops withdrawal Afghanistan 1989",
+            "caption": "Last Soviet troops leave Afghanistan, Feb 1989"
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 12098,
+      "audioRef": "audio/data-modes-test/s5-troop-levels.mp3",
+      "wordTimings": [
+        {
+          "word": "Soviet",
+          "startMs": 100,
+          "endMs": 636
+        },
+        {
+          "word": "troop",
+          "startMs": 636,
+          "endMs": 1082
+        },
+        {
+          "word": "levels",
+          "startMs": 1082,
+          "endMs": 1618
+        },
+        {
+          "word": "climbed",
+          "startMs": 1618,
+          "endMs": 2243
+        },
+        {
+          "word": "from",
+          "startMs": 2243,
+          "endMs": 2600
+        },
+        {
+          "word": "thirty",
+          "startMs": 2600,
+          "endMs": 3135
+        },
+        {
+          "word": "thousand",
+          "startMs": 3135,
+          "endMs": 3849
+        },
+        {
+          "word": "in",
+          "startMs": 3849,
+          "endMs": 4028
+        },
+        {
+          "word": "1979",
+          "startMs": 4028,
+          "endMs": 4385
+        },
+        {
+          "word": "to",
+          "startMs": 4385,
+          "endMs": 4564
+        },
+        {
+          "word": "a",
+          "startMs": 4564,
+          "endMs": 4653
+        },
+        {
+          "word": "hundred",
+          "startMs": 4653,
+          "endMs": 5278
+        },
+        {
+          "word": "and",
+          "startMs": 5278,
+          "endMs": 5546
+        },
+        {
+          "word": "fifteen",
+          "startMs": 5546,
+          "endMs": 6170
+        },
+        {
+          "word": "thousand",
+          "startMs": 6170,
+          "endMs": 6885
+        },
+        {
+          "word": "by",
+          "startMs": 6885,
+          "endMs": 7063
+        },
+        {
+          "word": "1985",
+          "startMs": 7063,
+          "endMs": 7510
+        },
+        {
+          "word": "held",
+          "startMs": 7510,
+          "endMs": 7867
+        },
+        {
+          "word": "there",
+          "startMs": 7867,
+          "endMs": 8313
+        },
+        {
+          "word": "for",
+          "startMs": 8313,
+          "endMs": 8581
+        },
+        {
+          "word": "years",
+          "startMs": 8581,
+          "endMs": 9116
+        },
+        {
+          "word": "then",
+          "startMs": 9116,
+          "endMs": 9474
+        },
+        {
+          "word": "collapsed",
+          "startMs": 9474,
+          "endMs": 10277
+        },
+        {
+          "word": "to",
+          "startMs": 10277,
+          "endMs": 10456
+        },
+        {
+          "word": "zero",
+          "startMs": 10456,
+          "endMs": 10813
+        },
+        {
+          "word": "by",
+          "startMs": 10813,
+          "endMs": 10991
+        },
+        {
+          "word": "1989",
+          "startMs": 10991,
+          "endMs": 11437
+        }
+      ]
+    }
+  ],
+  "status": "draft"
+}

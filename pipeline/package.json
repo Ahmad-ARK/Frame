@@ -1,0 +1,28 @@
+{
+  "name": "documentary-pipeline-core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Documentary pipeline core — research, script→storyboard generation, own-script importer (Phase 2)",
+  "scripts": {
+    "import": "tsx src/cli/import.ts",
+    "generate": "tsx src/cli/generate.ts",
+    "research": "tsx src/cli/research.ts",
+    "enrich": "tsx src/cli/enrich.ts",
+    "assets": "tsx src/cli/assets.ts",
+    "voiceover": "tsx src/cli/voiceover.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@google/genai": "^1.0.0",
+    "dotenv": "^16.4.0",
+    "sharp": "^0.32.6",
+    "smartcrop-sharp": "^2.0.8",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.0"
+  }
+}

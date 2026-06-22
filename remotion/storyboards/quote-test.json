@@ -1,0 +1,188 @@
+{
+  "id": "quote-modes-test",
+  "channelId": "documentary-dark",
+  "topic": "Words That Built a War",
+  "thesis": "What they said tells you who they were.",
+  "scenes": [
+    {
+      "id": "s1-brzezinski",
+      "narration": "Decades later, the man who designed it felt no remorse. Asked if he regretted arming the jihadists, Zbigniew Brzezinski snapped: Regret what? That secret operation was an excellent idea.",
+      "visual": {
+        "type": "quoteCard",
+        "directive": "Brzezinski's unrepentant words, with the man himself shown.",
+        "style": {
+          "quote": {
+            "mode": "portrait",
+            "quote": "Regret what? That secret operation was an excellent idea.",
+            "attribution": "Zbigniew Brzezinski",
+            "role": "National Security Advisor, 1998",
+            "portrait": {
+              "subject": "Zbigniew Brzezinski portrait",
+              "src": "assets/quote-modes-test/s1-brzezinski-portrait.jpg",
+              "caption": "Zbigniew Brzezinski"
+            }
+          }
+        },
+        "overlays": [
+          {
+            "kind": "text",
+            "atMs": 1800,
+            "durationMs": 3000,
+            "anchor": "bottomLeft",
+            "text": "No apology. No regret.",
+            "emphasis": true
+          },
+          {
+            "kind": "image",
+            "atMs": 7200,
+            "durationMs": 3500,
+            "anchor": "bottomRight",
+            "src": "assets/quote-modes-test/s1-brzezinski-ov1.jpg",
+            "subject": "Afghan mujahideen fighters 1980s",
+            "caption": "CIA-armed fighters, Afghan–Soviet War"
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 9000
+    },
+    {
+      "id": "s2-pattern",
+      "narration": "So let me say it plainly. This is not a tragedy. It is a pattern.",
+      "visual": {
+        "type": "quoteCard",
+        "directive": "The narrator's hammer-blow thesis line.",
+        "style": {
+          "quote": {
+            "mode": "statement",
+            "quote": "This is not a tragedy.\nIt is a pattern.",
+            "emphasis": [
+              "tragedy",
+              "pattern"
+            ]
+          }
+        }
+      },
+      "sources": [],
+      "durationMs": 7000
+    },
+    {
+      "id": "s3-memo",
+      "narration": "A White House memo from 1979 said the quiet part out loud: We now have the opportunity of giving to the USSR its Vietnam War.",
+      "visual": {
+        "type": "quoteCard",
+        "directive": "A leaked official memo quotation.",
+        "style": {
+          "quote": {
+            "mode": "document",
+            "quote": "We now have the opportunity of giving to the USSR its Vietnam War.",
+            "attribution": "Zbigniew Brzezinski",
+            "role": "Memorandum to President Carter",
+            "source": "WHITE HOUSE MEMO · 1979"
+          }
+        },
+        "overlays": [
+          {
+            "kind": "image",
+            "atMs": 1600,
+            "durationMs": 3500,
+            "anchor": "bottomRight",
+            "src": "assets/quote-modes-test/s3-memo-ov0.jpg",
+            "subject": "Vietnam War US soldiers archive",
+            "caption": "U.S. quagmire in Vietnam — the template"
+          },
+          {
+            "kind": "text",
+            "atMs": 6400,
+            "durationMs": 2800,
+            "anchor": "topLeft",
+            "text": "Declassified — Le Nouvel Observateur, 1998",
+            "emphasis": true
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 8000
+    },
+    {
+      "id": "s4-wilson",
+      "narration": "Congressman Charlie Wilson summed up the hubris: These things were glorious, and they changed the world. And then we screwed up the endgame.",
+      "visual": {
+        "type": "quoteCard",
+        "directive": "An energetic quote with key words emphasized.",
+        "style": {
+          "quote": {
+            "mode": "kinetic",
+            "quote": "These things were glorious, and they changed the world. And then we screwed up the endgame.",
+            "attribution": "Congressman Charlie Wilson",
+            "emphasis": [
+              "glorious",
+              "changed",
+              "screwed",
+              "endgame"
+            ]
+          }
+        },
+        "overlays": [
+          {
+            "kind": "image",
+            "atMs": 1800,
+            "durationMs": 3000,
+            "anchor": "topRight",
+            "src": "assets/quote-modes-test/s4-wilson-ov0.jpg",
+            "subject": "Charlie Wilson congressman portrait",
+            "caption": "Rep. Charlie Wilson (D-TX)"
+          },
+          {
+            "kind": "text",
+            "atMs": 7200,
+            "durationMs": 3200,
+            "anchor": "bottomLeft",
+            "text": "Afghanistan, post-1989 — abandoned.",
+            "emphasis": true
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 9000
+    },
+    {
+      "id": "s5-mujahideen",
+      "narration": "To the fighters themselves, it was simpler. As one mujahideen commander put it: God gave us this victory, and God will decide what comes next.",
+      "visual": {
+        "type": "quoteCard",
+        "directive": "A plain attributed quotation.",
+        "style": {
+          "quote": {
+            "mode": "standard",
+            "quote": "God gave us this victory, and God will decide what comes next.",
+            "attribution": "Mujahideen Commander",
+            "role": "Afghan fighter, post-Soviet withdrawal, c. 1989"
+          }
+        },
+        "overlays": [
+          {
+            "kind": "image",
+            "atMs": 1600,
+            "durationMs": 3500,
+            "anchor": "bottomRight",
+            "src": "assets/quote-modes-test/s5-mujahideen-ov0.jpg",
+            "subject": "Soviet withdrawal Afghanistan 1989",
+            "caption": "Soviet troops leave Afghanistan, Feb. 1989"
+          },
+          {
+            "kind": "text",
+            "atMs": 6400,
+            "durationMs": 2600,
+            "anchor": "topLeft",
+            "text": "The endgame no one planned for.",
+            "emphasis": true
+          }
+        ]
+      },
+      "sources": [],
+      "durationMs": 8000
+    }
+  ],
+  "status": "draft"
+}

@@ -1,0 +1,100 @@
+{
+  "id": "sb-phase0-soviet-afghan",
+  "channelId": "documentary-dark",
+  "topic": "Who Won the Soviet-Afghan War",
+  "thesis": "The Soviet-Afghan War created the conditions for its own aftermath. The same networks that defeated the Soviets became the enemy America spent forty years fighting. Victory and defeat are the same word, spoken by different people at different times.",
+  "scenes": [
+    {
+      "id": "s1-title",
+      "narration": "In 1989, the last Soviet soldier crossed the bridge out of Afghanistan. America called it a Cold War victory. Pakistan called it strategic genius. The mujahideen called it God's triumph. Twelve years later, those same mujahideen flew planes into the World Trade Center.",
+      "visual": {
+        "type": "titleCard",
+        "directive": "Full-screen editorial title card. Dark background. Syne 800 display type. Red accent on second line.",
+        "style": {
+          "eyebrow": "GEOPOLITICS · 1979–2021",
+          "title": "WHO WON THE\nSOVIET-AFGHAN WAR",
+          "subtitle": "Four stories. One pattern. Forty years of consequences."
+        }
+      },
+      "sources": [],
+      "durationMs": 5000
+    },
+    {
+      "id": "s2-map",
+      "narration": "December 1979. Soviet tanks cross the Amu Darya river into Afghanistan. But here's the part most accounts skip — the war didn't start in 1979. It started six months earlier, when the United States began secretly funding anti-communist fighters inside Afghanistan. This wasn't a defense. This was a trap.",
+      "visual": {
+        "type": "map",
+        "directive": "Central Asia and South Asia region. Afghanistan highlighted in red. Soviet invasion route animated from north, crossing the Amu Darya. Elevated 3D labels for USSR, Afghanistan, Pakistan. Cinematic perspective tilt.",
+        "style": {
+          "center": [65, 33],
+          "scale": 1380,
+          "cameraAnimation": {
+            "keyframes": [
+              { "atMs": 0,    "center": [64.0, 36.5], "scale": 640  },
+              { "atMs": 2800, "center": [65.0, 33.0], "scale": 1380 },
+              { "atMs": 5500, "center": [65.2, 35.0], "scale": 1420 }
+            ]
+          },
+          "highlightCountries": [
+            { "iso": "004", "name": "AFGHANISTAN", "color": "primary", "opacity": 0.92 },
+            { "iso": "398", "name": "KAZAKHSTAN",   "color": "accent",  "opacity": 0.28 },
+            { "iso": "860", "name": "UZBEKISTAN",   "color": "accent",  "opacity": 0.28 },
+            { "iso": "762", "name": "TAJIKISTAN",   "color": "accent",  "opacity": 0.28 },
+            { "iso": "795", "name": "TURKMENISTAN", "color": "accent",  "opacity": 0.28 },
+            { "iso": "643", "name": "RUSSIA",       "color": "accent",  "opacity": 0.14 },
+            { "iso": "586", "name": "PAKISTAN",     "color": "text",    "opacity": 0.18 }
+          ],
+          "labels": [
+            {
+              "position": [67.7, 33.9],
+              "text": "AFGHANISTAN",
+              "sublabel": "Soviet Target · 1979",
+              "enterAtMs": 1200
+            },
+            {
+              "position": [59.0, 41.5],
+              "text": "U.S.S.R.",
+              "sublabel": "Soviet Union",
+              "enterAtMs": 2600
+            },
+            {
+              "position": [70.5, 30.2],
+              "text": "PAKISTAN",
+              "sublabel": "CIA Staging Ground",
+              "enterAtMs": 4000
+            }
+          ],
+          "invasionRoute": {
+            "waypoints": [
+              [63.5, 37.8],
+              [63.8, 37.0],
+              [64.2, 36.2],
+              [65.0, 35.5],
+              [65.8, 34.9],
+              [66.5, 34.4],
+              [67.0, 34.1]
+            ],
+            "enterAtMs": 5500,
+            "animDurationMs": 5000,
+            "color": "primary",
+            "label": "Soviet Advance · Dec 1979"
+          }
+        }
+      },
+      "sources": [
+        {
+          "claim": "Soviet forces crossed the Amu Darya river on December 25, 1979",
+          "sourceUrl": "https://en.wikipedia.org/wiki/Soviet%E2%80%93Afghan_War",
+          "sourceTitle": "Soviet–Afghan War — Wikipedia"
+        },
+        {
+          "claim": "Brzezinski admitted the US began funding mujahideen six months before the Soviet invasion",
+          "sourceUrl": "https://en.wikipedia.org/wiki/Zbigniew_Brzezinski",
+          "sourceTitle": "Zbigniew Brzezinski — Wikipedia"
+        }
+      ],
+      "durationMs": 15000
+    }
+  ],
+  "status": "draft"
+}
