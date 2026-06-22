@@ -6,9 +6,6 @@ import "dotenv/config";
 // where no real photograph exists — generative imagery is a garnish, used
 // intentionally, never a substitute for real archival photos.
 
-const DEFAULT_ENDPOINT =
-  "https://ahmadkhalid236997--flux-api-model-web.modal.run";
-
 export type FluxOptions = {
   width?: number;
   height?: number;
@@ -23,13 +20,15 @@ export class FluxAuthError extends Error {}
 function creds(): { endpoint: string; key: string; secret: string } {
   const key = process.env.FLUX_MODAL_KEY;
   const secret = process.env.FLUX_MODAL_SECRET;
-  if (!key || !secret) {
+  const endpoint = process.env.FLUX_ENDPOINT;
+  if (!key || !secret || !endpoint) {
     throw new FluxAuthError(
-      "FLUX_MODAL_KEY / FLUX_MODAL_SECRET are not set. Add them to pipeline/.env " +
-        "(Modal → Settings → Proxy Auth Tokens) to generate genImage scenes."
+      "FLUX_MODAL_KEY / FLUX_MODAL_SECRET / FLUX_ENDPOINT are not set. Add them to pipeline/.env " +
+        "(Modal → Settings → Proxy Auth Tokens; FLUX_ENDPOINT is your Modal web endpoint URL) " +
+        "to generate genImage scenes."
     );
   }
-  return { endpoint: process.env.FLUX_ENDPOINT ?? DEFAULT_ENDPOINT, key, secret };
+  return { endpoint, key, secret };
 }
 
 const isTransient = (msg: string) =>
