@@ -97,7 +97,7 @@ Pick: the main title or a hard section drop → impact; the thesis line → word
 - "kinetic"   — an energetic quote where key words should POP: { "mode":"kinetic", "quote", "attribution", "emphasis":["key","words","from","the","quote"] }
 - "statement" — the NARRATOR'S OWN punchy on-screen line, a hammer-blow (NOT attributed to a person): { "mode":"statement", "quote":"This isn't a tragedy.\\nIt's a pattern.", "emphasis":["pattern."] }  // \\n for line breaks; NO attribution
 - "document"  — a quote from a leaked/official memo, cable, or record: { "mode":"document", "quote", "attribution", "role", "source":"WHITE HOUSE MEMO · 1979" }
-Pick: a famous/iconic person quoted → portrait (show their face); a normal attributed quote → standard; the writer's OWN punch line addressed to the viewer → statement; an official/leaked document → document; emphasize key words → kinetic. Use a real verbatim quotation for standard/portrait/kinetic/document. "emphasis" words must be exact words from the quote.
+Pick: a quote by ANY real named person → portrait by DEFAULT (show their face — a quote on a black screen is a dead zone); use standard ONLY if the person predates photography or no portrait of them could exist. The writer's OWN punch line addressed to the viewer → statement; an official/leaked document → document; emphasize key words → kinetic. Use a real verbatim quotation for standard/portrait/kinetic/document. "emphasis" words must be exact words from the quote.
 
 ### "timeline" — choose a MODE, return under "timeline"
 - "vertical"   — 3–7 dated events WITH detail: { "mode":"vertical", "heading", "events":[ {"date","title","description","color":"primary"|"accent"} ] }

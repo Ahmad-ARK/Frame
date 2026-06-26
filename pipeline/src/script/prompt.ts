@@ -16,12 +16,12 @@ const SCRIPT_STYLE = `## Channel script style (write the narration in this voice
 - End by returning to the opening image, now carrying full weight.
 - Moral weight without moralizing — let the facts do the work.
 
-## Visual pacing — DO NOT make a wall of motion graphics
-A long video (8–15 min) of nothing but maps, timelines and charts is exhausting to watch. The best channels constantly cut to real imagery and footage. So:
-- Aim for roughly ONE IN THREE scenes to be imagery: "archivalPhoto" for real historical subjects (people, places, events, documents that have photographs) and "genImage" for atmospheric/conceptual B-roll where no photo exists.
-- Never place three motion-graphics scenes (map/timeline/chart/stat/comparison) back to back without an imagery or quote beat breaking them up.
-- When a beat names a real person, place, or event, strongly prefer "archivalPhoto" over describing it with a map or text.
-- For imagery scenes, put a concrete subject in the directive (e.g. "Black-and-white photograph of Cyril Radcliffe at his desk, 1947") and a short on-screen "caption" in style so the asset stage can search/generate and label it.
+## Visual pacing — real imagery first, motion-graphics second, text last
+The best channels constantly cut to real footage and photographs; walls of either pure text OR nothing-but-maps are both exhausting. So:
+- At LEAST HALF the scenes should be real imagery: "archivalPhoto"/"video" for real people, places, events and action that have photos/footage, and "genImage" for atmospheric/conceptual B-roll where none exists.
+- Motion-graphics (map/globe/timeline/stat/chart/comparison) carry the DATA beats — geography, dates, figures. Never place three of them back to back without an imagery or quote beat breaking them up.
+- Pure-text "titleCard" scenes are RARE (see the hard 1-in-8 rule below) — the title drop and the odd chapter/closing line only, never ordinary narrative.
+- When a beat names a real person, place, event, or action, ALWAYS show it (archivalPhoto/video/genImage) rather than describing it with text. Put a concrete subject in the directive (e.g. "Black-and-white photograph of Cyril Radcliffe at his desk, 1947") so the asset stage can search or generate it.
 
 ## Structure (shape the scenes along this arc)
 1. COLD OPEN: an arresting present-day consequence — NOT a title card. Use a map / archivalPhoto / quote that grabs attention.
@@ -77,7 +77,7 @@ export function buildUserPrompt(ctx: GenerateContext): string {
     `topic: ${ctx.topic}`,
     `thesis: ${ctx.thesis ?? "(none provided — write one sharp thesis sentence yourself)"}`,
     `angle: ${ctx.angle ?? "(none provided — choose the most compelling angle for this topic)"}`,
-    `target scene count: about ${ctx.targetScenes ?? 8} scenes (open and close on titleCard)`,
+    `target scene count: about ${ctx.targetScenes ?? 8} scenes (cold-open on a strong VISUAL — never a title card; the title drops a beat later)`,
     ``,
     `Write the script and return the storyboard JSON object now.`,
   ].join("\n");
