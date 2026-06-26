@@ -52,6 +52,18 @@ export function finalizeAndValidate(
         if (scene && typeof scene === "object") {
           scene.id ??= `s${String(i + 1).padStart(2, "0")}`;
           scene.sources ??= [];
+          // The model occasionally drops visual.type / visual.directive on a
+          // scene. Repair rather than fail the whole storyboard: default to a
+          // visual type and derive the directive from the narration (which the
+          // asset stage can search on).
+          if (scene.visual && typeof scene.visual === "object") {
+            const v = scene.visual as Record<string, any>;
+            if (typeof v.type !== "string" || !v.type.trim()) v.type = "archivalPhoto";
+            if (typeof v.directive !== "string" || !v.directive.trim()) {
+              const n = typeof scene.narration === "string" ? scene.narration : "";
+              v.directive = n.replace(/\s+/g, " ").trim().slice(0, 140) || "Documentary visual for this beat.";
+            }
+          }
         }
       });
     }

@@ -68,6 +68,8 @@ PURE TEXT (rare — see the hard rule):
   (1-2 sentences each) so the picture changes every ~6-10 seconds.
 
 ## Per-scene fields
+EVERY scene MUST include BOTH "visual.type" AND "visual.directive" (a non-empty
+string) — even when you also provide "visual.style". Never omit them.
 - "visual.type": one value from the vocabulary above.
 - "visual.directive": a concrete note naming the SUBJECT to show — e.g. "Archival
   footage of Soviet T-62 tanks crossing the Amu Darya bridge into Afghanistan,
