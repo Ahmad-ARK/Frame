@@ -10,6 +10,7 @@ import { ArchivalPhoto, styleToPhotoSpec } from "./compositions/ArchivalPhoto";
 import { QuoteCard, styleToQuoteSpec } from "./compositions/QuoteCard";
 import { ComparisonScene } from "./compositions/ComparisonScene";
 import { OverlayLayer } from "./compositions/OverlayLayer";
+import { CaptionLayer, type CaptionStyle } from "./compositions/CaptionLayer";
 import { NewspaperScene, styleToNewspaperSpec } from "./compositions/NewspaperScene";
 import { DocumentScene, styleToDocumentSpec } from "./compositions/DocumentScene";
 import { GlobeScene, styleToGlobeSpec } from "./compositions/GlobeScene";
@@ -122,8 +123,8 @@ const SceneRenderer: React.FC<{ scene: Scene }> = ({ scene }) => {
   }
 };
 
-/** Full documentary — storyboard-driven */
-const Documentary: React.FC<{ storyboard: Storyboard }> = ({ storyboard }) => (
+/** Full documentary — storyboard-driven. `captionStyle` defaults to "karaoke" (auto). */
+const Documentary: React.FC<{ storyboard: Storyboard; captionStyle?: CaptionStyle }> = ({ storyboard, captionStyle = "karaoke" }) => (
   <StyleGuideProvider guide={documentaryDark}>
     <Series>
       {storyboard.scenes.map((scene) => (
@@ -135,6 +136,8 @@ const Documentary: React.FC<{ storyboard: Storyboard }> = ({ storyboard }) => (
           {scene.visual.overlays && scene.visual.overlays.length > 0 && (
             <OverlayLayer overlays={scene.visual.overlays} />
           )}
+          {/* Captions sit ABOVE overlays so they stay legible. */}
+          <CaptionLayer wordTimings={scene.wordTimings} durationMs={scene.durationMs ?? 5000} styleId={captionStyle} />
           {scene.audioRef && <Audio src={staticFile(scene.audioRef)} />}
         </Series.Sequence>
       ))}
@@ -284,6 +287,22 @@ export const RemotionRoot: React.FC = () => {
 
   return (
     <>
+      {/* GENERIC: renders ANY storyboard passed via inputProps (the backend job
+          runner uses this with --props). Duration is computed from the storyboard. */}
+      <Composition
+        id="DynamicDocumentary"
+        component={Documentary}
+        durationInFrames={300}
+        fps={FPS}
+        width={1920}
+        height={1080}
+        defaultProps={{ storyboard: backlogTest, captionStyle: "karaoke" as CaptionStyle }}
+        calculateMetadata={({ props }) => {
+          const sb = (props as { storyboard?: Storyboard }).storyboard;
+          const ms = sb?.scenes?.length ? totalMs(sb) : 5000;
+          return { durationInFrames: Math.max(1, msToFrames(ms, FPS)) };
+        }}
+      />
       {/* Phase 0 proof — 20 seconds */}
       <Composition
         id="DocumentaryPhase0"

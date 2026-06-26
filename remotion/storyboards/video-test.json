@@ -29,7 +29,7 @@
             "kind": "text",
             "atMs": 1361,
             "durationMs": 3000,
-            "anchor": "bottomLeft",
+            "anchor": "topLeft",
             "text": "New Mexico, July 1945",
             "emphasis": true
           },
@@ -40,19 +40,6 @@
             "anchor": "topRight",
             "text": "The world's first nuclear detonation",
             "emphasis": true
-          },
-          {
-            "kind": "image",
-            "atMs": 4514,
-            "durationMs": 4000,
-            "anchor": "bottomRight",
-            "src": "assets/video-modes-test/s1-trinity-ov2.jpg",
-            "subject": "Trinity test fireball photograph",
-            "caption": "The Trinity fireball, 0.016 seconds after detonation",
-            "focal": {
-              "x": 0.39487962021024076,
-              "y": 0.5
-            }
           }
         ]
       },
@@ -336,7 +323,7 @@
             "kind": "text",
             "atMs": 592,
             "durationMs": 4000,
-            "anchor": "bottomLeft",
+            "anchor": "topLeft",
             "text": "An image burned into history",
             "emphasis": true
           },
@@ -466,7 +453,7 @@
             "kind": "text",
             "atMs": 2812,
             "durationMs": 3000,
-            "anchor": "bottomLeft",
+            "anchor": "topLeft",
             "text": "Expanding at ~340 m/s",
             "emphasis": true
           },

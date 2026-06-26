@@ -114,7 +114,10 @@ export async function findWikimediaImageCandidates(
     const licenseScore =
       c.license.type === "PD" || c.license.type === "CC0" ? 2
       : c.license.type === "CC BY" ? 1 : 0;
-    return licenseScore * 10_000_000 + c.width * c.height;
+    // De-prioritise multi-panel "montage"/"collage" lead images (the typical
+    // Wikipedia article hero) — they read as a messy grid in a single-image slot.
+    const montagePenalty = /montage|collage|combo|compilation|\bgrid\b|multiple/i.test(c.title) ? 50_000_000 : 0;
+    return licenseScore * 10_000_000 - montagePenalty + c.width * c.height;
   };
 
   // Try the full query, then progressively simpler ones (verbose multi-word

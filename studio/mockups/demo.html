@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Frame — documentary studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#08080a; --bg-2:#0b0b0e; --surf:#101014; --surf-2:#16161c;
+  --line:rgba(255,255,255,.07); --line-2:rgba(255,255,255,.12);
+  --ink:#f3efe7; --ink-2:#9a9aa6; --ink-3:#62626f;
+  --red:#e2473f; --red-deep:#cf3434; --amber:#f0c040; --green:#39c777;
+  --syne:'Syne',system-ui,sans-serif; --sans:'DM Sans',system-ui,sans-serif; --mono:'Space Mono',ui-monospace,monospace;
+  --ease:cubic-bezier(.22,.8,.28,1); --rcard:20px; --rmd:13px;
+  --lift:0 1px 2px rgba(0,0,0,.4),0 14px 40px rgba(0,0,0,.34);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow:hidden}
+::selection{background:rgba(226,71,63,.3)}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+.kicker{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink-3)}
+.screen{position:fixed;inset:0;opacity:0;visibility:hidden;transition:opacity .5s var(--ease);overflow:auto}
+.screen.on{opacity:1;visibility:visible}
+.rise{opacity:0;transform:translateY(14px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.screen.on .rise{opacity:1;transform:none}
+.rise:nth-child(2){transition-delay:.06s}.rise:nth-child(3){transition-delay:.12s}.rise:nth-child(4){transition-delay:.18s}
+
+.btn{display:inline-flex;align-items:center;gap:9px;height:46px;padding:0 22px;border-radius:12px;font-weight:600;font-size:15px;transition:.18s var(--ease)}
+.btn.sm{height:38px;padding:0 16px;font-size:14px;border-radius:11px}
+.btn.primary{background:var(--ink);color:#0a0a0c}.btn.primary:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(243,239,231,.14)}
+.btn.accent{background:linear-gradient(180deg,var(--red),var(--red-deep));color:#fff;box-shadow:0 6px 20px rgba(207,52,52,.28)}.btn.accent:hover{transform:translateY(-1px);filter:brightness(1.05)}
+.btn.ghost{border:1px solid var(--line-2);color:var(--ink)}.btn.ghost:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.2)}
+.btn svg,.icn{width:18px;height:18px;stroke:currentColor;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
+
+/* bezel monitor (the frame, back by request) */
+.bezel{border-radius:18px;padding:15px;background:linear-gradient(180deg,#1c1c24,#0a0a10);border:1px solid #000;box-shadow:var(--lift),inset 0 1px 0 rgba(255,255,255,.06);position:relative}
+.bezel .scr{position:absolute;width:6px;height:6px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#3a3a46,#0c0c12);box-shadow:inset 0 0 2px #000}
+.bezel .scr.a{top:8px;left:8px}.bezel .scr.b{top:8px;right:8px}.bezel .scr.c{bottom:8px;left:8px}.bezel .scr.d{bottom:8px;right:8px}
+.screen-in{aspect-ratio:16/9;border-radius:9px;overflow:hidden;position:relative;background:radial-gradient(120% 120% at 50% 0,#13131b,#06060a);box-shadow:inset 0 0 0 1px rgba(255,255,255,.05),inset 0 0 56px rgba(0,0,0,.6)}
+.scn-globe{position:absolute;top:50%;left:50%;transform:translate(-50%,-52%);width:46%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 38% 32%,#23232e,#0b0b13 72%);box-shadow:inset -8px -14px 38px rgba(0,0,0,.6)}
+.scn-afg{position:absolute;top:47%;left:48%;width:9%;height:7%;background:var(--red);border-radius:42% 52% 46% 56%;box-shadow:0 0 14px rgba(226,71,63,.6);transform:translate(-50%,-50%) rotate(-8deg)}
+.scn-tag{position:absolute;top:47%;left:51%;font-family:var(--syne);font-weight:800;font-size:12px;letter-spacing:.9px;color:#fff;background:rgba(8,8,12,.66);padding:2px 7px;border-left:2px solid var(--red);transform:translateY(-50%)}
+.scn-cap{position:absolute;left:0;right:0;bottom:8%;text-align:center;font-weight:600;font-size:15px}
+.scn-cap em{color:var(--amber);font-style:normal;font-weight:700}
+.scn-scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.012) 0 1px,transparent 1px 3px);pointer-events:none}
+
+/* ───── WELCOME ───── */
+#welcome{background:radial-gradient(1100px 620px at 80% 6%,rgba(226,71,63,.10),transparent 60%),radial-gradient(900px 700px at 6% 100%,rgba(240,192,64,.04),transparent 55%),var(--bg)}
+.w-nav{display:flex;align-items:center;justify-content:space-between;padding:30px 60px}
+.mark{display:flex;align-items:center;gap:11px;font-family:var(--syne);font-weight:800;font-size:18px;letter-spacing:.5px}
+.mark i{width:11px;height:11px;border-radius:3px;background:var(--red);box-shadow:0 0 14px rgba(226,71,63,.6);display:block}
+.w-nav nav{display:flex;gap:30px;font-size:14px;color:var(--ink-2)}.w-nav nav a{cursor:pointer;transition:.15s}.w-nav nav a:hover{color:var(--ink)}
+.hero{max-width:1140px;margin:0 auto;padding:84px 60px 0;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero h1{font-family:var(--syne);font-weight:800;font-size:60px;line-height:1.02;letter-spacing:-1.5px}
+.hero h1 .em{color:var(--ink-2)}
+.hero p{font-size:18px;line-height:1.6;color:var(--ink-2);max-width:430px;margin:24px 0 36px}
+.hero .cta{display:flex;gap:14px}
+
+/* ───── app shell ───── */
+.app{display:grid;grid-template-columns:74px 1fr;height:100%}
+.side{background:var(--bg-2);border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;padding:22px 0;gap:8px}
+.side .mk{width:34px;height:34px;border-radius:10px;background:linear-gradient(180deg,#1d1d24,#101015);display:grid;place-items:center;margin-bottom:14px;border:1px solid var(--line)}
+.side .mk i{width:10px;height:10px;border-radius:3px;background:var(--red);box-shadow:0 0 12px rgba(226,71,63,.6)}
+.snav{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;color:var(--ink-3);transition:.15s}
+.snav:hover{color:var(--ink);background:rgba(255,255,255,.04)}.snav.on{color:var(--ink);background:rgba(255,255,255,.06)}
+.snav svg{width:21px;height:21px;stroke:currentColor;stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.side .sp{flex:1}
+.main{overflow:auto;min-width:0}
+
+/* ───── LIBRARY ───── */
+.lib{max-width:920px;margin:0 auto;padding:58px 48px}
+.lib-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:36px}
+.lib-head h2{font-family:var(--syne);font-weight:700;font-size:34px;letter-spacing:-.5px}
+.lib-head p{color:var(--ink-3);font-size:14px;margin-top:5px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.proj{cursor:pointer;transition:.2s var(--ease)}.proj:hover{transform:translateY(-3px)}
+.proj .pv{aspect-ratio:16/9;border-radius:14px;border:1px solid var(--line);overflow:hidden;position:relative;background:radial-gradient(120% 120% at 50% 0,#13131b,#06060a)}
+.proj:hover .pv{border-color:var(--line-2);box-shadow:var(--lift)}
+.proj .pmeta{padding:14px 4px 0;display:flex;align-items:center;justify-content:space-between}
+.proj .pmeta h3{font-family:var(--syne);font-weight:600;font-size:16px}
+.proj .pmeta .sub{color:var(--ink-3);font-size:12px;margin-top:3px;font-family:var(--mono)}
+.tagm{font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:4px 9px;border-radius:6px}
+.tagm.done{color:var(--green);background:rgba(57,199,119,.1);border:1px solid rgba(57,199,119,.22)}
+.tagm.draft{color:var(--ink-2);background:rgba(255,255,255,.05);border:1px solid var(--line)}
+.tagm.rend{color:var(--amber);background:rgba(240,192,64,.1);border:1px solid rgba(240,192,64,.25)}
+.newcard{aspect-ratio:16/9;border:1px dashed var(--line-2);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--ink-2);cursor:pointer;transition:.2s var(--ease)}
+.newcard:hover{border-color:var(--red);color:var(--ink);background:rgba(226,71,63,.03)}
+.newcard .pl{width:46px;height:46px;border-radius:14px;border:1px solid var(--line-2);display:grid;place-items:center}
+
+/* ───── NEW (intake) ───── */
+.compose{max-width:680px;margin:0 auto;padding:64px 40px}
+.compose h2{font-family:var(--syne);font-weight:700;font-size:32px;letter-spacing:-.5px;margin:12px 0 30px}
+.modes{display:flex;gap:10px;margin-bottom:22px}
+.mode{flex:1;border:1px solid var(--line);border-radius:var(--rmd);padding:15px;text-align:left;transition:.16s var(--ease)}
+.mode:hover{border-color:var(--line-2)}.mode.on{border-color:var(--red);background:rgba(226,71,63,.05)}
+.mode .icn{margin-bottom:9px;color:var(--ink-2)}.mode.on .icn{color:var(--red)}
+.mode b{display:block;font-weight:600;font-size:14px}.mode small{color:var(--ink-3);font-size:12px}
+.composer{border:1px solid var(--line);border-radius:var(--rcard);background:var(--surf)}
+.composer textarea{width:100%;min-height:220px;background:transparent;border:0;color:var(--ink);font:inherit;font-size:16px;line-height:1.7;padding:20px;resize:none;outline:none}
+.composer textarea::placeholder{color:var(--ink-3)}
+.drop{min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--ink-2)}
+.drop .ring{width:58px;height:58px;border-radius:18px;border:1px solid var(--line-2);display:grid;place-items:center}
+.cbar{display:flex;align-items:center;justify-content:space-between;margin-top:18px}
+.cbar .hint{color:var(--ink-3);font-size:13px;font-family:var(--mono)}
+
+/* ───── stepper (gate screens) ───── */
+.gate{display:grid;grid-template-rows:66px 1fr;height:100%}
+.gbar{display:flex;align-items:center;justify-content:space-between;padding:0 26px;border-bottom:1px solid var(--line);background:var(--bg-2)}
+.gbar .ttl{font-family:var(--syne);font-weight:700;font-size:15px}
+.gbar .ttl small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:1.4px;color:var(--ink-3)}
+.steps{display:flex;align-items:center;gap:6px;position:absolute;left:50%;transform:translateX(-50%)}
+.steps .st{display:flex;align-items:center;gap:8px;padding:7px 13px;border-radius:10px;font-size:13px;color:var(--ink-3);transition:.18s}
+.steps .st .n{width:19px;height:19px;border-radius:50%;border:1.5px solid currentColor;display:grid;place-items:center;font-family:var(--mono);font-size:10px}
+.steps .st.on{color:var(--ink);background:rgba(255,255,255,.05)}
+.steps .st.done{color:var(--green)}.steps .st.done .n{border-color:var(--green);background:rgba(57,199,119,.14)}
+.steps .st.done .n svg{width:10px;height:10px;stroke:var(--green);stroke-width:2.6;fill:none}
+.steps .sep{width:18px;height:1px;background:var(--line-2)}
+.gbody{overflow:auto;min-height:0}
+
+/* ① SCRIPT */
+.script-wrap{max-width:680px;margin:0 auto;padding:50px 40px}
+.script-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.script-top .kicker{margin:0}
+.doc{font-size:19px;line-height:1.85;color:#e7e3da}
+.doc p{margin-bottom:20px}.doc p:last-child{margin-bottom:0}
+.doc textarea{width:100%;min-height:420px;background:transparent;border:0;color:#e7e3da;font:inherit;font-size:19px;line-height:1.85;resize:none;outline:none}
+.script-foot{margin-top:26px;display:flex;align-items:center;justify-content:space-between;color:var(--ink-3);font-family:var(--mono);font-size:12px}
+
+/* ② VISUALS */
+.vis-wrap{max-width:680px;margin:0 auto;padding:46px 40px}
+.vis-head h2{font-family:var(--syne);font-weight:700;font-size:28px;letter-spacing:-.4px}
+.vis-head p{color:var(--ink-2);margin-top:7px;font-size:15px}
+.vis-head p b{color:var(--amber);font-weight:600}
+.acard{border:1px solid var(--line);border-radius:var(--rcard);background:var(--surf);padding:16px;display:flex;gap:18px;margin-top:18px}
+.acard .av{width:200px;flex:0 0 auto}
+.acard .av .pic{aspect-ratio:16/9;border-radius:11px;border:1px solid var(--line);overflow:hidden;background:linear-gradient(135deg,#2a2620,#161009);position:relative}
+.acard .av .pic::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 60% 45%,rgba(240,192,64,.18),transparent 60%)}
+.acard .ab{flex:1;min-width:0;display:flex;flex-direction:column}
+.acard .flag{align-self:flex-start;font-family:var(--mono);font-size:10px;letter-spacing:.8px;text-transform:uppercase;color:var(--amber);background:rgba(240,192,64,.1);border:1px solid rgba(240,192,64,.25);padding:3px 8px;border-radius:6px;margin-bottom:10px;display:inline-flex;gap:6px;align-items:center}
+.acard .desc{font-size:16px;font-weight:600;line-height:1.4}
+.acard .ctx{color:var(--ink-3);font-size:13px;margin-top:6px}.acard .ctx em{color:var(--ink-2);font-style:normal}
+.acard .src{color:var(--ink-3);font-family:var(--mono);font-size:11px;margin-top:4px}
+.acard .acts{display:flex;gap:8px;margin-top:auto;padding-top:14px}
+.abtn{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:9px;font-size:13px;font-weight:500;border:1px solid var(--line);background:var(--surf-2);color:var(--ink-2);transition:.14s}
+.abtn:hover{border-color:var(--line-2);color:var(--ink)}
+.abtn.go{border-color:rgba(226,71,63,.4);color:var(--ink);background:rgba(226,71,63,.08)}
+.abtn svg{width:15px;height:15px;stroke:currentColor;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.verified-note{margin-top:22px;display:flex;align-items:center;gap:10px;color:var(--ink-2);font-size:14px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--rmd);background:var(--surf)}
+.verified-note .ck{width:22px;height:22px;border-radius:50%;background:rgba(57,199,119,.14);display:grid;place-items:center}
+.verified-note .ck svg{width:12px;height:12px;stroke:var(--green);stroke-width:2.4;fill:none}
+
+/* ③ CAPTIONS / PREVIEW */
+.prev-wrap{max-width:1040px;margin:0 auto;padding:40px;display:grid;grid-template-columns:1.4fr 1fr;gap:30px;align-items:start}
+.prev-foot{display:flex;align-items:center;gap:14px;margin-top:18px}
+.tline{margin-top:16px}
+.tline .tk{height:6px;border-radius:4px;background:rgba(255,255,255,.08);position:relative}
+.tline .tk>div{position:absolute;left:0;top:0;bottom:0;width:54%;background:var(--red);border-radius:4px}
+.tline .tr{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--ink-3);margin-top:8px}
+.caps h3{font-family:var(--syne);font-weight:600;font-size:15px;margin-bottom:6px}
+.caps .csub{color:var(--ink-3);font-size:13px;margin-bottom:16px}
+.cap-list{display:flex;flex-direction:column;gap:4px}
+.cap-line{padding:11px 13px;border-radius:11px;font-size:15px;line-height:1.45;color:var(--ink-2);transition:.14s;cursor:text;border:1px solid transparent}
+.cap-line:hover{background:rgba(255,255,255,.03)}
+.cap-line.on{color:var(--ink);background:rgba(226,71,63,.07);border-color:rgba(226,71,63,.3)}
+.cap-line .tm{font-family:var(--mono);font-size:10px;color:var(--ink-3);margin-right:9px}
+.cap-line em{color:var(--amber);font-style:normal;font-weight:600}
+
+/* RENDER / DONE */
+.veil{position:fixed;inset:0;background:rgba(6,6,8,.72);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center}
+.sheet{width:430px;text-align:center}
+.sheet h3{font-family:var(--syne);font-weight:700;font-size:20px;margin-top:22px}
+.sheet .now{color:var(--ink-2);font-size:14px;margin:6px 0 18px}
+.pbar{height:7px;border-radius:5px;background:rgba(255,255,255,.07);overflow:hidden;margin-bottom:10px}
+.pbar>div{height:100%;background:linear-gradient(90deg,var(--red),var(--amber));border-radius:5px;transition:width .4s var(--ease)}
+.pmeta2{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+.done-wrap{max-width:840px;margin:0 auto;padding:50px 40px;text-align:center}
+.done-wrap .kicker{margin-bottom:12px;color:var(--green)}
+.done-wrap h2{font-family:var(--syne);font-weight:700;font-size:30px;letter-spacing:-.4px;margin-bottom:26px}
+.play-badge{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;box-shadow:0 10px 40px rgba(0,0,0,.5);cursor:pointer}
+.play-badge svg{width:25px;height:25px;fill:#0a0a0c;margin-left:3px}
+.done-actions{display:flex;gap:12px;justify-content:center;margin-top:26px}
+
+.demo{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:3px;padding:5px;background:rgba(16,16,20,.82);backdrop-filter:blur(16px);border:1px solid var(--line-2);border-radius:14px;z-index:99;box-shadow:var(--lift)}
+.demo button{font-family:var(--mono);font-size:10px;letter-spacing:.4px;text-transform:uppercase;color:var(--ink-3);padding:7px 10px;border-radius:9px;transition:.14s}
+.demo button:hover{color:var(--ink);background:rgba(255,255,255,.05)}.demo button.on{color:#0a0a0c;background:var(--ink)}
+</style>
+</head>
+<body>
+
+<!-- WELCOME -->
+<section class="screen on" id="welcome">
+  <div class="w-nav rise"><div class="mark"><i></i> Frame</div><nav><a>Samples</a><a>Pricing</a><a>Sign in</a></nav></div>
+  <div class="hero">
+    <div>
+      <div class="kicker rise">Documentary studio</div>
+      <h1 class="rise" style="margin-top:18px">Your script.<br>A finished <span class="em">documentary.</span></h1>
+      <p class="rise">Give Frame a script, a topic, or your own voice. It does the rest — and walks you through it, three quick checks: the words, the visuals, the captions.</p>
+      <div class="cta rise">
+        <button class="btn accent" onclick="go('library')">Create a film <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <button class="btn ghost" onclick="go('done')">Watch a sample</button>
+      </div>
+    </div>
+    <div class="bezel rise"><span class="scr a"></span><span class="scr b"></span><span class="scr c"></span><span class="scr d"></span>
+      <div class="screen-in"><div class="scn-globe"></div><div class="scn-afg"></div><div class="scn-tag">AFGHANISTAN</div><div class="scn-cap">the mountains of <em>Afghanistan</em></div><div class="scn-scan"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- LIBRARY -->
+<section class="screen" id="library">
+  <div class="app">
+    <div class="side">
+      <div class="mk"><i></i></div>
+      <button class="snav on" title="Films"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18M8 5v14"/></svg></button>
+      <button class="snav" onclick="go('new')" title="New"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+      <div class="sp"></div>
+      <button class="snav" title="Settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1l2-1.5-2-3.4-2.3 1a7 7 0 0 0-1.7-1l-.3-2.6h-4l-.3 2.6a7 7 0 0 0-1.7 1l-2.3-1-2 3.4 2 1.5a7 7 0 0 0 0 2l-2 1.5 2 3.4 2.3-1a7 7 0 0 0 1.7 1l.3 2.6h4l.3-2.6a7 7 0 0 0 1.7-1l2.3 1 2-3.4-2-1.5a7 7 0 0 0 .1-1z"/></svg></button>
+    </div>
+    <div class="main">
+      <div class="lib">
+        <div class="lib-head rise">
+          <div><h2>Films</h2><p>3 projects · last edited today</p></div>
+          <button class="btn accent" onclick="go('new')"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg> New film</button>
+        </div>
+        <div class="grid">
+          <div class="proj rise" onclick="go('script')">
+            <div class="pv"><div class="scn-globe"></div><div class="scn-afg"></div><div class="scn-tag">AFGHANISTAN</div><div class="scn-cap">the mountains of <em>Afghanistan</em></div></div>
+            <div class="pmeta"><div><h3>The Atomic Age</h3><div class="sub">0:51 · edited 2h ago</div></div><span class="tagm done">Rendered</span></div>
+          </div>
+          <div class="proj rise" onclick="go('script')">
+            <div class="pv"><div class="scn-cap" style="bottom:42%;font-size:16px">Who Won the<br><em>Soviet–Afghan War</em></div></div>
+            <div class="pmeta"><div><h3>Who Won the War</h3><div class="sub">draft · in review</div></div><span class="tagm draft">Draft</span></div>
+          </div>
+          <div class="proj rise" onclick="go('render')">
+            <div class="pv"><div class="scn-cap" style="bottom:42%;font-size:16px">Partition of <em>1947</em></div></div>
+            <div class="pmeta"><div><h3>Partition of 1947</h3><div class="sub">rendering · 64%</div></div><span class="tagm rend">Rendering</span></div>
+          </div>
+          <div class="newcard rise" onclick="go('new')"><div class="pl"><svg class="icn" viewBox="0 0 24 24" style="width:22px;height:22px"><path d="M12 5v14M5 12h14"/></svg></div><div style="font-weight:600">Start a new film</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEW -->
+<section class="screen" id="new">
+  <div class="app">
+    <div class="side"><div class="mk"><i></i></div>
+      <button class="snav" onclick="go('library')" title="Films"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18M8 5v14"/></svg></button>
+      <button class="snav on" title="New"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button><div class="sp"></div>
+    </div>
+    <div class="main">
+      <div class="compose">
+        <div class="kicker rise">New film</div>
+        <h2 class="rise">How should it start?</h2>
+        <div class="modes rise">
+          <button class="mode on" onclick="pickMode(this,'script')"><svg class="icn" viewBox="0 0 24 24"><path d="M4 5h16M4 10h16M4 15h10"/></svg><b>Write a script</b><small>Paste your narration</small></button>
+          <button class="mode" onclick="pickMode(this,'topic')"><svg class="icn" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><b>From a topic</b><small>Frame writes it</small></button>
+          <button class="mode" onclick="pickMode(this,'audio')"><svg class="icn" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><b>My own voice</b><small>Upload a recording</small></button>
+        </div>
+        <div class="composer rise">
+          <textarea id="scriptArea" placeholder="On the morning of September twelfth, one headline said it all: the United States had been attacked.&#10;&#10;Across the decade, the press tracked every turn — the invasion, the secret funding, the final retreat…"></textarea>
+          <div class="drop" id="dropArea" style="display:none"><div class="ring"><svg class="icn" viewBox="0 0 24 24" style="width:24px;height:24px"><path d="M12 16V4M7 9l5-5 5 5M5 20h14"/></svg></div><div>Drop a recording, or browse</div><small style="color:var(--ink-3);font-family:var(--mono);font-size:11px">transcribed &amp; word-aligned on your GPU</small></div>
+        </div>
+        <div class="cbar rise"><span class="hint">⌘↵ to continue</span><button class="btn accent" onclick="go('generating');runGen()">Continue <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GENERATING -->
+<section class="screen" id="generating">
+  <div style="max-width:520px;margin:0 auto;padding:120px 40px;text-align:center">
+    <div style="width:96px;height:96px;margin:0 auto 28px;position:relative">
+      <svg width="96" height="96" viewBox="0 0 96 96" style="transform:rotate(-90deg)"><circle cx="48" cy="48" r="43" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="5"/><circle id="genArc" cx="48" cy="48" r="43" fill="none" stroke="var(--amber)" stroke-width="5" stroke-linecap="round" stroke-dasharray="270" stroke-dashoffset="270"/></svg>
+      <div id="genPct" style="position:absolute;inset:0;display:grid;place-items:center;font-family:var(--syne);font-weight:700;font-size:24px">0%</div>
+    </div>
+    <h2 style="font-family:var(--syne);font-weight:700;font-size:25px">Reading your script</h2>
+    <div id="genNow" style="color:var(--ink-2);margin-top:8px;font-size:15px">Understanding the story…</div>
+  </div>
+</section>
+
+<!-- ① SCRIPT -->
+<section class="screen" id="script">
+  <div class="gate">
+    <div class="gbar">
+      <div class="ttl">The Atomic Age<small>STEP 1 OF 4</small></div>
+      <div class="steps">
+        <div class="st on"><span class="n">1</span> Script</div><span class="sep"></span>
+        <div class="st"><span class="n">2</span> Visuals</div><span class="sep"></span>
+        <div class="st"><span class="n">3</span> Captions</div><span class="sep"></span>
+        <div class="st"><span class="n">4</span> Render</div>
+      </div>
+      <button class="btn accent sm" onclick="go('visuals')">Looks good <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    </div>
+    <div class="gbody">
+      <div class="script-wrap rise">
+        <div class="script-top"><span class="kicker">Your script</span><button class="abtn" id="editBtn" onclick="toggleEdit()"><svg viewBox="0 0 24 24"><path d="M4 20h4l11-11-4-4L4 16z"/></svg> Edit</button></div>
+        <div class="doc" id="docRead">
+          <p>On the morning of September twelfth, one headline said it all: the United States had been attacked.</p>
+          <p>Across the decade, the press tracked every turn — the invasion, the secret funding, and the final retreat.</p>
+          <p>A 1979 White House memorandum laid out the plan in plain language, addressed to the President himself.</p>
+          <p>Half a world away, in the mountains of Afghanistan, the trap was quietly set.</p>
+          <p>This isn't a tragedy. It's a pattern.</p>
+        </div>
+        <div class="script-foot"><span>183 words · about 0:51</span><span>read it through before you continue</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ② VISUALS -->
+<section class="screen" id="visuals">
+  <div class="gate">
+    <div class="gbar">
+      <div class="ttl">The Atomic Age<small>STEP 2 OF 4</small></div>
+      <div class="steps">
+        <div class="st done"><span class="n"><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg></span> Script</div><span class="sep"></span>
+        <div class="st on"><span class="n">2</span> Visuals</div><span class="sep"></span>
+        <div class="st"><span class="n">3</span> Captions</div><span class="sep"></span>
+        <div class="st"><span class="n">4</span> Render</div>
+      </div>
+      <button class="btn accent sm" onclick="go('captions')">Next <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    </div>
+    <div class="gbody">
+      <div class="vis-wrap">
+        <div class="vis-head rise"><h2>Take a look at the visuals</h2><p>Frame gathered everything. <b>2 need your eye</b> — the rest checked out.</p></div>
+
+        <div class="acard rise" id="ac1">
+          <div class="av"><div class="pic"></div></div>
+          <div class="ab">
+            <span class="flag"><svg style="width:11px;height:11px;stroke:currentColor;stroke-width:2;fill:none" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M10.3 3.9 2 18a2 2 0 0 0 1.7 3h16.6a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg> Not sure about this one</span>
+            <div class="desc">Soviet withdrawal from Afghanistan, 1989</div>
+            <div class="ctx">appears under <em>“the final retreat”</em></div>
+            <div class="src">found: a war-memorial park — probably not what you meant</div>
+            <div class="acts">
+              <button class="abtn go" onclick="fixCard('ac1')"><svg viewBox="0 0 24 24"><path d="M4 4v6h6M20 20v-6h-6M20 8a8 8 0 0 0-14-3M4 16a8 8 0 0 0 14 3"/></svg> Try another</button>
+              <button class="abtn"><svg viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M5 20h14"/></svg> Upload</button>
+              <button class="abtn"><svg viewBox="0 0 24 24"><path d="M5 3v4M3 5h4M19 17v4M17 19h4M12 4l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg> Generate</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="acard rise" id="ac2">
+          <div class="av"><div class="pic" style="background:linear-gradient(135deg,#22242c,#0e1014)"></div></div>
+          <div class="ab">
+            <span class="flag"><svg style="width:11px;height:11px;stroke:currentColor;stroke-width:2;fill:none" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M10.3 3.9 2 18a2 2 0 0 0 1.7 3h16.6a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg> Not sure about this one</span>
+            <div class="desc">CIA funding for the Mujahideen</div>
+            <div class="ctx">appears under <em>“the secret funding”</em></div>
+            <div class="src">found: a modern news clip — may not be period footage</div>
+            <div class="acts">
+              <button class="abtn go" onclick="fixCard('ac2')"><svg viewBox="0 0 24 24"><path d="M4 4v6h6M20 20v-6h-6M20 8a8 8 0 0 0-14-3M4 16a8 8 0 0 0 14 3"/></svg> Try another</button>
+              <button class="abtn"><svg viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M5 20h14"/></svg> Upload</button>
+              <button class="abtn"><svg viewBox="0 0 24 24"><path d="M5 3v4M3 5h4M19 17v4M17 19h4M12 4l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg> Generate</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="verified-note rise"><div class="ck"><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg></div><div><b style="color:var(--ink);font-weight:600">9 more visuals — all verified.</b> <span style="color:var(--ink-3)">Trinity test footage, the 9/11 front page, the Brzezinski memo, the globe… </span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ③ CAPTIONS / PREVIEW -->
+<section class="screen" id="captions">
+  <div class="gate">
+    <div class="gbar">
+      <div class="ttl">The Atomic Age<small>STEP 3 OF 4</small></div>
+      <div class="steps">
+        <div class="st done"><span class="n"><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg></span> Script</div><span class="sep"></span>
+        <div class="st done"><span class="n"><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg></span> Visuals</div><span class="sep"></span>
+        <div class="st on"><span class="n">3</span> Captions</div><span class="sep"></span>
+        <div class="st"><span class="n">4</span> Render</div>
+      </div>
+      <button class="btn accent sm" onclick="go('render');runRender()"><svg style="width:16px;height:16px;stroke:currentColor;stroke-width:1.7;fill:none" viewBox="0 0 24 24"><path d="M5 4l14 8-14 8z"/></svg> Render film</button>
+    </div>
+    <div class="gbody">
+      <div class="prev-wrap">
+        <div class="rise">
+          <div class="bezel"><span class="scr a"></span><span class="scr b"></span><span class="scr c"></span><span class="scr d"></span>
+            <div class="screen-in"><div class="scn-globe"></div><div class="scn-afg"></div><div class="scn-tag">AFGHANISTAN</div><div class="scn-cap">the mountains of <em>Afghanistan</em></div><div class="scn-scan"></div></div>
+          </div>
+          <div class="prev-foot"><button class="btn ghost sm" id="pvPlay"><svg viewBox="0 0 24 24"><path d="M7 5h3v14H7zM14 5h3v14h-3z" fill="currentColor" stroke="none"/></svg> Pause</button><span style="color:var(--ink-2);font-family:var(--mono);font-size:12px"><b style="color:var(--ink)">00:27</b> / 00:51</span></div>
+          <div class="tline"><div class="tk"><div></div></div><div class="tr"><span>0:00</span><span>0:30</span><span>0:51</span></div></div>
+        </div>
+        <div class="caps rise">
+          <h3>Captions</h3>
+          <div class="csub">Click any line to fix a word.</div>
+          <div class="cap-list">
+            <div class="cap-line"><span class="tm">0:18</span>A 1979 White House memorandum laid out the plan.</div>
+            <div class="cap-line on"><span class="tm">0:24</span>Half a world away, in the mountains of <em>Afghanistan</em>…</div>
+            <div class="cap-line"><span class="tm">0:31</span>…the trap was quietly set.</div>
+            <div class="cap-line"><span class="tm">0:37</span>From Washington, the money flowed to Islamabad.</div>
+            <div class="cap-line"><span class="tm">0:45</span>This isn't a tragedy. It's a pattern.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RENDER -->
+<section class="screen" id="render">
+  <div class="veil"><div class="sheet">
+    <div class="bezel"><span class="scr a"></span><span class="scr b"></span><span class="scr c"></span><span class="scr d"></span>
+      <div class="screen-in"><div class="scn-globe"></div><div class="scn-afg"></div><div class="scn-tag">AFGHANISTAN</div></div>
+    </div>
+    <h3>Rendering</h3>
+    <div class="now" id="rNow">Compositing the scenes…</div>
+    <div class="pbar"><div id="rBar" style="width:0"></div></div>
+    <div class="pmeta2"><span id="rPct">0%</span><span>GTX 1660 Ti · ~40s left</span></div>
+  </div></div>
+</section>
+
+<!-- DONE -->
+<section class="screen" id="done">
+  <div class="app">
+    <div class="side"><div class="mk"><i></i></div><button class="snav" onclick="go('library')" title="Films"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18M8 5v14"/></svg></button><div class="sp"></div></div>
+    <div class="main">
+      <div class="done-wrap">
+        <div class="kicker rise">Render complete</div>
+        <h2 class="rise">The Atomic Age</h2>
+        <div class="bezel rise"><span class="scr a"></span><span class="scr b"></span><span class="scr c"></span><span class="scr d"></span>
+          <div class="screen-in"><div class="scn-globe"></div><div class="scn-afg"></div><div class="scn-tag">AFGHANISTAN</div><div class="scn-cap">the mountains of <em>Afghanistan</em></div><div class="play-badge"><svg viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z"/></svg></div></div>
+        </div>
+        <div class="done-actions rise">
+          <button class="btn primary"><svg viewBox="0 0 24 24"><path d="M12 4v12M7 11l5 5 5-5M5 20h14"/></svg> Download mp4</button>
+          <button class="btn ghost"><svg viewBox="0 0 24 24"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"/></svg> Share</button>
+          <button class="btn ghost" onclick="go('library')">Back to films</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<nav class="demo" id="demo"></nav>
+
+<script>
+const screens=['welcome','library','new','generating','script','visuals','captions','render','done'];
+const labels={welcome:'Welcome',library:'Library',new:'New',generating:'Generate',script:'Script',visuals:'Visuals',captions:'Captions',render:'Render',done:'Done'};
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('on',s.id===id));document.querySelectorAll('#demo button').forEach(b=>b.classList.toggle('on',b.dataset.s===id));window.scrollTo(0,0);}
+const demo=document.getElementById('demo');screens.forEach(s=>{const b=document.createElement('button');b.textContent=labels[s];b.dataset.s=s;b.onclick=()=>go(s);if(s==='welcome')b.classList.add('on');demo.appendChild(b);});
+
+function pickMode(el,m){el.parentElement.querySelectorAll('.mode').forEach(x=>x.classList.remove('on'));el.classList.add('on');
+  document.getElementById('scriptArea').style.display=m==='audio'?'none':'';document.getElementById('dropArea').style.display=m==='audio'?'flex':'none';}
+
+function toggleEdit(){
+  const r=document.getElementById('docRead');const btn=document.getElementById('editBtn');
+  if(r.dataset.edit){r.innerHTML=r.dataset.html;delete r.dataset.edit;btn.innerHTML='<svg viewBox="0 0 24 24"><path d="M4 20h4l11-11-4-4L4 16z"/></svg> Edit';}
+  else{r.dataset.html=r.innerHTML;const txt=[...r.querySelectorAll('p')].map(p=>p.textContent).join('\n\n');
+    r.innerHTML='<textarea>'+txt+'</textarea>';r.dataset.edit='1';btn.innerHTML='<svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg> Save';r.querySelector('textarea').focus();}
+}
+function fixCard(id){const c=document.getElementById(id);c.querySelector('.flag').innerHTML='<svg style="width:11px;height:11px;stroke:var(--green);stroke-width:2.4;fill:none" viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg> Replaced';c.querySelector('.flag').style.color='var(--green)';c.querySelector('.flag').style.background='rgba(57,199,119,.1)';c.querySelector('.flag').style.borderColor='rgba(57,199,119,.25)';c.querySelector('.pic').style.background='linear-gradient(135deg,#1c2622,#0c1410)';c.querySelector('.src').textContent='found: archival footage · verified';}
+document.querySelectorAll('.cap-list .cap-line').forEach(l=>l.onclick=()=>{document.querySelectorAll('.cap-list .cap-line').forEach(x=>x.classList.remove('on'));l.classList.add('on');});
+
+let genT;function runGen(){const arc=document.getElementById('genArc');const pct=document.getElementById('genPct');const now=document.getElementById('genNow');
+  const msgs=['Understanding the story…','Choosing how to show each beat…','Gathering footage & photos…','Timing the narration…','Almost there…'];let p=0;clearInterval(genT);
+  genT=setInterval(()=>{p+=2.4;if(p>100)p=100;arc.style.strokeDashoffset=270*(1-p/100);pct.textContent=Math.round(p)+'%';now.textContent=msgs[Math.min(4,Math.floor(p/20))];if(p>=100){clearInterval(genT);setTimeout(()=>go('script'),500);}},85);}
+let renT;function runRender(){const bar=document.getElementById('rBar');const pct=document.getElementById('rPct');const now=document.getElementById('rNow');let p=0;clearInterval(renT);
+  renT=setInterval(()=>{p+=1.7;if(p>100)p=100;bar.style.width=p+'%';pct.textContent=Math.round(p)+'%';now.textContent='Scene '+Math.min(6,Math.ceil(p/100*6))+' of 6 · compositing';if(p>=100){clearInterval(renT);now.textContent='Encoding…';setTimeout(()=>go('done'),700);}},75);}
+</script>
+</body>
+</html>

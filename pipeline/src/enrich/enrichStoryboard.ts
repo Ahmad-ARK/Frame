@@ -36,8 +36,87 @@ function findWordTime(
   return hit?.startMs;
 }
 
-const OVERLAY_ANCHORS = ["right", "topLeft", "bottomRight", "topRight", "bottomLeft"];
-const VALID_ANCHORS = new Set(["topLeft", "topRight", "bottomLeft", "bottomRight", "left", "right", "center"]);
+type Anchor = "topLeft" | "topRight" | "bottomLeft" | "bottomRight" | "left" | "right" | "center";
+const VALID_ANCHORS = new Set<Anchor>(["topLeft", "topRight", "bottomLeft", "bottomRight", "left", "right", "center"]);
+// Tried in this order when an overlay's wanted anchor is taken/blocked. Corners
+// before edges before center (center sits over the subject of most scenes).
+const ANCHOR_PRIORITY: Anchor[] = ["topRight", "topLeft", "right", "left", "bottomRight", "bottomLeft", "center"];
+// Vertical/horizontal mirror — first fallback for a blocked anchor, so a remapped
+// overlay keeps its side (a bottomLeft caption that collides moves to topLeft).
+const MIRROR: Record<Anchor, Anchor> = {
+  topLeft: "bottomLeft", bottomLeft: "topLeft", topRight: "bottomRight", bottomRight: "topRight",
+  left: "right", right: "left", center: "center",
+};
+
+/**
+ * The anchor zones a scene's OWN fixed UI occupies — timed overlays must avoid
+ * landing on them (this is what made a video's lower-third caption and a timeline's
+ * heading get covered by a floating overlay).
+ */
+function sceneOccupiedAnchors(type: string): Set<Anchor> {
+  switch (type) {
+    case "video":
+    case "archivalPhoto":
+    case "genImage":
+    case "newspaper":
+    case "document":
+      return new Set<Anchor>(["bottomLeft", "bottomRight"]); // lower-third caption + attribution/source
+    case "timeline":
+      return new Set<Anchor>(["topLeft"]); // heading kicker
+    case "quoteCard":
+    case "titleCard":
+    case "comparison":
+      return new Set<Anchor>(["center", "left", "right"]); // centred / side text
+    case "stat":
+    case "chart":
+      return new Set<Anchor>(["center"]); // the big number / chart
+    default:
+      return new Set<Anchor>(); // map: tags are placed dynamically — rely on overlap avoidance only
+  }
+}
+
+/**
+ * Assigns each overlay an anchor that (a) avoids the scene's occupied label zones
+ * and (b) does not share an anchor with a time-overlapping sibling. Greedy in time
+ * order; prefers the requested anchor, then its mirror, then the priority list.
+ */
+export function assignOverlayAnchors(
+  specs: { atMs: number; durationMs: number; anchor?: string }[],
+  sceneType: string
+): Anchor[] {
+  const blocked = sceneOccupiedAnchors(sceneType);
+  const placed: { anchor: Anchor; start: number; end: number }[] = [];
+  const order = specs.map((s, i) => ({ i, start: s.atMs, end: s.atMs + s.durationMs, want: VALID_ANCHORS.has(s.anchor as Anchor) ? (s.anchor as Anchor) : undefined }));
+  order.sort((a, b) => a.start - b.start);
+  const out: Anchor[] = new Array(specs.length);
+  const taken = (a: Anchor, start: number, end: number) => placed.some((p) => p.anchor === a && start < p.end && end > p.start);
+  for (const o of order) {
+    const tryOrder: Anchor[] = [];
+    const push = (a?: Anchor) => { if (a && !tryOrder.includes(a)) tryOrder.push(a); };
+    push(o.want); push(o.want ? MIRROR[o.want] : undefined);
+    for (const a of ANCHOR_PRIORITY) push(a);
+    const anchor =
+      tryOrder.find((a) => !blocked.has(a) && !taken(a, o.start, o.end)) ?? // free & unblocked
+      tryOrder.find((a) => !taken(a, o.start, o.end)) ?? // free (allow blocked if all clear ones taken)
+      tryOrder.find((a) => !blocked.has(a)) ?? // unblocked (accept time overlap)
+      o.want ?? ANCHOR_PRIORITY[0];
+    placed.push({ anchor, start: o.start, end: o.end });
+    out[o.i] = anchor;
+  }
+  return out;
+}
+
+// An IMAGE overlay only earns its place when the base scene can't itself show that
+// imagery AND an inset doesn't undermine the scene's job. Suppress it where the base
+// is FULL imagery (video, archival/gen photos), a text PUNCH (quote/title — and
+// quote-portrait already shows the face), or where event callouts replace it
+// (timeline). KEEP it where an inset of a named person/place/event adds something
+// the base can't show: map, stat/chart, comparison, and the paper/print scenes
+// (document → the memo's author; newspaper → the event photo), plus globe.
+const IMAGE_OVERLAY_SUPPRESSED = new Set([
+  "video", "archivalPhoto", "genImage", "quoteCard", "titleCard", "timeline",
+]);
+export const suppressesImageOverlays = (type: string): boolean => IMAGE_OVERLAY_SUPPRESSED.has(type);
 
 /** Resolves LLM overlay specs into render-ready timed overlays (cueWord → atMs). */
 function resolveOverlays(e: any, scene: any): any[] {
@@ -45,19 +124,27 @@ function resolveOverlays(e: any, scene: any): any[] {
   if (!raw.length) return [];
   const dur = scene.durationMs ?? 5000;
   const wt = scene.wordTimings;
-  return raw
+  const type = scene.visual?.type;
+  // Drop image overlays where they're redundant/undermining (text & stat still allowed).
+  const dropImages = suppressesImageOverlays(type);
+  // 1) Resolve timing + payload (anchor assigned in pass 2, collision-aware).
+  const items = raw
     .slice(0, 5)
     .map((o: any, i: number) => {
       const t = o.cueWord ? findWordTime(wt, String(o.cueWord)) : undefined;
       const atMs = t !== undefined ? t : Math.round(dur * (0.2 + 0.6 * (i / Math.max(1, raw.length - 1))));
-      const anchor = VALID_ANCHORS.has(o.anchor) ? o.anchor : OVERLAY_ANCHORS[i % OVERLAY_ANCHORS.length];
-      const base: any = { atMs, durationMs: o.durationMs ?? 3500, anchor };
-      if (o.kind === "image" && o.subject) return { ...base, kind: "image", subject: String(o.subject), caption: o.caption };
-      if (o.kind === "stat" && o.value) return { ...base, kind: "stat", value: String(o.value), label: o.label };
-      if (o.kind === "text" && o.text) return { ...base, kind: "text", text: String(o.text), emphasis: true };
-      return null;
+      const durationMs = o.durationMs ?? 3500;
+      const want = VALID_ANCHORS.has(o.anchor) ? o.anchor : undefined;
+      let payload: any = null;
+      if (o.kind === "image" && o.subject) payload = dropImages ? null : { kind: "image", subject: String(o.subject), caption: o.caption };
+      else if (o.kind === "stat" && o.value) payload = { kind: "stat", value: String(o.value), label: o.label };
+      else if (o.kind === "text" && o.text) payload = { kind: "text", text: String(o.text), emphasis: true };
+      return payload ? { atMs, durationMs, anchor: want, payload } : null;
     })
-    .filter(Boolean);
+    .filter(Boolean) as { atMs: number; durationMs: number; anchor?: Anchor; payload: any }[];
+  // 2) Collision-aware anchor assignment (avoids scene labels + overlapping siblings).
+  const anchors = assignOverlayAnchors(items, type);
+  return items.map((it, i) => ({ atMs: it.atMs, durationMs: it.durationMs, anchor: anchors[i], ...it.payload }));
 }
 
 /**

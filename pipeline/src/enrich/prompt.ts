@@ -101,11 +101,12 @@ Pick: a famous/iconic person quoted → portrait (show their face); a normal att
 
 ### "timeline" — choose a MODE, return under "timeline"
 - "vertical"   — 3–7 dated events WITH detail: { "mode":"vertical", "heading", "events":[ {"date","title","description","color":"primary"|"accent"} ] }
-- "horizontal" — events across a span of years, a sweeping time axis: { "mode":"horizontal", "heading", "events":[ {"date","title","color"} ] }
+- "horizontal" — events across a span of years, a sweeping time axis: { "mode":"horizontal", "heading", "events":[ {"date","title","color","image":{"subject":"SHORT photo search"}} ] }
 - "eras"       — distinct PHASES/periods of history: { "mode":"eras", "heading", "eras":[ {"from":"1979","to":"1989","label":"Soviet War","color"} ] }
-- "milestones" — 2–4 PIVOTAL turning points, each a dramatic full-screen reveal: { "mode":"milestones", "events":[ {"date","title","description","color"} ] }
+- "milestones" — 2–4 PIVOTAL turning points, each a dramatic full-screen reveal: { "mode":"milestones", "events":[ {"date","title","description","color","image":{"subject":"SHORT photo search"}} ] }
 - "parallel"   — TWO actors/sides over the same period ("the US did X while the USSR did Y"): { "mode":"parallel", "heading", "tracks":[ {"label":"USA","color":"accent","events":[{"date","title"}]}, {"label":"USSR","color":"primary","events":[{"date","title"}]} ] }
 Pick by the beat: several events with detail→vertical; a long span/progression→horizontal; distinct named phases→eras; a few turning points→milestones; two sides compared→parallel. Every "date" MUST contain a 4-digit year ("Dec 1979", "1947", "2001").
+IMAGERY: for "horizontal" and "milestones" events, you MAY add an optional "image":{"subject":"..."} (a SHORT 2–4 word photo search for a real photo of that event/person). It renders as a connector-linked callout on the event's dot (horizontal) or a side panel (milestones), appearing as that event lands. Do NOT also add a separate image overlay on a timeline scene — the event image replaces it. "vertical" and "eras" do not take per-event images.
 
 ### "overlays" — for EVERY scene (keeps long scenes alive)
 On TOP of the base visual, you may add timed overlays that pop in on a spoken word and fade out. A scene that holds one visual for many seconds feels dead — so for any scene longer than a few seconds, add 1–4 overlays spaced through it, landing on concrete things the speaker names. Return an "overlays" array on each scene:
@@ -125,7 +126,7 @@ On TOP of the base visual, you may add timed overlays that pop in on a spoken wo
     "label": string           // what it measures
   }
 ]
-Rules: use "image" whenever a real NAMED person/place/object is mentioned (this is the most engaging). Use "text" for a hammer-blow phrase, "stat" for a spoken number. Pick distinct cueWords that actually appear in the narration. Put overlays where the base visual would otherwise sit still. Different anchors for overlapping times. If a scene is short and already busy, few or no overlays are fine — and for information-dense base visuals (newspaper "montage", photo "grid" or "montage", map "tour") return an EMPTY overlays array: the base already fills the frame and overlays would just collide.
+Rules: an "image" overlay is for scenes whose base visual CANNOT itself show that picture — "map", "stat"/"chart", "comparison", "globe", and the print scenes "document" (an inset PORTRAIT of the memo's author) and "newspaper" (a real photo of the event) — where an inset of a NAMED person/place/object adds something the base can't. Do NOT add "image" overlays on scenes that are ALREADY full imagery or a text punch — "video", "archivalPhoto"/"genImage", "quoteCard", "titleCard", "timeline": there the base (or its own callouts/portrait) carries the picture, and a floating inset just reads as random and collides. (Those scenes may still use "text"/"stat" overlays.) Use "text" for a hammer-blow phrase, "stat" for a spoken number. Pick distinct cueWords that actually appear in the narration. Put overlays where the base visual would otherwise sit still. Different anchors for overlapping times. If a scene is short and already busy, few or no overlays are fine — and for information-dense base visuals (newspaper "montage", photo "grid" or "montage", map "tour") return an EMPTY overlays array.
 
 ## Output
 Return EXACTLY:

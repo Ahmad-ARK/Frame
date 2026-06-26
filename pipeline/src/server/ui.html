@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Documentary Pipeline</title>
+<style>
+  :root { --bg:#0b0b0f; --surface:#14141c; --line:#23232e; --text:#e8e4da; --muted:#7a7a8a; --primary:#cf3434; --accent:#f0c040; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:'DM Sans',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:760px; margin:0 auto; padding:40px 22px 80px; }
+  h1 { font-weight:800; letter-spacing:-.5px; font-size:30px; margin:0 0 4px; }
+  .sub { color:var(--muted); margin:0 0 28px; font-size:14px; }
+  .card { background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:22px; margin-bottom:18px; }
+  label { display:block; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); margin:14px 0 6px; }
+  input, textarea, select { width:100%; background:var(--bg); border:1px solid var(--line); color:var(--text); border-radius:9px; padding:11px 13px; font:inherit; font-size:15px; }
+  textarea { min-height:130px; resize:vertical; line-height:1.5; }
+  .modes { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:6px; }
+  .modes button { flex:1; min-width:120px; background:var(--bg); border:1px solid var(--line); color:var(--muted); border-radius:9px; padding:11px; font:inherit; font-weight:600; cursor:pointer; transition:.15s; }
+  .modes button.on { border-color:var(--primary); color:var(--text); background:#1b1320; }
+  .row { display:flex; gap:12px; } .row > * { flex:1; }
+  .go { width:100%; margin-top:20px; background:var(--primary); color:#fff; border:0; border-radius:10px; padding:14px; font:inherit; font-weight:800; font-size:16px; cursor:pointer; letter-spacing:.3px; }
+  .go:disabled { opacity:.5; cursor:default; }
+  .hide { display:none; }
+  #status { margin-top:14px; }
+  .bar { height:8px; background:var(--bg); border:1px solid var(--line); border-radius:6px; overflow:hidden; margin:10px 0; }
+  .bar > div { height:100%; background:linear-gradient(90deg,var(--primary),var(--accent)); width:0; transition:width .4s; }
+  .stage { font-size:13px; color:var(--muted); font-family:'Space Mono',monospace; }
+  .err { color:var(--primary); font-size:14px; white-space:pre-wrap; }
+  video { width:100%; border-radius:12px; margin-top:14px; background:#000; border:1px solid var(--line); }
+  a.dl { color:var(--accent); font-size:13px; text-decoration:none; }
+  .note { font-size:12px; color:var(--muted); margin-top:6px; line-height:1.5; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Documentary Pipeline</h1>
+  <p class="sub">Local studio — submit a job, watch it render. Runs entirely on your machine.</p>
+
+  <div class="card">
+    <label>API key <span style="text-transform:none;color:#555">(leave blank in dev mode)</span></label>
+    <input id="key" placeholder="Bearer key — only if the server was started with API_KEYS" />
+
+    <label>What do you want to make?</label>
+    <div class="modes" id="modes">
+      <button data-mode="render" class="on">Render existing</button>
+      <button data-mode="import">My script</button>
+      <button data-mode="generate">From a topic</button>
+      <button data-mode="audio">My audio</button>
+    </div>
+
+    <div data-for="render">
+      <label>Storyboard</label>
+      <select id="storyboardId"></select>
+      <p class="note">Renders an already-built storyboard. No LLM/network needed — good for a quick test.</p>
+    </div>
+    <div data-for="import" class="hide">
+      <label>Your script</label>
+      <textarea id="script" placeholder="Paste your documentary script…"></textarea>
+      <div class="row"><div><label>Title</label><input id="topic_i" placeholder="My Title"/></div><div><label>Thesis (optional)</label><input id="thesis_i" placeholder="the one-line argument"/></div></div>
+    </div>
+    <div data-for="generate" class="hide">
+      <div class="row"><div><label>Topic</label><input id="topic_g" placeholder="How X happened"/></div><div><label>Thesis (optional)</label><input id="thesis_g" placeholder="the one-line argument"/></div></div>
+    </div>
+    <div data-for="audio" class="hide">
+      <label>Narration recording</label>
+      <input id="audioFile" type="file" accept="audio/*" />
+      <label>Script <span style="text-transform:none;color:#555">(optional — transcribed if blank)</span></label>
+      <textarea id="audioScript" placeholder="Paste the script you recorded (improves accuracy), or leave blank to transcribe."></textarea>
+      <div class="row"><div><label>Title</label><input id="topic_a" placeholder="My Title"/></div></div>
+    </div>
+
+    <label>Caption style</label>
+    <select id="captionStyle">
+      <option value="karaoke" selected>Karaoke (default)</option>
+      <option value="clean">Clean</option>
+      <option value="word">Word-by-word</option>
+      <option value="bar">Lower-third bar</option>
+      <option value="bold">Bold</option>
+      <option value="off">Off</option>
+    </select>
+
+    <button class="go" id="go">Make video</button>
+  </div>
+
+  <div class="card hide" id="statusCard">
+    <div class="stage" id="stageText">queued…</div>
+    <div class="bar"><div id="barFill"></div></div>
+    <div id="result"></div>
+  </div>
+</div>
+
+<script>
+let mode = "render";
+const $ = (id) => document.getElementById(id);
+const authHeaders = () => { const k = $("key").value.trim(); return k ? { "Authorization": "Bearer " + k } : {}; };
+
+document.querySelectorAll("#modes button").forEach(b => b.onclick = () => {
+  mode = b.dataset.mode;
+  document.querySelectorAll("#modes button").forEach(x => x.classList.toggle("on", x === b));
+  document.querySelectorAll("[data-for]").forEach(el => el.classList.toggle("hide", el.dataset.for !== mode));
+});
+
+// populate the storyboard dropdown
+fetch("/storyboards", { headers: authHeaders() }).then(r => r.json()).then(d => {
+  const sel = $("storyboardId");
+  (d.storyboards || []).forEach(s => { const o = document.createElement("option"); o.value = s; o.textContent = s; sel.appendChild(o); });
+  if ([...sel.options].some(o => o.value === "backlog-test")) sel.value = "backlog-test";
+}).catch(() => {});
+
+async function upload(file) {
+  const r = await fetch("/uploads?name=" + encodeURIComponent(file.name), { method: "POST", headers: authHeaders(), body: file });
+  if (!r.ok) throw new Error("upload failed: " + (await r.text()));
+  return (await r.json()).path;
+}
+
+async function buildBody() {
+  const captionStyle = $("captionStyle").value;
+  if (mode === "render") return { mode, storyboardId: $("storyboardId").value, captionStyle };
+  if (mode === "import") return { mode, script: $("script").value, topic: $("topic_i").value || "Untitled", thesis: $("thesis_i").value || undefined, captionStyle };
+  if (mode === "generate") return { mode, topic: $("topic_g").value, thesis: $("thesis_g").value || undefined, captionStyle };
+  if (mode === "audio") {
+    const f = $("audioFile").files[0];
+    if (!f) throw new Error("pick an audio file");
+    $("stageText").textContent = "uploading audio…";
+    const audioPath = await upload(f);
+    return { mode, audioPath, script: $("audioScript").value || undefined, topic: $("topic_a").value || "Untitled", captionStyle };
+  }
+}
+
+let timer;
+$("go").onclick = async () => {
+  clearInterval(timer);
+  $("go").disabled = true; $("statusCard").classList.remove("hide"); $("result").innerHTML = ""; $("barFill").style.width = "0"; $("stageText").textContent = "submitting…";
+  try {
+    const body = await buildBody();
+    const r = await fetch("/jobs", { method: "POST", headers: { "Content-Type": "application/json", ...authHeaders() }, body: JSON.stringify(body) });
+    const j = await r.json();
+    if (!r.ok) throw new Error(j.error || "submit failed");
+    poll(j.id);
+  } catch (e) { fail(e.message); }
+};
+
+function poll(id) {
+  timer = setInterval(async () => {
+    try {
+      const r = await fetch("/jobs/" + id, { headers: authHeaders() });
+      const j = await r.json();
+      if (!r.ok) throw new Error(j.error || "lost the job");
+      $("stageText").textContent = j.status + (j.stage ? " · " + j.stage : "");
+      $("barFill").style.width = Math.round((j.progress || 0) * 100) + "%";
+      if (j.status === "succeeded") { clearInterval(timer); done(j.outputUrl); }
+      else if (j.status === "failed") { clearInterval(timer); fail(j.error || "failed"); }
+    } catch (e) { clearInterval(timer); fail(e.message); }
+  }, 1000);
+}
+
+function done(url) {
+  $("go").disabled = false;
+  $("result").innerHTML = '<video src="' + url + '" controls autoplay></video><div style="margin-top:8px"><a class="dl" href="' + url + '" download>↓ download mp4</a></div>';
+}
+function fail(msg) { clearInterval(timer); $("go").disabled = false; $("stageText").textContent = "failed"; $("result").innerHTML = '<div class="err">' + msg + '</div>'; }
+</script>
+</body>
+</html>

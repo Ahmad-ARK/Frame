@@ -45,15 +45,20 @@
         "overlays": [
           {
             "kind": "image",
-            "atMs": 2200,
+            "atMs": 3898,
             "durationMs": 3500,
             "anchor": "topRight",
+            "src": "assets/timeline-modes-test/s1-decade-ov0.png",
             "subject": "CIA Operation Cyclone Afghanistan",
-            "caption": "Operation Cyclone — CIA's covert arming program"
+            "caption": "Operation Cyclone — CIA's covert arming program",
+            "focal": {
+              "x": 0.6250651380927567,
+              "y": 0.4978181818181818
+            }
           },
           {
             "kind": "text",
-            "atMs": 4400,
+            "atMs": 7796,
             "durationMs": 3000,
             "anchor": "bottomLeft",
             "text": "100,000 Soviet troops cross the border",
@@ -61,24 +66,202 @@
           },
           {
             "kind": "image",
-            "atMs": 6600,
+            "atMs": 11694,
             "durationMs": 4000,
             "anchor": "right",
+            "src": "assets/timeline-modes-test/s1-decade-ov2.jpg",
             "subject": "Stinger missile mujahideen Afghanistan",
-            "caption": "Stinger missiles — a war-changing weapon"
+            "caption": "Stinger missiles — a war-changing weapon",
+            "focal": {
+              "x": 0.41719342604298354,
+              "y": 0.5
+            }
           },
           {
             "kind": "image",
-            "atMs": 8800,
+            "atMs": 15592,
             "durationMs": 3500,
             "anchor": "bottomRight",
+            "src": "assets/timeline-modes-test/s1-decade-ov3.jpg",
             "subject": "Soviet troops withdrawal Afghanistan 1989",
-            "caption": "February 1989 — the Soviets leave"
+            "caption": "February 1989 — the Soviets leave",
+            "focal": {
+              "x": 0.3741965105601469,
+              "y": 0.5
+            }
           }
         ]
       },
       "sources": [],
-      "durationMs": 11000
+      "durationMs": 19490,
+      "audioRef": "audio/timeline-modes-test/s1-decade.mp3",
+      "wordTimings": [
+        {
+          "word": "The",
+          "startMs": 100,
+          "endMs": 433
+        },
+        {
+          "word": "war",
+          "startMs": 433,
+          "endMs": 766
+        },
+        {
+          "word": "unfolded",
+          "startMs": 766,
+          "endMs": 1655
+        },
+        {
+          "word": "over",
+          "startMs": 1655,
+          "endMs": 2099
+        },
+        {
+          "word": "a",
+          "startMs": 2099,
+          "endMs": 2210
+        },
+        {
+          "word": "decade",
+          "startMs": 2210,
+          "endMs": 2988
+        },
+        {
+          "word": "Operation",
+          "startMs": 2938,
+          "endMs": 4140
+        },
+        {
+          "word": "Cyclone",
+          "startMs": 4140,
+          "endMs": 5075
+        },
+        {
+          "word": "began",
+          "startMs": 5075,
+          "endMs": 5743
+        },
+        {
+          "word": "in",
+          "startMs": 5743,
+          "endMs": 6010
+        },
+        {
+          "word": "July",
+          "startMs": 6010,
+          "endMs": 6545
+        },
+        {
+          "word": "1979",
+          "startMs": 6545,
+          "endMs": 7212
+        },
+        {
+          "word": "The",
+          "startMs": 7212,
+          "endMs": 7492
+        },
+        {
+          "word": "Soviets",
+          "startMs": 7492,
+          "endMs": 8146
+        },
+        {
+          "word": "invaded",
+          "startMs": 8146,
+          "endMs": 8799
+        },
+        {
+          "word": "that",
+          "startMs": 8799,
+          "endMs": 9172
+        },
+        {
+          "word": "December",
+          "startMs": 9172,
+          "endMs": 10012
+        },
+        {
+          "word": "The",
+          "startMs": 10012,
+          "endMs": 10406
+        },
+        {
+          "word": "CIA",
+          "startMs": 10406,
+          "endMs": 10800
+        },
+        {
+          "word": "sent",
+          "startMs": 10800,
+          "endMs": 11325
+        },
+        {
+          "word": "Stinger",
+          "startMs": 11325,
+          "endMs": 12244
+        },
+        {
+          "word": "missiles",
+          "startMs": 12244,
+          "endMs": 13294
+        },
+        {
+          "word": "in",
+          "startMs": 13294,
+          "endMs": 13556
+        },
+        {
+          "word": "1986",
+          "startMs": 13556,
+          "endMs": 14212
+        },
+        {
+          "word": "And",
+          "startMs": 14212,
+          "endMs": 14518
+        },
+        {
+          "word": "the",
+          "startMs": 14518,
+          "endMs": 14822
+        },
+        {
+          "word": "last",
+          "startMs": 14822,
+          "endMs": 15229
+        },
+        {
+          "word": "Soviet",
+          "startMs": 15229,
+          "endMs": 15839
+        },
+        {
+          "word": "troops",
+          "startMs": 15839,
+          "endMs": 16449
+        },
+        {
+          "word": "withdrew",
+          "startMs": 16449,
+          "endMs": 17262
+        },
+        {
+          "word": "in",
+          "startMs": 17262,
+          "endMs": 17466
+        },
+        {
+          "word": "February",
+          "startMs": 17466,
+          "endMs": 18279
+        },
+        {
+          "word": "1989",
+          "startMs": 18279,
+          "endMs": 18787
+        }
+      ]
     },
     {
       "id": "s2-eras",
@@ -115,7 +298,7 @@
         "overlays": [
           {
             "kind": "text",
-            "atMs": 2000,
+            "atMs": 3639,
             "durationMs": 3000,
             "anchor": "topLeft",
             "text": "A decade of superpower occupation",
@@ -123,7 +306,7 @@
           },
           {
             "kind": "text",
-            "atMs": 5000,
+            "atMs": 9097,
             "durationMs": 3000,
             "anchor": "center",
             "text": "Civil war, warlords, the Taliban rise",
@@ -131,7 +314,7 @@
           },
           {
             "kind": "stat",
-            "atMs": 8000,
+            "atMs": 14555,
             "durationMs": 3500,
             "anchor": "bottomRight",
             "value": "20 years",
@@ -140,7 +323,160 @@
         ]
       },
       "sources": [],
-      "durationMs": 10000
+      "durationMs": 18194,
+      "audioRef": "audio/timeline-modes-test/s2-eras.mp3",
+      "wordTimings": [
+        {
+          "word": "The",
+          "startMs": 100,
+          "endMs": 375
+        },
+        {
+          "word": "story",
+          "startMs": 375,
+          "endMs": 833
+        },
+        {
+          "word": "breaks",
+          "startMs": 833,
+          "endMs": 1383
+        },
+        {
+          "word": "into",
+          "startMs": 1383,
+          "endMs": 1750
+        },
+        {
+          "word": "three",
+          "startMs": 1750,
+          "endMs": 2208
+        },
+        {
+          "word": "distinct",
+          "startMs": 2208,
+          "endMs": 2942
+        },
+        {
+          "word": "eras",
+          "startMs": 2942,
+          "endMs": 3400
+        },
+        {
+          "word": "From",
+          "startMs": 3350,
+          "endMs": 4009
+        },
+        {
+          "word": "1979",
+          "startMs": 4009,
+          "endMs": 4668
+        },
+        {
+          "word": "to",
+          "startMs": 4668,
+          "endMs": 4997
+        },
+        {
+          "word": "1989",
+          "startMs": 4997,
+          "endMs": 5821
+        },
+        {
+          "word": "the",
+          "startMs": 5821,
+          "endMs": 6315
+        },
+        {
+          "word": "Soviet",
+          "startMs": 6315,
+          "endMs": 7304
+        },
+        {
+          "word": "war",
+          "startMs": 7304,
+          "endMs": 7962
+        },
+        {
+          "word": "From",
+          "startMs": 7962,
+          "endMs": 8495
+        },
+        {
+          "word": "1989",
+          "startMs": 8495,
+          "endMs": 9028
+        },
+        {
+          "word": "to",
+          "startMs": 9028,
+          "endMs": 9295
+        },
+        {
+          "word": "2001",
+          "startMs": 9295,
+          "endMs": 9961
+        },
+        {
+          "word": "the",
+          "startMs": 9961,
+          "endMs": 10360
+        },
+        {
+          "word": "vacuum",
+          "startMs": 10360,
+          "endMs": 11160
+        },
+        {
+          "word": "left",
+          "startMs": 11160,
+          "endMs": 11692
+        },
+        {
+          "word": "behind",
+          "startMs": 11692,
+          "endMs": 12625
+        },
+        {
+          "word": "From",
+          "startMs": 12625,
+          "endMs": 13179
+        },
+        {
+          "word": "2001",
+          "startMs": 13179,
+          "endMs": 13734
+        },
+        {
+          "word": "to",
+          "startMs": 13734,
+          "endMs": 14011
+        },
+        {
+          "word": "2021",
+          "startMs": 14011,
+          "endMs": 14704
+        },
+        {
+          "word": "America's",
+          "startMs": 14704,
+          "endMs": 15951
+        },
+        {
+          "word": "own",
+          "startMs": 15951,
+          "endMs": 16366
+        },
+        {
+          "word": "long",
+          "startMs": 16366,
+          "endMs": 16921
+        },
+        {
+          "word": "war",
+          "startMs": 16921,
+          "endMs": 17475
+        }
+      ]
     },
     {
       "id": "s3-turning-points",
@@ -156,52 +492,119 @@
                 "date": "1979",
                 "title": "The Invasion",
                 "description": "Soviet forces invade Afghanistan — igniting a proxy war that reshapes global geopolitics.",
-                "color": "primary"
+                "color": "primary",
+                "image": {
+                  "subject": "Soviet soldiers Afghanistan war 1980",
+                  "src": "assets/timeline-modes-test/s3-turning-points-tl0.jpg",
+                  "focal": {
+                    "x": 0.5836305984938566,
+                    "y": 0.5
+                  }
+                }
               },
               {
                 "date": "1989",
                 "title": "The Retreat",
                 "description": "The Soviet withdrawal leaves a power vacuum and a country awash in weapons and competing factions.",
-                "color": "accent"
+                "color": "accent",
+                "image": {
+                  "subject": "Soviet army withdrawal Afghanistan 1989",
+                  "src": "assets/timeline-modes-test/s3-turning-points-tl1.jpg",
+                  "focal": {
+                    "x": 0.4791666666666667,
+                    "y": 0.5
+                  }
+                }
               },
               {
                 "date": "2001",
                 "title": "The Blowback",
                 "description": "The September 11 attacks — carried out by forces born of the Afghan jihad — bring America into its own Afghan war.",
-                "color": "primary"
+                "color": "primary",
+                "image": {
+                  "subject": "World Trade Center September 11 attacks",
+                  "src": "assets/timeline-modes-test/s3-turning-points-tl2.jpg",
+                  "focal": {
+                    "x": 0.609375,
+                    "y": 0.5
+                  }
+                }
               }
             ]
           }
         },
-        "overlays": [
-          {
-            "kind": "image",
-            "atMs": 1800,
-            "durationMs": 3500,
-            "anchor": "topRight",
-            "subject": "Soviet invasion Afghanistan 1979 tanks",
-            "caption": "Soviet tanks enter Kabul, December 1979"
-          },
-          {
-            "kind": "image",
-            "atMs": 4500,
-            "durationMs": 3500,
-            "anchor": "topRight",
-            "subject": "Soviet withdrawal Afghanistan 1989 bridge",
-            "caption": "Soviet troops cross the Friendship Bridge, 1989"
-          },
-          {
-            "kind": "image",
-            "atMs": 7200,
-            "durationMs": 4000,
-            "anchor": "topRight",
-            "subject": "September 11 2001 attacks New York",
-            "caption": "September 11, 2001 — the blowback"
-          }
-        ]
+        "overlays": []
       },
       "sources": [],
-      "durationMs": 9000
+      "durationMs": 12386,
+      "audioRef": "audio/timeline-modes-test/s3-turning-points.mp3",
+      "wordTimings": [
+        {
+          "word": "Three",
+          "startMs": 100,
+          "endMs": 573
+        },
+        {
+          "word": "dates",
+          "startMs": 573,
+          "endMs": 1046
+        },
+        {
+          "word": "changed",
+          "startMs": 1046,
+          "endMs": 1709
+        },
+        {
+          "word": "everything",
+          "startMs": 1709,
+          "endMs": 2750
+        },
+        {
+          "word": "1979",
+          "startMs": 2700,
+          "endMs": 3645
+        },
+        {
+          "word": "the",
+          "startMs": 3645,
+          "endMs": 4212
+        },
+        {
+          "word": "invasion",
+          "startMs": 4212,
+          "endMs": 5912
+        },
+        {
+          "word": "1989",
+          "startMs": 5912,
+          "endMs": 6823
+        },
+        {
+          "word": "the",
+          "startMs": 6823,
+          "endMs": 7369
+        },
+        {
+          "word": "retreat",
+          "startMs": 7369,
+          "endMs": 8825
+        },
+        {
+          "word": "2001",
+          "startMs": 8825,
+          "endMs": 9667
+        },
+        {
+          "word": "the",
+          "startMs": 9667,
+          "endMs": 10172
+        },
+        {
+          "word": "blowback",
+          "startMs": 10172,
+          "endMs": 11688
+        }
+      ]
     },
     {
       "id": "s4-two-sides",
@@ -220,11 +623,27 @@
                 "events": [
                   {
                     "date": "1979",
-                    "title": "Funneled billions to rebels"
+                    "title": "Funneled billions to rebels",
+                    "image": {
+                      "subject": "Charlie Wilson congressman Afghanistan",
+                      "src": "assets/timeline-modes-test/s4-two-sides-tl0.jpg",
+                      "focal": {
+                        "x": 0.6580201164637375,
+                        "y": 0.5
+                      }
+                    }
                   },
                   {
                     "date": "1986",
-                    "title": "Sent Stinger missiles"
+                    "title": "Sent Stinger missiles",
+                    "image": {
+                      "subject": "FIM-92 Stinger missile",
+                      "src": "assets/timeline-modes-test/s4-two-sides-tl1.jpg",
+                      "focal": {
+                        "x": 0.4777650147686249,
+                        "y": 0.49803101156780705
+                      }
+                    }
                   }
                 ]
               },
@@ -234,46 +653,185 @@
                 "events": [
                   {
                     "date": "1979",
-                    "title": "Invaded Afghanistan"
+                    "title": "Invaded Afghanistan",
+                    "image": {
+                      "subject": "Soviet tanks Kabul 1979",
+                      "src": "assets/timeline-modes-test/s4-two-sides-tl2.jpg",
+                      "focal": {
+                        "x": 0.58825,
+                        "y": 0.5
+                      }
+                    }
                   },
                   {
                     "date": "1989",
-                    "title": "Finally withdrew"
+                    "title": "Finally withdrew",
+                    "image": {
+                      "subject": "Soviet withdrawal Afghanistan 1989",
+                      "src": "assets/timeline-modes-test/s4-two-sides-tl3.jpg",
+                      "focal": {
+                        "x": 0.38654444828778967,
+                        "y": 0.5
+                      }
+                    }
                   }
                 ]
               }
             ]
           }
         },
-        "overlays": [
-          {
-            "kind": "stat",
-            "atMs": 2000,
-            "durationMs": 3500,
-            "anchor": "topLeft",
-            "value": "$3B+",
-            "label": "US covert aid to Afghan rebels"
-          },
-          {
-            "kind": "image",
-            "atMs": 5000,
-            "durationMs": 3500,
-            "anchor": "topRight",
-            "subject": "Stinger missile mujahideen shoulder fired",
-            "caption": "Stingers neutralised Soviet air superiority"
-          },
-          {
-            "kind": "image",
-            "atMs": 8000,
-            "durationMs": 3500,
-            "anchor": "bottomRight",
-            "subject": "Soviet withdrawal Afghanistan convoy 1989",
-            "caption": "Soviet convoy leaves — February 1989"
-          }
-        ]
+        "overlays": []
       },
       "sources": [],
-      "durationMs": 10000
+      "durationMs": 15674,
+      "audioRef": "audio/timeline-modes-test/s4-two-sides.mp3",
+      "wordTimings": [
+        {
+          "word": "Watch",
+          "startMs": 100,
+          "endMs": 657
+        },
+        {
+          "word": "the",
+          "startMs": 657,
+          "endMs": 991
+        },
+        {
+          "word": "two",
+          "startMs": 991,
+          "endMs": 1326
+        },
+        {
+          "word": "players",
+          "startMs": 1326,
+          "endMs": 2105
+        },
+        {
+          "word": "move",
+          "startMs": 2105,
+          "endMs": 2662
+        },
+        {
+          "word": "America",
+          "startMs": 2612,
+          "endMs": 3282
+        },
+        {
+          "word": "funneled",
+          "startMs": 3282,
+          "endMs": 4048
+        },
+        {
+          "word": "billions",
+          "startMs": 4048,
+          "endMs": 4814
+        },
+        {
+          "word": "to",
+          "startMs": 4814,
+          "endMs": 5005
+        },
+        {
+          "word": "the",
+          "startMs": 5005,
+          "endMs": 5292
+        },
+        {
+          "word": "rebels",
+          "startMs": 5292,
+          "endMs": 5867
+        },
+        {
+          "word": "starting",
+          "startMs": 5867,
+          "endMs": 6632
+        },
+        {
+          "word": "in",
+          "startMs": 6632,
+          "endMs": 6824
+        },
+        {
+          "word": "1979",
+          "startMs": 6824,
+          "endMs": 7207
+        },
+        {
+          "word": "and",
+          "startMs": 7207,
+          "endMs": 7494
+        },
+        {
+          "word": "sent",
+          "startMs": 7494,
+          "endMs": 7877
+        },
+        {
+          "word": "Stingers",
+          "startMs": 7877,
+          "endMs": 8642
+        },
+        {
+          "word": "in",
+          "startMs": 8642,
+          "endMs": 8834
+        },
+        {
+          "word": "1986",
+          "startMs": 8834,
+          "endMs": 9312
+        },
+        {
+          "word": "The",
+          "startMs": 9312,
+          "endMs": 9666
+        },
+        {
+          "word": "Soviets",
+          "startMs": 9666,
+          "endMs": 10490
+        },
+        {
+          "word": "invaded",
+          "startMs": 10490,
+          "endMs": 11314
+        },
+        {
+          "word": "in",
+          "startMs": 11314,
+          "endMs": 11549
+        },
+        {
+          "word": "1979",
+          "startMs": 11549,
+          "endMs": 12020
+        },
+        {
+          "word": "and",
+          "startMs": 12020,
+          "endMs": 12373
+        },
+        {
+          "word": "finally",
+          "startMs": 12373,
+          "endMs": 13197
+        },
+        {
+          "word": "withdrew",
+          "startMs": 13197,
+          "endMs": 14139
+        },
+        {
+          "word": "in",
+          "startMs": 14139,
+          "endMs": 14374
+        },
+        {
+          "word": "1989",
+          "startMs": 14374,
+          "endMs": 14962
+        }
+      ]
     },
     {
       "id": "s5-long-arc",
@@ -289,7 +847,15 @@
               {
                 "date": "1953",
                 "title": "Iran Coup",
-                "color": "accent"
+                "color": "accent",
+                "image": {
+                  "subject": "Mohammad Mossadegh portrait",
+                  "src": "assets/timeline-modes-test/s5-long-arc-tl0.jpg",
+                  "focal": {
+                    "x": 0.5,
+                    "y": 0.5705059203444564
+                  }
+                }
               },
               {
                 "date": "1963",
@@ -299,12 +865,28 @@
               {
                 "date": "1979",
                 "title": "Afghanistan",
-                "color": "primary"
+                "color": "primary",
+                "image": {
+                  "subject": "Mujahideen fighters Afghanistan",
+                  "src": "assets/timeline-modes-test/s5-long-arc-tl2.jpg",
+                  "focal": {
+                    "x": 0.6366666666666667,
+                    "y": 0.5
+                  }
+                }
               },
               {
                 "date": "2001",
                 "title": "American Invasion",
-                "color": "primary"
+                "color": "primary",
+                "image": {
+                  "subject": "US soldiers Afghanistan 2001",
+                  "src": "assets/timeline-modes-test/s5-long-arc-tl3.jpg",
+                  "focal": {
+                    "x": 0.4997448979591837,
+                    "y": 0.3661901595744681
+                  }
+                }
               },
               {
                 "date": "2011",
@@ -314,48 +896,181 @@
               {
                 "date": "2021",
                 "title": "Fall of Kabul",
-                "color": "primary"
+                "color": "primary",
+                "image": {
+                  "subject": "Kabul airport evacuation 2021",
+                  "src": "assets/timeline-modes-test/s5-long-arc-tl5.jpg",
+                  "focal": {
+                    "x": 0.5208333333333334,
+                    "y": 0.5
+                  }
+                }
               }
             ]
           }
         },
-        "overlays": [
-          {
-            "kind": "image",
-            "atMs": 2200,
-            "durationMs": 3000,
-            "anchor": "topLeft",
-            "subject": "Iran 1953 coup Mohammad Mosaddegh",
-            "caption": "Iran, 1953 — Mosaddegh ousted"
-          },
-          {
-            "kind": "image",
-            "atMs": 4400,
-            "durationMs": 3500,
-            "anchor": "topRight",
-            "subject": "Soviet invasion Afghanistan 1979",
-            "caption": "Afghanistan, 1979 — the pivot point"
-          },
-          {
-            "kind": "image",
-            "atMs": 6600,
-            "durationMs": 3500,
-            "anchor": "bottomLeft",
-            "subject": "US invasion Afghanistan 2001 troops",
-            "caption": "America invades, October 2001"
-          },
-          {
-            "kind": "image",
-            "atMs": 8800,
-            "durationMs": 4000,
-            "anchor": "bottomRight",
-            "subject": "Fall of Kabul Taliban 2021",
-            "caption": "Kabul falls, August 2021"
-          }
-        ]
+        "overlays": []
       },
       "sources": [],
-      "durationMs": 11000
+      "durationMs": 21266,
+      "audioRef": "audio/timeline-modes-test/s5-long-arc.mp3",
+      "wordTimings": [
+        {
+          "word": "Trace",
+          "startMs": 100,
+          "endMs": 772
+        },
+        {
+          "word": "the",
+          "startMs": 772,
+          "endMs": 1175
+        },
+        {
+          "word": "long",
+          "startMs": 1175,
+          "endMs": 1712
+        },
+        {
+          "word": "arc",
+          "startMs": 1712,
+          "endMs": 2250
+        },
+        {
+          "word": "The",
+          "startMs": 2200,
+          "endMs": 2723
+        },
+        {
+          "word": "Iran",
+          "startMs": 2723,
+          "endMs": 3420
+        },
+        {
+          "word": "coup",
+          "startMs": 3420,
+          "endMs": 4117
+        },
+        {
+          "word": "in",
+          "startMs": 4117,
+          "endMs": 4466
+        },
+        {
+          "word": "1953",
+          "startMs": 4466,
+          "endMs": 5338
+        },
+        {
+          "word": "The",
+          "startMs": 5338,
+          "endMs": 5877
+        },
+        {
+          "word": "Iraq",
+          "startMs": 5877,
+          "endMs": 6597
+        },
+        {
+          "word": "coup",
+          "startMs": 6597,
+          "endMs": 7316
+        },
+        {
+          "word": "in",
+          "startMs": 7316,
+          "endMs": 7676
+        },
+        {
+          "word": "1963",
+          "startMs": 7676,
+          "endMs": 8575
+        },
+        {
+          "word": "Afghanistan",
+          "startMs": 8575,
+          "endMs": 10523
+        },
+        {
+          "word": "in",
+          "startMs": 10523,
+          "endMs": 10877
+        },
+        {
+          "word": "1979",
+          "startMs": 10877,
+          "endMs": 11762
+        },
+        {
+          "word": "The",
+          "startMs": 11762,
+          "endMs": 12122
+        },
+        {
+          "word": "American",
+          "startMs": 12122,
+          "endMs": 13079
+        },
+        {
+          "word": "invasion",
+          "startMs": 13079,
+          "endMs": 14037
+        },
+        {
+          "word": "in",
+          "startMs": 14037,
+          "endMs": 14276
+        },
+        {
+          "word": "2001",
+          "startMs": 14276,
+          "endMs": 14875
+        },
+        {
+          "word": "Libya",
+          "startMs": 14875,
+          "endMs": 15979
+        },
+        {
+          "word": "in",
+          "startMs": 15979,
+          "endMs": 16421
+        },
+        {
+          "word": "2011",
+          "startMs": 16421,
+          "endMs": 17525
+        },
+        {
+          "word": "The",
+          "startMs": 17525,
+          "endMs": 17957
+        },
+        {
+          "word": "fall",
+          "startMs": 17957,
+          "endMs": 18533
+        },
+        {
+          "word": "of",
+          "startMs": 18533,
+          "endMs": 18821
+        },
+        {
+          "word": "Kabul",
+          "startMs": 18821,
+          "endMs": 19542
+        },
+        {
+          "word": "in",
+          "startMs": 19542,
+          "endMs": 19830
+        },
+        {
+          "word": "2021",
+          "startMs": 19830,
+          "endMs": 20550
+        }
+      ]
     }
   ],
   "status": "draft"

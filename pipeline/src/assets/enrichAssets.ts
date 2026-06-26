@@ -8,8 +8,9 @@ import { findInternetArchiveVideoCandidates } from "./internetArchive.js";
 import { verifyFootage, type FootageVerdict } from "./footageVerify.js";
 import { verifyImage, type ImageVerdict } from "./imageVerify.js";
 import { isQuotaError } from "../gemini/client.js";
-import { generateFluxImage, buildFluxPrompt, FluxAuthError } from "./flux.js";
+import { generateFluxImage, generateFluxImages, isFluxError, type FluxResult, buildFluxPrompt, FluxAuthError } from "./flux.js";
 import { computeFocal } from "./focal.js";
+import { mapPool, hostThrottle, hostOf } from "../util/pool.js";
 
 // Visual types backed by a single fetched (searched) still image.
 const IMAGE_TYPES = new Set(["archivalPhoto", "newspaper", "document"]);
@@ -23,8 +24,14 @@ export type AssetEnrichOptions = {
   publicDir?: string;
   /** Stop after this many fetches (quota/testing). */
   max?: number;
-  /** Delay between fetches (ms). Default 500. */
+  /** Min interval between calls to the SAME host (ms). Default 1100 (Wikimedia 429s). */
   delayMs?: number;
+  /** How many searched-image scenes to fetch concurrently (across hosts). Default 3. */
+  searchConcurrency?: number;
+  /** Prompts per request to the batched FLUX endpoint (VRAM-bound). Default 3. */
+  fluxBatchSize?: number;
+  /** Concurrency for the single-endpoint FLUX fallback. Default 1 (cost-neutral). */
+  fluxConcurrency?: number;
   /** Allow CC BY-SA images (off by default — share-alike risk). */
   allowShareAlike?: boolean;
   /** Source adapters to try, in order. Default: wikimedia → internetArchive. */
@@ -222,79 +229,98 @@ export async function enrichStoryboardAssets(
     return null;
   };
 
-  for (let i = 0; i < total; i++) {
-    const { scene } = targets[i];
-    const isGen = GEN_TYPES.has(scene.visual.type);
-    const style = (scene.visual.style ?? {}) as Record<string, any>;
-    const query = isGen ? buildFluxPrompt(scene.visual.directive, style.prompt) : queryForScene(scene);
+  const slice = targets.slice(0, total);
+  const genTargets = slice.filter(({ scene }) => GEN_TYPES.has(scene.visual.type));
+  const searchTargets = slice.filter(({ scene }) => !GEN_TYPES.has(scene.visual.type));
+  // Space same-host calls (e.g. Wikimedia) >= delayMs apart even while different
+  // hosts (search vs download vs FLUX) overlap. Keeps politeness, adds parallelism.
+  const throttle = hostThrottle(delayMs);
+  let progress = 0;
+
+  // ── genImage scenes: generate them TOGETHER. With FLUX_BATCH_ENDPOINT set this
+  // is one warm L40S doing true GPU batching (the cost win); otherwise it's
+  // cost-neutral sequential generation on one warm container. Grouped by
+  // dimensions so a batched forward pass gets uniform-sized latents.
+  if (genTargets.length > 0 && !fluxDisabled) {
+    const groups = new Map<string, typeof genTargets>();
+    for (const t of genTargets) {
+      const s = (t.scene.visual.style ?? {}) as Record<string, any>;
+      const key = `${s.width ?? 1536}x${s.height ?? 864}`;
+      (groups.get(key) ?? groups.set(key, []).get(key)!).push(t);
+    }
+    for (const [dims, group] of groups) {
+      if (fluxDisabled) {
+        for (const { scene } of group) {
+          opts.onProgress?.({ sceneId: scene.id, query: "(genImage)", result: "error", detail: "FLUX disabled (no credentials)", index: ++progress, total });
+          errored++;
+        }
+        continue;
+      }
+      const [w, h] = dims.split("x").map(Number);
+      const prompts = group.map(({ scene }) => buildFluxPrompt(scene.visual.directive, (scene.visual.style as any)?.prompt));
+      let results: FluxResult[];
+      try {
+        results = await generateFluxImages(prompts, { width: w, height: h, batchSize: opts.fluxBatchSize, concurrency: opts.fluxConcurrency });
+      } catch (err) {
+        // A whole-batch failure (e.g. missing creds) — mark each and stop FLUX.
+        if (err instanceof FluxAuthError) fluxDisabled = true;
+        results = group.map(() => ({ error: err as Error }));
+      }
+      for (let g = 0; g < group.length; g++) {
+        const { scene } = group[g];
+        const r = results[g];
+        if (isFluxError(r)) {
+          if (r.error instanceof FluxAuthError) fluxDisabled = true;
+          errored++;
+          opts.onProgress?.({ sceneId: scene.id, query: prompts[g], result: "error", detail: String(r.error?.message ?? r.error).slice(0, 100), index: ++progress, total });
+          continue;
+        }
+        const fileName = `${scene.id}.png`;
+        await writeFile(join(assetDir, fileName), r);
+        scene.visual.assets = [
+          { ref: `assets/${sb.id}/${fileName}`, kind: "image", source: "imageModel", license: { type: "AI-generated", attributionRequired: false } },
+        ];
+        filled++;
+        opts.onProgress?.({ sceneId: scene.id, query: prompts[g], result: "filled", detail: `imageModel (FLUX) · ${(r.length / 1024).toFixed(0)}KB`, index: ++progress, total });
+      }
+    }
+  }
+
+  // ── searched-image scenes: fetch in parallel across sources/hosts. The throttle
+  // keeps any single host paced like before; downloads overlap the next search.
+  await mapPool(searchTargets, opts.searchConcurrency ?? 3, async ({ scene }) => {
+    const query = queryForScene(scene);
     let result: "filled" | "not-found" | "error" = "not-found";
     let detail: string | undefined;
-
-    if (isGen && fluxDisabled) {
-      opts.onProgress?.({ sceneId: scene.id, query, result: "error", detail: "FLUX disabled (no credentials)", index: i + 1, total });
-      errored++;
-      if (i < total - 1) await sleep(delayMs);
-      continue;
-    }
-
     try {
-      if (isGen) {
-        // Generate with FLUX and write the PNG bytes directly.
-        const bytes = await generateFluxImage(query, {
-          width: style.width,
-          height: style.height,
-          seed: style.seed,
-        });
-        const fileName = `${scene.id}.png`;
-        await writeFile(join(assetDir, fileName), bytes);
+      let found = null as Awaited<ReturnType<(typeof finders)[number]["find"]>>;
+      for (const { find } of finders) {
+        await throttle("search"); // pace search-API calls (Wikimedia 429s)
+        found = await find(query, { allowShareAlike: opts.allowShareAlike });
+        if (found) break;
+      }
+      if (found) {
+        const ext = extFromMime(found.mime);
+        const fileName = `${scene.id}.${ext}`;
+        await throttle(hostOf(found.url));
+        await downloadTo(found.url, join(assetDir, fileName));
         scene.visual.assets = [
-          {
-            ref: `assets/${sb.id}/${fileName}`,
-            kind: "image",
-            source: "imageModel",
-            license: { type: "AI-generated", attributionRequired: false },
-          },
+          { ref: `assets/${sb.id}/${fileName}`, kind: "image", source: found.source, license: found.license },
         ];
         filled++;
         result = "filled";
-        detail = `imageModel (FLUX) · ${(bytes.length / 1024).toFixed(0)}KB`;
+        const dims = found.width && found.height ? ` · ${found.width}x${found.height}` : "";
+        detail = `${found.source} · ${found.license.type}${dims}`;
       } else {
-        // Try each search source in order; take the first license-clean hit.
-        let found = null as Awaited<ReturnType<(typeof finders)[number]["find"]>>;
-        for (const { find } of finders) {
-          found = await find(query, { allowShareAlike: opts.allowShareAlike });
-          if (found) break;
-        }
-        if (found) {
-          const ext = extFromMime(found.mime);
-          const fileName = `${scene.id}.${ext}`;
-          await downloadTo(found.url, join(assetDir, fileName));
-          scene.visual.assets = [
-            {
-              ref: `assets/${sb.id}/${fileName}`, // staticFile()-relative (posix)
-              kind: "image",
-              source: found.source,
-              license: found.license,
-            },
-          ];
-          filled++;
-          result = "filled";
-          const dims = found.width && found.height ? ` · ${found.width}x${found.height}` : "";
-          detail = `${found.source} · ${found.license.type}${dims}`;
-        } else {
-          notFound++;
-        }
+        notFound++;
       }
     } catch (err) {
       errored++;
       result = "error";
       detail = String((err as Error)?.message ?? err).slice(0, 100);
-      if (err instanceof FluxAuthError) fluxDisabled = true; // stop trying FLUX
     }
-
-    opts.onProgress?.({ sceneId: scene.id, query, result, detail, index: i + 1, total });
-    if (i < total - 1) await sleep(delayMs);
-  }
+    opts.onProgress?.({ sceneId: scene.id, query, result, detail, index: ++progress, total });
+  });
 
   // ── Pass 2: fetch images for word-cued image OVERLAYS (insets) ──
   for (const scene of sb.scenes) {
@@ -564,6 +590,37 @@ export async function enrichStoryboardAssets(
       } catch (err) {
         errored++;
         console.error(`  ✗ footage ${scene.id}[${k}]: ${String((err as Error)?.message ?? err).slice(0, 60)}`);
+      }
+    }
+  }
+
+  // ── Pass 7: images tied to TIMELINE events (rendered as connector-linked callouts) ──
+  for (const scene of sb.scenes) {
+    if (scene.visual.type !== "timeline") continue;
+    const tl: any = (scene.visual.style as any)?.timeline ?? {};
+    // Events live under `events` for most modes, and under `tracks[].events` for parallel.
+    const events: any[] = [
+      ...(tl.events ?? []),
+      ...((tl.tracks ?? []) as any[]).flatMap((tr) => tr.events ?? []),
+    ];
+    for (let k = 0; k < events.length; k++) {
+      const img = events[k]?.image;
+      if (!img || img.src || !img.subject) continue;
+      try {
+        const got = await fetchVerifiedImage(String(img.subject), `${scene.id}-tl${k}`, "a real photograph of the subject or event");
+        if (got) {
+          img.src = got.src;
+          img.focal = got.focal;
+          filled++;
+          console.error(`  ✓ timeline ${scene.id}[${k}] "${String(img.subject).slice(0, 36)}" → verified`);
+        } else {
+          notFound++;
+          console.error(`  · timeline ${scene.id}[${k}] "${String(img.subject).slice(0, 36)}" → no verified image`);
+        }
+        await sleep(delayMs);
+      } catch (err) {
+        errored++;
+        console.error(`  ✗ timeline ${scene.id}[${k}]: ${String((err as Error)?.message ?? err).slice(0, 60)}`);
       }
     }
   }

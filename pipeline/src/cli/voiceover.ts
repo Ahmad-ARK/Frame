@@ -4,6 +4,7 @@ import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { tmpdir } from "node:os";
 import { StoryboardSchema } from "../schema/storyboard.js";
+import { alignAudioToText, whisperAvailable } from "../audio/wordTimings.js";
 
 const execFileP = promisify(execFile);
 
@@ -13,10 +14,10 @@ const execFileP = promisify(execFile);
 // from its narration length. Audio lands in Remotion's public/ so the renderer
 // muxes it natively via <Audio>.
 
-type Args = { input?: string; out?: string; voice: string; padMs: number };
+type Args = { input?: string; out?: string; voice: string; padMs: number; whisper: boolean };
 
 function parseArgs(argv: string[]): Args {
-  const args: Args = { voice: "en-US-ChristopherNeural", padMs: 650 };
+  const args: Args = { voice: "en-US-ChristopherNeural", padMs: 650, whisper: true };
   const positional: string[] = [];
   for (let i = 0; i < argv.length; i++) {
     const raw = argv[i];
@@ -26,6 +27,7 @@ function parseArgs(argv: string[]): Args {
     if (key === "--out") { args.out = val; if (eq < 0) i++; }
     else if (key === "--voice") { args.voice = val; if (eq < 0) i++; }
     else if (key === "--pad") { args.padMs = Number(val); if (eq < 0) i++; }
+    else if (key === "--no-whisper") args.whisper = false; // keep the fast char-interp timings
     else if (!raw.startsWith("--")) positional.push(raw);
   }
   args.input = positional[0];
@@ -77,17 +79,26 @@ async function main() {
   const audioDir = join(publicDir, "audio", sb.id);
   await mkdir(audioDir, { recursive: true });
 
-  console.error(`Generating voiceover for "${sb.topic}" (voice: ${args.voice}) ...\n`);
+  // edge-tts gives only sentence boundaries (→ char-interpolated word times that
+  // drift). If whisper is available, RE-TIME each clip against its own audio so
+  // captions/visuals land on the real spoken word. `--no-whisper` keeps the fast path.
+  const useWhisper = args.whisper && (await whisperAvailable());
+  console.error(`Generating voiceover for "${sb.topic}" (voice: ${args.voice})${useWhisper ? " · whisper word-timing" : ""} ...\n`);
   let total = 0;
   for (const scene of sb.scenes) {
     const file = join(audioDir, `${scene.id}.mp3`);
-    const words = await ttsToFile(scene.narration, args.voice, file);
+    let words = await ttsToFile(scene.narration, args.voice, file);
     const ms = await durationMs(file);
     scene.durationMs = ms + args.padMs;
     scene.audioRef = `audio/${sb.id}/${scene.id}.mp3`;
+    let timed = "interp";
+    if (useWhisper) {
+      try { const a = await alignAudioToText(file, scene.narration); if (a.length) { words = a; timed = "whisper"; } }
+      catch (err) { console.error(`    · whisper re-time failed (${String((err as Error).message).slice(0, 50)}) — kept interp`); }
+    }
     if (words.length) scene.wordTimings = words;
     total += scene.durationMs;
-    console.error(`  ✓ ${scene.id.padEnd(34)} ${(scene.durationMs / 1000).toFixed(1)}s · ${words.length} words`);
+    console.error(`  ✓ ${scene.id.padEnd(28)} ${(scene.durationMs / 1000).toFixed(1)}s · ${words.length} words · ${timed}`);
   }
 
   const validated = StoryboardSchema.parse(sb);
