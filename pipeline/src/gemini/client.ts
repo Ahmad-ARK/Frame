@@ -1,16 +1,29 @@
 import "dotenv/config";
 import { GoogleGenAI } from "@google/genai";
-
-const apiKey = process.env.GEMINI_API_KEY;
-if (!apiKey) {
-  throw new Error(
-    "GEMINI_API_KEY is not set. Copy .env.example to .env and add your Google AI Studio key."
-  );
-}
+import { qwenGenerate } from "../llm/qwen.js";
 
 export const DEFAULT_MODEL = process.env.GEMINI_MODEL ?? "gemini-2.5-flash-lite";
 
-const ai = new GoogleGenAI({ apiKey });
+// Which model backend handles the LLM + vision calls. "gemini" (default) uses the
+// Google API; "qwen" routes to the self-hosted Qwen2.5-VL endpoint on Modal
+// (no rate caps). generateGrounded stays Gemini-only (search grounding is a
+// Gemini feature and is not used in the prepare/render path).
+const PROVIDER = (process.env.LLM_PROVIDER ?? "gemini").toLowerCase();
+const useQwen = PROVIDER === "qwen";
+
+// Lazily create the Gemini client only when a Gemini call is actually made, so
+// a Qwen-only deployment needs no GEMINI_API_KEY.
+let _ai: GoogleGenAI | null = null;
+function ai(): GoogleGenAI {
+  if (!_ai) {
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      throw new Error("GEMINI_API_KEY is not set. Copy .env.example to .env and add your Google AI Studio key (or set LLM_PROVIDER=qwen).");
+    }
+    _ai = new GoogleGenAI({ apiKey });
+  }
+  return _ai;
+}
 
 export type GenerateJsonOptions = {
   system: string;
@@ -65,14 +78,17 @@ function isTransient(err: unknown): boolean {
   );
 }
 
-/** Calls Gemini in JSON mode and returns the raw response text (still a string). */
+/** Generates JSON from the configured backend and returns the raw response text. */
 export async function generateJson(opts: GenerateJsonOptions): Promise<string> {
+  if (useQwen) {
+    return qwenGenerate({ system: opts.system, user: opts.user, temperature: opts.temperature ?? 0.4 });
+  }
   const maxAttempts = 3;
   let lastErr: unknown;
 
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     try {
-      const res = await ai.models.generateContent({
+      const res = await ai().models.generateContent({
         model: opts.model ?? DEFAULT_MODEL,
         contents: opts.user,
         config: {
@@ -112,6 +128,9 @@ export async function generateJson(opts: GenerateJsonOptions): Promise<string> {
  * amount of keyword metadata can).
  */
 export async function generateVisionJson(opts: GenerateVisionJsonOptions): Promise<string> {
+  if (useQwen) {
+    return qwenGenerate({ system: opts.system, user: opts.user, images: opts.images, temperature: opts.temperature ?? 0 });
+  }
   const maxAttempts = 3;
   let lastErr: unknown;
   const parts = [
@@ -121,7 +140,7 @@ export async function generateVisionJson(opts: GenerateVisionJsonOptions): Promi
 
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     try {
-      const res = await ai.models.generateContent({
+      const res = await ai().models.generateContent({
         model: opts.model ?? DEFAULT_MODEL,
         contents: [{ role: "user", parts }],
         config: {
@@ -158,7 +177,7 @@ export async function generateGrounded(
 
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     try {
-      const res = await ai.models.generateContent({
+      const res = await ai().models.generateContent({
         model: opts.model ?? DEFAULT_MODEL,
         contents: opts.user,
         config: {

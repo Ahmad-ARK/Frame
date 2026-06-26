@@ -1,3 +1,40 @@
+# Modal endpoints
+
+The pipeline self-hosts two models on Modal: **FLUX.1-dev** for `genImage` stills,
+and (optionally) **Qwen2.5-VL** for the LLM + vision work in place of Gemini.
+
+## Qwen2.5-VL — LLM + vision without rate caps (`qwen_vl_app.py`)
+
+One vision-language model serves BOTH the pipeline's text work (script import,
+scene enrichment) and its vision work (verifying fetched footage/images depict
+the subject), replacing Gemini — so there's no 20-requests/day free-tier cap and
+no external billing. You pay Modal GPU-seconds (scale-to-zero).
+
+Deploy (you run this — Claude never handles your Modal secrets):
+
+```bash
+modal deploy pipeline/modal/qwen_vl_app.py
+```
+
+Then in `pipeline/.env`:
+
+```
+LLM_PROVIDER=qwen
+QWEN_ENDPOINT=https://<you>--qwen-vl-generate.modal.run
+# FLUX_MODAL_KEY / FLUX_MODAL_SECRET are reused as the proxy-auth tokens
+```
+
+Notes:
+- Default model is `Qwen/Qwen2.5-VL-7B-Instruct` (Apache-2.0, **not gated** — no HF
+  token needed). Fits one L40S comfortably; A10G (24 GB) also works and is cheaper.
+- For higher quality at more GPU cost, set `QWEN_MODEL=Qwen/Qwen2.5-VL-32B-Instruct`
+  (needs an AWQ build + a bigger GPU; won't fit one L40S in bf16).
+- It uses 🤗 transformers (simple, robust). For higher throughput later, swap the
+  endpoint internals to vLLM — the pipeline client (`src/llm/qwen.ts`) doesn't change.
+- `LLM_PROVIDER=gemini` (the default) keeps using Google; the switch is env-only.
+
+---
+
 # Modal FLUX endpoints
 
 The pipeline generates `genImage` stills with FLUX.1-dev hosted on Modal.
