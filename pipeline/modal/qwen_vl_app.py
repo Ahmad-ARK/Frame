@@ -25,6 +25,15 @@ import modal
 
 MODEL = os.environ.get("QWEN_MODEL", "Qwen/Qwen2.5-VL-7B-Instruct")
 
+
+def _download_model():
+    # Bake the weights into the image at build time so cold starts are fast
+    # (no ~16 GB re-download per container).
+    from huggingface_hub import snapshot_download
+
+    snapshot_download(MODEL, ignore_patterns=["*.pt", "*.bin"])  # prefer safetensors
+
+
 image = (
     modal.Image.debian_slim(python_version="3.11")
     .pip_install(
@@ -32,10 +41,12 @@ image = (
         "transformers==4.49.0",   # Qwen2.5-VL support landed here
         "accelerate==1.3.0",
         "qwen-vl-utils==0.0.8",
+        "huggingface_hub[hf_transfer]",
         "pillow",
         "fastapi[standard]",
     )
     .env({"HF_HUB_ENABLE_HF_TRANSFER": "1"})
+    .run_function(_download_model)
 )
 
 app = modal.App("qwen-vl", image=image)
