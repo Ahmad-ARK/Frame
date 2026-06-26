@@ -16,6 +16,9 @@ import { importScript } from "../importer/importScript.js";
 import { generateStoryboard } from "../script/generateScript.js";
 import { enrichStoryboard } from "../enrich/enrichStoryboard.js";
 import { enrichStoryboardAssets } from "../assets/enrichAssets.js";
+import { SYSTEM_PROMPT as IMPORT_PROMPT } from "../importer/prompt.js";
+import { SCRIPT_SYSTEM_PROMPT } from "../script/prompt.js";
+import { ENRICH_SYSTEM_PROMPT } from "../enrich/prompt.js";
 import { alignStoryboardToAudio } from "../audio/alignStoryboardAudio.js";
 import { transcribeAudio } from "../audio/wordTimings.js";
 import { log, errInfo } from "./logger.js";
@@ -41,9 +44,18 @@ export const WORK_DIR = resolve(PIPELINE_DIR, "out", "work");
 // The resumable build steps, in order. The checkpoint records the last one done.
 const STEPS = ["source", "voiceover", "enrich", "assets"] as const;
 
+// A fingerprint of the prompts that shape the storyboard. Folding it into the
+// checkpoint hash means changing a prompt (e.g. making scenes more visual)
+// invalidates cached work, so the next run REBUILDS instead of resuming a
+// storyboard produced by the old prompt.
+const PROMPT_VERSION = createHash("sha1")
+  .update(IMPORT_PROMPT + SCRIPT_SYSTEM_PROMPT + ENRICH_SYSTEM_PROMPT)
+  .digest("hex")
+  .slice(0, 8);
+
 const sourceHash = (input: Record<string, unknown>) =>
   createHash("sha1")
-    .update(JSON.stringify([input.script ?? "", input.topic ?? "", input.thesis ?? "", input.audioPath ?? "", input.channelId ?? ""]))
+    .update(JSON.stringify([input.script ?? "", input.topic ?? "", input.thesis ?? "", input.audioPath ?? "", input.channelId ?? "", PROMPT_VERSION]))
     .digest("hex")
     .slice(0, 16);
 
