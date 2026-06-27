@@ -38,6 +38,7 @@ image = (
     modal.Image.debian_slim(python_version="3.11")
     .pip_install(
         "torch==2.5.1",
+        "torchvision==0.20.1",
         "transformers==4.49.0",   # Qwen2.5-VL support landed here
         "accelerate==1.3.0",
         "qwen-vl-utils==0.0.8",
