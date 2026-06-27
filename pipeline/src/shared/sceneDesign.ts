@@ -16,46 +16,60 @@ reach for a title/text card to cover ordinary narrative, you are doing it wrong 
 find the photo, footage, map, document, or image that shows it instead.
 
 ## Scene visual vocabulary — pick the single best TYPE per beat
-REAL IMAGERY (prefer these whenever the beat names something real):
-- "archivalPhoto" — a real historical photograph exists (a person, place, event,
-  object, moment). DEFAULT choice for anything named and photographable.
-- "video"        — real archival FOOTAGE of an action/event (tanks crossing, a
-  speech, a crowd, a withdrawal). Prefer over a still when the beat describes
-  motion or a moment unfolding.
-- "genImage"     — an atmospheric/conceptual image where no real photo exists
-  (a mood, a metaphor, a reconstructed scene). B-roll glue between real shots.
-GEOGRAPHY:
-- "map"          — invasions, borders, routes, where an event happened in a region.
-- "globe"        — transcontinental relationships (arcs of money / arms / influence).
+GEOGRAPHY (check this FIRST — geography beats everything else):
+- "map"          — any beat where LOCATION or MOVEMENT is the point: an invasion,
+  a border, a supply route, where something happened. Subtypes at enrich time:
+  locator (one place), tour (narrator names 2-4 places), route (physical movement
+  along a path — tanks, refugees, a convoy), compare (territory divided/split),
+  flows (arms/money/influence from A to B), spread (territory growing over time).
+  USE MAP whenever a country, region, river, or border is central — even if real
+  footage or a photo also exists. A map SHOWS geography; a photo only hints at it.
+- "globe"        — transcontinental arcs (CIA → Pakistan → Afghanistan, or attacks
+  across oceans). Use over "map" when the relationship spans multiple continents.
+REAL IMAGERY (when the beat is NOT primarily geographic):
+- "video"        — real archival FOOTAGE of an action unfolding (tanks rolling,
+  a speech, a crowd, a signing, a withdrawal). Pick this when motion carries the beat.
+- "archivalPhoto"— a real historical photograph of a named person, object, or event
+  where video doesn't exist or isn't needed.
+- "genImage"     — an atmospheric/conceptual image where no real photo could plausibly
+  exist (a mood, a metaphor, a reconstructed scene). Use sparingly.
 DATA & EVIDENCE:
-- "timeline"     — a run of TWO OR MORE dated events.
-- "stat"         — one dramatic number, or a few compared (bar).
-- "chart"        — a single quantity tracked over time (line/area).
-- "comparison"   — two forces/sides set against each other.
-- "newspaper"    — a headline / press reaction.
-- "document"     — a leaked memo, treaty, cable, or official paper (use this for a
-  quotation that comes FROM a document).
+- "timeline"     — THREE OR MORE causally related dated events that form a meaningful
+  chronological sequence (e.g. "1979 invasion → 1985 Stinger missiles → 1989
+  withdrawal"). DO NOT use for a single date, a decade reference, or two isolated
+  facts. If you only have 1-2 dates, use "archivalPhoto" or "video" instead.
+- "stat"         — one dramatic number or a small comparison (the $3B figure, the
+  death toll). ONLY when the narration actually states the figure.
+- "chart"        — one quantity tracked over time (troop levels 1979-1989).
+- "comparison"   — two or three forces explicitly contrasted (US vs Soviet, before/after).
+- "newspaper"    — a headline or press reaction moment.
+- "document"     — a leaked memo, treaty, cable, or official paper; use when quoting
+  FROM a document rather than FROM a person.
 NAMED QUOTES:
-- "quoteCard"    — a verbatim quotation by a NAMED real person. Put the person's
-  name in "attribution" so their PORTRAIT is shown beside the quote — a real
-  person's words should appear next to their FACE, never floating on black.
+- "quoteCard"    — a verbatim quotation by a NAMED real person. Always set
+  "attribution" so their portrait appears beside the quote.
 PURE TEXT (rare — see the hard rule):
-- "titleCard"    — the title drop and the occasional chapter beat ONLY.
+- "titleCard"    — MAXIMUM 2 per film. Only for the video's own title and
+  a major mid-film chapter drop. NEVER for a sentence of regular narration.
 
-## Selection rules (apply in order)
-1. Does the beat name a real PERSON, PLACE, EVENT, or OBJECT? → SHOW it: "video"
-   if it is an action/moment in motion, otherwise "archivalPhoto"; use "genImage"
-   only when no real image could plausibly exist.
-2. Is the core GEOGRAPHIC (invasion, route, border, location)? → "map" (one
-   country/region) or "globe" (across continents).
-3. TWO+ dated events named? → "timeline".
-4. One quantity over time → "chart"; one or a few standalone figures → "stat".
-5. A verbatim quote by a named person → "quoteCard" with attribution (→ portrait).
-   A quote FROM a memo/cable/treaty → "document".
-6. Two sides weighed against each other → "comparison".
-7. A press reaction / headline → "newspaper".
-8. ONLY a pure rhetorical title/chapter line, with no real subject to show, may be
-   "titleCard" — and only within the 1-in-8 budget.
+## Selection rules (apply in order — stop at the first match)
+1. Is LOCATION or MOVEMENT the core of the beat (an invasion, a route, a border,
+   where something happened, arms flowing from one country to another)?
+   → "map" (same continent) or "globe" (across continents). Do NOT fall back to
+   archivalPhoto just because a photo of the place also exists.
+2. Is it a verbatim quote by a named real person? → "quoteCard".
+3. Is it a quote FROM a document (memo, cable, treaty)? → "document".
+4. Is it a press reaction or headline? → "newspaper".
+5. Are there THREE OR MORE causally related dated events in sequence? → "timeline".
+   (Fewer than 3 dates, or two isolated facts → do NOT use timeline.)
+6. Is it a dramatic standalone number or comparison of a few figures? → "stat".
+7. Is it two sides explicitly contrasted? → "comparison".
+8. Is it a quantity tracked over time? → "chart".
+9. Does real archival FOOTAGE of this action exist? → "video".
+10. Does a real historical photograph of this subject exist? → "archivalPhoto".
+11. No real image could plausibly exist (mood, metaphor, reconstruction)? → "genImage".
+12. Is it a pure chapter-title line with NO visual subject? → "titleCard" (remember:
+    max 2 for the whole film — only the film title and one major section break).
 
 ## Title cards — SHORT and RARE (this is where the last render went wrong)
 - A "titleCard" scene's narration must be SHORT — just the title/chapter words —
