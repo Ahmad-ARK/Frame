@@ -17,13 +17,15 @@ export type QwenGenerateOptions = {
 
 function creds(): { endpoint: string; key: string; secret: string } {
   const endpoint = process.env.QWEN_ENDPOINT?.trim();
-  const key = process.env.FLUX_MODAL_KEY;
-  const secret = process.env.FLUX_MODAL_SECRET;
+  // Use a Qwen-specific proxy-auth token if set (when Qwen lives on a DIFFERENT
+  // Modal account than FLUX); otherwise fall back to the FLUX tokens (same account).
+  const key = process.env.QWEN_MODAL_KEY ?? process.env.FLUX_MODAL_KEY;
+  const secret = process.env.QWEN_MODAL_SECRET ?? process.env.FLUX_MODAL_SECRET;
   if (!endpoint) {
     throw new Error("QWEN_ENDPOINT is not set. Deploy pipeline/modal/qwen_vl_app.py and add its URL to pipeline/.env (with LLM_PROVIDER=qwen).");
   }
   if (!key || !secret) {
-    throw new Error("FLUX_MODAL_KEY / FLUX_MODAL_SECRET (Modal proxy-auth tokens) are required for the Qwen endpoint.");
+    throw new Error("Set QWEN_MODAL_KEY / QWEN_MODAL_SECRET (a proxy-auth token from the SAME Modal account the Qwen endpoint is deployed on), or FLUX_MODAL_KEY / FLUX_MODAL_SECRET if it's the same account.");
   }
   return { endpoint, key, secret };
 }
