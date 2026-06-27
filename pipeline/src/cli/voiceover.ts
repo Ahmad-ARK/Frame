@@ -56,12 +56,34 @@ async function ttsToFile(
   return parsed.words ?? [];
 }
 
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
 async function durationMs(file: string): Promise<number> {
-  const { stdout } = await execFileP("ffprobe", [
-    "-v", "error", "-show_entries", "format=duration",
-    "-of", "default=noprint_wrappers=1:nokey=1", file,
-  ]);
-  return Math.round(parseFloat(stdout.trim()) * 1000);
+  // On Windows, files under OneDrive (or scanned by Defender) get briefly locked
+  // right after they're written — ffprobe then fails with "Permission denied" /
+  // "Access is denied" / EBUSY (a sharing violation), even though the file is fine.
+  // Retry with backoff so a transient lock doesn't kill the whole prepare.
+  let lastErr: unknown;
+  for (let attempt = 1; attempt <= 6; attempt++) {
+    try {
+      const { stdout } = await execFileP("ffprobe", [
+        "-v", "error", "-show_entries", "format=duration",
+        "-of", "default=noprint_wrappers=1:nokey=1", file,
+      ]);
+      const d = Math.round(parseFloat(stdout.trim()) * 1000);
+      if (Number.isFinite(d) && d > 0) return d;
+      lastErr = new Error("ffprobe returned no duration");
+    } catch (err) {
+      lastErr = err;
+      const msg = String((err as Error)?.message ?? err);
+      const locked = /permission denied|access is denied|EACCES|EBUSY|EPERM|sharing violation|being used by another process/i.test(msg);
+      // A non-lock error won't fix itself — fail fast after a couple of tries.
+      if (!locked && attempt >= 2) throw err;
+      console.error(`    · ffprobe lock on "${file.split(/[\\/]/).pop()}" (attempt ${attempt}/6) — retrying`);
+    }
+    await sleep(400 * attempt);
+  }
+  throw lastErr;
 }
 
 async function main() {
