@@ -48,8 +48,8 @@ export function usePreparation() {
       patchProject({
         ...(rev.script ? { script: rev.script } : {}),
         assets: rev.visuals.map((v) => ({
-          id: v.id, desc: v.desc, line: v.line, source: v.source,
-          flagged: v.flagged, resolved: false, thumbUrl: v.thumbUrl,
+          id: v.id, sceneId: v.sceneId, desc: v.desc, line: v.line, source: v.source,
+          flagged: v.flagged, resolved: false, thumbUrl: v.thumbUrl, candidates: v.candidates,
         })),
         captions: rev.captions.map((c) => ({ id: c.id, t: c.t, text: c.text })),
         ...(preparedId ? { preparedId } : {}),

@@ -28,13 +28,24 @@ export interface StoryboardSummary {
   title: string;
 }
 
+export interface ReviewCandidate {
+  ref?: string;
+  url?: string;
+  kind: "image" | "video";
+  source: string;
+  thumbUrl?: string;
+  caption?: string;
+}
+
 export interface ReviewVisual {
   id: string;
+  sceneId: string;
   desc: string;
   line: string;
   source: string;
   flagged: boolean;
   thumbUrl?: string;
+  candidates?: ReviewCandidate[];
 }
 export interface ReviewCaption {
   id: string;
@@ -181,9 +192,28 @@ export const api = {
     const rev = await request<ReviewData>(`/review/${encodeURIComponent(id)}`);
     return {
       ...rev,
-      visuals: (rev.visuals ?? []).map((v) => ({ ...v, thumbUrl: proxyMediaUrl(v.thumbUrl) })),
+      visuals: (rev.visuals ?? []).map((v) => ({
+        ...v,
+        thumbUrl: proxyMediaUrl(v.thumbUrl),
+        candidates: (v.candidates ?? []).map((c) => ({ ...c, thumbUrl: proxyMediaUrl(c.thumbUrl) })),
+      })),
     };
   },
+
+  /** Swap the selected asset for a scene to a different candidate (local ref or remote url). */
+  pickAsset: (preparedId: string, sceneId: string, ref: string) =>
+    request<{ ok: boolean }>(`/prepared/${encodeURIComponent(preparedId)}/pick-asset`, {
+      method: "PUT",
+      body: JSON.stringify({ sceneId, ref }),
+    }),
+
+  /** FLUX-generate a still image for a scene and set it as the selected asset. */
+  generateAsset: (preparedId: string, sceneId: string) =>
+    request<{ ok: boolean; ref: string }>(`/prepared/${encodeURIComponent(preparedId)}/generate-asset`, {
+      method: "POST",
+      body: JSON.stringify({ sceneId }),
+      timeoutMs: 90_000, // FLUX cold start can take 60s
+    }),
 
   uploadAudio: async (name: string, bytes: ArrayBuffer) =>
     request<{ path: string }>(`/uploads?name=${encodeURIComponent(name)}`, {

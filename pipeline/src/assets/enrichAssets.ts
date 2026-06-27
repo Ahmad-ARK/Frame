@@ -286,31 +286,64 @@ export async function enrichStoryboardAssets(
     }
   }
 
-  // ── searched-image scenes: fetch in parallel across sources/hosts. The throttle
-  // keeps any single host paced like before; downloads overlap the next search.
+  // ── searched-image scenes: gather up to 3 candidates per scene so the user
+  // can pick the right one in the review gate. All candidates are downloaded
+  // (they're small JPEGs); the first becomes assets[0]; the rest are stored as
+  // scene.visual.candidates for the review UI.
+  const MAX_IMG_CANDIDATES = 3;
   await mapPool(searchTargets, opts.searchConcurrency ?? 3, async ({ scene }) => {
     const query = queryForScene(scene);
     let result: "filled" | "not-found" | "error" = "not-found";
     let detail: string | undefined;
     try {
-      let found = null as Awaited<ReturnType<(typeof finders)[number]["find"]>>;
-      for (const { find } of finders) {
-        await throttle("search"); // pace search-API calls (Wikimedia 429s)
-        found = await find(query, { allowShareAlike: opts.allowShareAlike });
-        if (found) break;
+      // Collect ranked candidates from all sources (deduplicated)
+      const allCandidates: Awaited<ReturnType<(typeof candidateFinders)[number]["find"]>> = [];
+      const seenUrls = new Set<string>();
+      for (const { find } of candidateFinders) {
+        if (allCandidates.length >= MAX_IMG_CANDIDATES) break;
+        let batch: typeof allCandidates = [];
+        try {
+          await throttle("search");
+          batch = await find(query, { allowShareAlike: opts.allowShareAlike, max: MAX_IMG_CANDIDATES });
+        } catch { batch = []; }
+        for (const c of batch) {
+          if (!seenUrls.has(c.url) && allCandidates.length < MAX_IMG_CANDIDATES) {
+            seenUrls.add(c.url);
+            allCandidates.push(c);
+          }
+        }
       }
-      if (found) {
-        const ext = extFromMime(found.mime);
-        const fileName = `${scene.id}.${ext}`;
-        await throttle(hostOf(found.url));
-        await downloadTo(found.url, join(assetDir, fileName));
-        scene.visual.assets = [
-          { ref: `assets/${sb.id}/${fileName}`, kind: "image", source: found.source, license: found.license },
-        ];
+
+      if (allCandidates.length === 0) {
+        notFound++;
+        opts.onProgress?.({ sceneId: scene.id, query, result, index: ++progress, total });
+        return;
+      }
+
+      // Download all candidates; skip any that fail
+      const downloadedCandidates: Array<{ ref: string; source: string; license: any; caption?: string }> = [];
+      for (let ci = 0; ci < allCandidates.length; ci++) {
+        const cand = allCandidates[ci];
+        const ext = extFromMime(cand.mime);
+        // First candidate uses the canonical filename (matches the assets[0] ref); the
+        // rest get a -c1, -c2 suffix so they don't overwrite each other.
+        const fileName = ci === 0 ? `${scene.id}.${ext}` : `${scene.id}-c${ci}.${ext}`;
+        try {
+          await throttle(hostOf(cand.url));
+          await downloadTo(cand.url, join(assetDir, fileName));
+          downloadedCandidates.push({ ref: `assets/${sb.id}/${fileName}`, source: cand.source, license: cand.license, caption: cand.title });
+        } catch { /* skip this candidate */ }
+      }
+
+      if (downloadedCandidates.length > 0) {
+        const primary = downloadedCandidates[0];
+        scene.visual.assets = [{ ref: primary.ref, kind: "image", source: primary.source as any, license: primary.license }];
+        (scene.visual as any).candidates = downloadedCandidates.map((c) => ({ ref: c.ref, kind: "image", source: c.source, license: c.license, caption: c.caption }));
         filled++;
         result = "filled";
-        const dims = found.width && found.height ? ` · ${found.width}x${found.height}` : "";
-        detail = `${found.source} · ${found.license.type}${dims}`;
+        const first = allCandidates[0];
+        const dims = first.width && first.height ? ` · ${first.width}x${first.height}` : "";
+        detail = `${first.source} · ${first.license.type}${dims}${downloadedCandidates.length > 1 ? ` (+${downloadedCandidates.length - 1} alts)` : ""}`;
       } else {
         notFound++;
       }
@@ -512,6 +545,17 @@ export async function enrichStoryboardAssets(
           allowShareAlike: opts.allowShareAlike,
           max: maxCandidates,
         });
+        // Store all candidate URLs now so the review gate can show alternatives
+        // even if we only download the first accepted one.
+        if (candidates.length > 0) {
+          (scene.visual as any).candidates = candidates.map((c) => ({
+            url: c.url,
+            kind: "video",
+            source: "internetArchive",
+            license: c.license,
+            subject,
+          }));
+        }
         const fileName = `${scene.id}-v${k}.mp4`;
         const absPath = join(assetDir, fileName);
 

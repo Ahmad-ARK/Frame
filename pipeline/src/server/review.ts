@@ -3,13 +3,24 @@
 // flag), and real word-timed captions. The scene-type system stays hidden: the
 // UI only ever sees a description, a source label, and an image URL.
 
+export interface ReviewCandidate {
+  ref?: string;    // local path (image) — served via /media/
+  url?: string;    // remote URL (video not yet downloaded)
+  kind: "image" | "video";
+  source: string;
+  thumbUrl?: string;
+  caption?: string;
+}
+
 export interface ReviewVisual {
   id: string;
+  sceneId: string; // storyboard scene id — used by pick-asset endpoint
   desc: string; // plain-language description of the picture
   line: string; // the narration line it illustrates
   source: string; // friendly provenance ("Wikimedia Commons", "AI-generated", …)
   flagged: boolean; // surfaced for review (AI-generated = worth a look)
   thumbUrl?: string; // the actual fetched/generated image
+  candidates?: ReviewCandidate[]; // alternative options the user can pick
 }
 
 export interface ReviewCaption {
@@ -75,17 +86,36 @@ export function mapStoryboardToReview(sb: any): ReviewData {
     const style = v.style ?? {};
     const line = firstLine(scene?.narration ?? "");
     const directive = String(v.directive ?? "A visual for this moment");
+    const sceneId = String(scene?.id ?? "");
     const add = (ref: string | undefined, source: string | undefined, desc: string) => {
       const url = mediaUrl(ref);
       if (!url || seen.has(url)) return;
       seen.add(url);
+      // Map raw candidates to ReviewCandidate (image → mediaUrl, video → keep remote url)
+      const rawCandidates: any[] = Array.isArray(v.candidates) ? v.candidates : [];
+      const candidates: ReviewCandidate[] = rawCandidates
+        .map((c: any) => {
+          const isImg = (c.kind ?? "image") === "image";
+          const cThumb = isImg ? mediaUrl(c.ref) : undefined;
+          return {
+            ref: c.ref,
+            url: c.url,
+            kind: (c.kind ?? "image") as "image" | "video",
+            source: SOURCE_LABEL[c.source ?? ""] ?? String(c.source ?? "Unknown"),
+            thumbUrl: cThumb,
+            caption: c.caption || c.subject,
+          };
+        })
+        .filter((c) => c.ref || c.url);
       visuals.push({
         id: `v${++vseq}`,
+        sceneId,
         desc: String(desc || directive).slice(0, 160),
         line,
         source: SOURCE_LABEL[source ?? ""] ?? "Library footage",
         flagged: isGenerated(source),
         thumbUrl: url,
+        candidates: candidates.length > 1 ? candidates : undefined,
       });
     };
     for (const a of v.assets ?? []) {

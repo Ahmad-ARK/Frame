@@ -154,6 +154,13 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 .abtn:hover{border-color:var(--line-2);color:var(--ink)}.abtn:disabled{opacity:.5;pointer-events:none}
 .abtn.go{border-color:rgba(226,71,63,.4);color:var(--ink);background:rgba(226,71,63,.08)}
 .abtn svg{width:15px;height:15px;stroke:currentColor;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.cand-strip{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+.cand-thumb{width:64px;height:40px;border-radius:7px;border:2px solid var(--line);background:var(--surf-2) no-repeat center/cover;cursor:pointer;position:relative;transition:.14s;display:grid;place-items:center;flex:0 0 auto}
+.cand-thumb:hover:not(:disabled){border-color:var(--amber);transform:scale(1.05)}
+.cand-thumb.active{border-color:var(--amber);box-shadow:0 0 0 1px var(--amber)}
+.cand-thumb:disabled{opacity:.5;pointer-events:none}
+.cand-check{position:absolute;inset:0;display:grid;place-items:center;background:rgba(240,192,64,.35);border-radius:5px}
+.cand-check svg{width:12px;height:12px;stroke:var(--amber);stroke-width:2.5;fill:none}
 .verified-note{margin-top:22px;display:flex;align-items:center;gap:10px;color:var(--ink-2);font-size:14px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--rmd);background:var(--surf)}
 .verified-note .ck{width:22px;height:22px;border-radius:50%;background:rgba(57,199,119,.14);display:grid;place-items:center}
 .verified-note .ck svg{width:12px;height:12px;stroke:var(--green);stroke-width:2.4;fill:none}

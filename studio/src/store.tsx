@@ -10,8 +10,18 @@ export type Screen = "welcome" | "library" | "new" | "generating" | "gate" | "re
 export type Gate = "script" | "visuals" | "captions";
 export type ComposeMode = "script" | "topic" | "voice";
 
+export interface AssetCandidate {
+  ref?: string;
+  url?: string;
+  kind: "image" | "video";
+  source: string;
+  thumbUrl?: string;
+  caption?: string;
+}
+
 export interface Asset {
   id: string;
+  sceneId: string;     // storyboard scene id — used to pick / generate alternatives
   desc: string;        // plain-language subject shown to the reviewer
   line: string;        // the narration line it appears under
   source: string;      // honest provenance note ("AI-generated", "Stock footage", …)
@@ -19,6 +29,7 @@ export interface Asset {
   resolved: boolean;   // reviewer accepted / replaced it
   busy?: boolean;      // a try-another regen is in flight
   thumbUrl?: string;   // the real fetched/generated image (once prepared)
+  candidates?: AssetCandidate[]; // alternative options the user can swap to
 }
 
 export interface Caption {

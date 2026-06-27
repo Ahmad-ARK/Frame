@@ -87,6 +87,7 @@ export const SceneSchema = z.object({
     directive: z.string(),
     style: z.record(z.unknown()).optional(),
     assets: z.array(AssetSchema).optional(),
+    candidates: z.array(z.record(z.unknown())).optional(),
     overlays: z.array(OverlaySchema).optional(),
   }),
   sources: z.array(SourcedFactSchema),

@@ -24,6 +24,8 @@ import { authenticate, authDisabled } from "./auth.js";
 import { log, errInfo } from "./logger.js";
 import { MAX_BODY_BYTES, MAX_UPLOAD_BYTES, validateJobInput, publicJob, jobLabel, cleanErrorMessage } from "./validate.js";
 import { mapStoryboardToReview } from "./review.js";
+import { writeFile as writeFileFsp } from "node:fs/promises";
+import { generateFluxImage, buildFluxPrompt } from "../assets/flux.js";
 
 const PORT = Number(process.env.PORT ?? 8787);
 const store = new JobStore();
@@ -155,6 +157,56 @@ const server = http.createServer(async (req, res) => {
       if (!existsSync(sbPath)) sbPath = join(STORYBOARDS_DIR, `${id}.json`);
       if (!existsSync(sbPath)) return json(res, 404, { error: "not found" });
       return json(res, 200, mapStoryboardToReview(JSON.parse(await readFile(sbPath, "utf8"))));
+    }
+
+    // PUT /prepared/:id/pick-asset — swap the selected asset for a scene.
+    // Body: { sceneId: string, ref: string }  (ref = the candidate's local path)
+    const pickAsset = /^\/prepared\/([a-z0-9._-]+)\/pick-asset$/.exec(path);
+    if (pickAsset && method === "PUT") {
+      const id = basename(pickAsset[1]);
+      const sbPath = join(PREPARED_DIR, `${id}.json`);
+      if (!existsSync(sbPath)) return json(res, 404, { error: "not found" });
+      const body = await readBody(req, MAX_BODY_BYTES);
+      const { sceneId, ref } = JSON.parse(body);
+      if (!sceneId || !ref) return json(res, 400, { error: "sceneId and ref required" });
+      const sb = JSON.parse(await readFile(sbPath, "utf8"));
+      const scene = (sb.scenes ?? []).find((s: any) => s.id === sceneId);
+      if (!scene) return json(res, 404, { error: "scene not found" });
+      const cands: any[] = scene.visual?.candidates ?? [];
+      const pick = cands.find((c: any) => c.ref === ref || c.url === ref);
+      if (!pick) return json(res, 404, { error: "candidate not found" });
+      // Promote the chosen candidate to assets[0]
+      scene.visual.assets = [{ ref: pick.ref ?? pick.url, kind: pick.kind ?? "image", source: pick.source ?? "wikimedia", license: pick.license ?? { type: "unknown", attributionRequired: false } }];
+      await writeFileFsp(sbPath, JSON.stringify(sb, null, 2));
+      return json(res, 200, { ok: true });
+    }
+
+    // POST /prepared/:id/generate-asset — FLUX-generate a still for a scene.
+    // Body: { sceneId: string }
+    const genAsset = /^\/prepared\/([a-z0-9._-]+)\/generate-asset$/.exec(path);
+    if (genAsset && method === "POST") {
+      const id = basename(genAsset[1]);
+      const sbPath = join(PREPARED_DIR, `${id}.json`);
+      if (!existsSync(sbPath)) return json(res, 404, { error: "not found" });
+      const body = await readBody(req, MAX_BODY_BYTES);
+      const { sceneId } = JSON.parse(body);
+      if (!sceneId) return json(res, 400, { error: "sceneId required" });
+      const sb = JSON.parse(await readFile(sbPath, "utf8"));
+      const scene = (sb.scenes ?? []).find((s: any) => s.id === sceneId);
+      if (!scene) return json(res, 404, { error: "scene not found" });
+      const assetDir = join(PUBLIC_DIR, "assets", sb.id);
+      await mkdir(assetDir, { recursive: true });
+      const fileName = `${sceneId}-generated.png`;
+      const absPath = join(assetDir, fileName);
+      const bytes = await generateFluxImage(buildFluxPrompt(scene.visual?.directive ?? sceneId), { width: 1536, height: 864 });
+      await writeFileFsp(absPath, bytes);
+      const ref = `assets/${sb.id}/${fileName}`;
+      scene.visual.assets = [{ ref, kind: "image", source: "imageModel", license: { type: "AI-generated", attributionRequired: false } }];
+      // Prepend to candidates so it shows first in the picker
+      const cands: any[] = scene.visual.candidates ?? [];
+      scene.visual.candidates = [{ ref, kind: "image", source: "imageModel", license: { type: "AI-generated", attributionRequired: false } }, ...cands];
+      await writeFileFsp(sbPath, JSON.stringify(sb, null, 2));
+      return json(res, 200, { ok: true, ref });
     }
 
     // Raw audio upload (the browser POSTs the file bytes; ?name=<filename>). The
