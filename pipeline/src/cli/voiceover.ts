@@ -86,11 +86,15 @@ async function main() {
   console.error(`Generating voiceover for "${sb.topic}" (voice: ${args.voice})${useWhisper ? " · whisper word-timing" : ""} ...\n`);
   let total = 0;
   for (const scene of sb.scenes) {
-    const file = join(audioDir, `${scene.id}.mp3`);
+    // Defensive: scene.id is normally clamped at import, but a cached/older
+    // storyboard may carry a runaway id. Bound the filename stem so the .mp3 write
+    // can't exceed the OS path-component limit (255 chars / Windows MAX_PATH).
+    const stem = scene.id.length > 80 ? scene.id.slice(0, 72).replace(/-+$/, "") : scene.id;
+    const file = join(audioDir, `${stem}.mp3`);
     let words = await ttsToFile(scene.narration, args.voice, file);
     const ms = await durationMs(file);
     scene.durationMs = ms + args.padMs;
-    scene.audioRef = `audio/${sb.id}/${scene.id}.mp3`;
+    scene.audioRef = `audio/${sb.id}/${stem}.mp3`;
     let timed = "interp";
     if (useWhisper) {
       try { const a = await alignAudioToText(file, scene.narration); if (a.length) { words = a; timed = "whisper"; } }

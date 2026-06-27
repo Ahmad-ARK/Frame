@@ -48,9 +48,20 @@ export function finalizeAndValidate(
     if (ctx.thesis && !sb.thesis) sb.thesis = ctx.thesis;
     sb.status ??= "draft";
     if (Array.isArray(sb.scenes)) {
+      const seenIds = new Set<string>();
       sb.scenes.forEach((scene: any, i: number) => {
         if (scene && typeof scene === "object") {
           scene.id ??= `s${String(i + 1).padStart(2, "0")}`;
+          // scene.id becomes audio + asset FILENAMES, and a path component is capped
+          // at 255 chars (Windows MAX_PATH 260). The model sometimes emits a runaway
+          // id (the whole narration slugified). Normalize to a short, slug-safe,
+          // UNIQUE id so the TTS/asset writers can't blow the filename limit.
+          let id = String(scene.id).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+          if (id.length > 48) id = id.slice(0, 48).replace(/-+$/, "");
+          if (!id) id = `s${i + 1}`;
+          if (seenIds.has(id)) id = `${id.slice(0, 44)}-${i + 1}`;
+          seenIds.add(id);
+          scene.id = id;
           scene.sources ??= [];
           // The model occasionally drops visual.type / visual.directive on a
           // scene. Repair rather than fail the whole storyboard: default to a
