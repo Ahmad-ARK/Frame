@@ -198,7 +198,10 @@ export async function runJob(job: Job, update: Update): Promise<void> {
     // Step 3 — fetch real footage/images.
     if (doneStep < 3) {
       update({ stage: "assets", progress: 0.68 });
-      storyboard = (await enrichStoryboardAssets(storyboard)).storyboard;
+      storyboard = (await enrichStoryboardAssets(storyboard, {
+        verifyFootage: false, // user verifies in the Visuals review gate
+        verifyImages: false,
+      })).storyboard;
       await checkpoint(3);
     }
 

@@ -209,24 +209,34 @@ export async function enrichStoryboard(
     directive: s.visual.directive,
   }));
 
-  // ── One LLM call for all judgement parts (or injected JSON for testing) ──
+  // ── LLM enrichment — batched so small models (Qwen 7B) don't hit token limits ──
+  // 5 scenes per call: each batch fits comfortably in ~4096 output tokens, and
+  // results are merged into one map. Gemini ignores BATCH_SIZE (no token cap).
+  const BATCH_SIZE = 5;
   let enrichMap: Record<string, any>;
   if (opts.llmEnrichMap) {
     enrichMap = opts.llmEnrichMap.scenes ?? opts.llmEnrichMap;
     notes.push("using injected LLM JSON (--llm-json)");
   } else {
-    try {
-      const raw = await generateJson({
-        system: ENRICH_SYSTEM_PROMPT,
-        user: buildEnrichUserPrompt(sb.topic, sceneInputs),
-        temperature: 0.2,
-      });
-      enrichMap = JSON.parse(stripFences(raw))?.scenes ?? {};
-    } catch (err) {
-      if (isQuotaError(err)) {
-        return { storyboard: sb, enriched: 0, skipped: targets.length, quotaHit: true, notes };
+    enrichMap = {};
+    for (let i = 0; i < sceneInputs.length; i += BATCH_SIZE) {
+      const batch = sceneInputs.slice(i, i + BATCH_SIZE);
+      try {
+        const raw = await generateJson({
+          system: ENRICH_SYSTEM_PROMPT,
+          user: buildEnrichUserPrompt(sb.topic, batch),
+          temperature: 0.2,
+          maxTokens: 8192,
+        });
+        const parsed = JSON.parse(stripFences(raw))?.scenes ?? {};
+        Object.assign(enrichMap, parsed);
+        notes.push(`enrich batch ${Math.floor(i / BATCH_SIZE) + 1}: ${Object.keys(parsed).length} scenes`);
+      } catch (err) {
+        if (isQuotaError(err)) {
+          return { storyboard: sb, enriched: 0, skipped: targets.length, quotaHit: true, notes };
+        }
+        notes.push(`enrich batch ${Math.floor(i / BATCH_SIZE) + 1} failed: ${String((err as Error)?.message ?? err).slice(0, 60)}`);
       }
-      throw err;
     }
   }
 

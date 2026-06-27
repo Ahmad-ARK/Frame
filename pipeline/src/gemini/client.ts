@@ -30,6 +30,7 @@ export type GenerateJsonOptions = {
   user: string;
   model?: string;
   temperature?: number;
+  maxTokens?: number;
 };
 
 export type GroundingChunk = { uri: string; title?: string };
@@ -81,7 +82,7 @@ function isTransient(err: unknown): boolean {
 /** Generates JSON from the configured backend and returns the raw response text. */
 export async function generateJson(opts: GenerateJsonOptions): Promise<string> {
   if (useQwen) {
-    return qwenGenerate({ system: opts.system, user: opts.user, temperature: opts.temperature ?? 0.4 });
+    return qwenGenerate({ system: opts.system, user: opts.user, temperature: opts.temperature ?? 0.4, maxTokens: opts.maxTokens });
   }
   const maxAttempts = 3;
   let lastErr: unknown;
