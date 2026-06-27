@@ -63,6 +63,27 @@ export function finalizeAndValidate(
               const n = typeof scene.narration === "string" ? scene.narration : "";
               v.directive = n.replace(/\s+/g, " ").trim().slice(0, 140) || "Documentary visual for this beat.";
             }
+            // SAFETY NET: the model sometimes tags a scene "genImage" and then
+            // describes one of our structured scenes ("a graphic of a declassified
+            // memo", "a graphic connecting the events"). Reroute the type so enrich
+            // builds the real document/newspaper/timeline/chart instead of a worse
+            // drawn imitation. Only fires when the directive literally reads as a
+            // DRAWN graphic, so photographic genImage scenes are untouched.
+            if (v.type === "genImage") {
+              const d = String(v.directive).toLowerCase();
+              const drawn = /\b(graphic|stylized|stylised|representation|depiction|illustration|diagram|drawn|infographic)\b/.test(d);
+              if (drawn) {
+                let rerouted: string | undefined;
+                if (/\b(newspaper|front page|headline)\b/.test(d)) rerouted = "newspaper";
+                else if (/\b(declassified|classified|memo|memorandum|cable|dossier|playbook|operating manual|official record|document|leaked file)\b/.test(d)) rerouted = "document";
+                else if (/\b(timeline|chronolog|pattern|sequence of events|over the (years|decades)|connect\w* (the )?events)\b/.test(d)) rerouted = "timeline";
+                else if (/\b(bar chart|line chart|chart showing|graph showing|diagram showing)\b/.test(d)) rerouted = "chart";
+                if (rerouted) {
+                  console.error(`  ↻ rerouted scene "${scene.id}" genImage → ${rerouted} (directive read as a drawn ${rerouted})`);
+                  v.type = rerouted;
+                }
+              }
+            }
           }
         }
       });
