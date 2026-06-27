@@ -166,8 +166,7 @@ const server = http.createServer(async (req, res) => {
       const id = basename(pickAsset[1]);
       const sbPath = join(PREPARED_DIR, `${id}.json`);
       if (!existsSync(sbPath)) return json(res, 404, { error: "not found" });
-      const body = await readBody(req, MAX_BODY_BYTES);
-      const { sceneId, ref } = JSON.parse(body);
+      const { sceneId, ref } = await readBody(req);
       if (!sceneId || !ref) return json(res, 400, { error: "sceneId and ref required" });
       const sb = JSON.parse(await readFile(sbPath, "utf8"));
       const scene = (sb.scenes ?? []).find((s: any) => s.id === sceneId);
@@ -188,8 +187,7 @@ const server = http.createServer(async (req, res) => {
       const id = basename(genAsset[1]);
       const sbPath = join(PREPARED_DIR, `${id}.json`);
       if (!existsSync(sbPath)) return json(res, 404, { error: "not found" });
-      const body = await readBody(req, MAX_BODY_BYTES);
-      const { sceneId } = JSON.parse(body);
+      const { sceneId } = await readBody(req);
       if (!sceneId) return json(res, 400, { error: "sceneId required" });
       const sb = JSON.parse(await readFile(sbPath, "utf8"));
       const scene = (sb.scenes ?? []).find((s: any) => s.id === sceneId);
