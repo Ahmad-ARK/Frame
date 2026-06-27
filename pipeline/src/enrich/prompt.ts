@@ -71,11 +71,12 @@ Use headline for one front page; montage for press reaction across years; clippi
 Use typed for a reconstructed memo, redacted to dramatize secrecy, scan for a real document.
 
 ### "video" — choose a MODE, return under "video"  (REAL archival/B-roll FOOTAGE — moving pictures, not stills)
+IMPORTANT: a scene tagged type="video" MUST have a "video" object with "mode" and "clips". Never return an empty object or omit this key for a video scene — it causes a blank FOOTAGE placeholder in the final render.
 Use video when MOVING footage carries the beat better than a still: an event unfolding (troops advancing, a city under fire, a protest, a launch, a signing), establishing the atmosphere of a place, or a "watch this moment" detail. Each clip has a SHORT "subject" (2–5 word footage search — a concrete FILMABLE event/place + a type word: "Soviet tanks Afghanistan", "Berlin Wall 1989", "New York City street 1980s") and a "caption" (lower-third). Footage is searched on the Internet Archive (public-domain / CC).
-- "single"  — ONE atmospheric/establishing clip, full-bleed: { "mode":"single", "clips":[ {"subject","caption"} ] }
-- "montage" — a rapid sequence of related clips (3–5) showing passage/scale: { "mode":"montage", "clips":[ {"subject","caption"}, ... ] }
-- "loop"    — ONE short clip looped to fill a longer beat (a flame, marching feet, a waving flag): { "mode":"loop", "clips":[ {"subject","caption"} ] }
-- "freeze"  — play, then FREEZE on a detail with an investigative callout ("watch this frame"): { "mode":"freeze", "clips":[ {"subject","caption"} ], "freezeCue":"the narration word when the picture should lock", "annotation":{ "x":0.0-1.0, "y":0.0-1.0, "radius":0.12, "label":"what to look at" } }
+- "single"  — ONE atmospheric/establishing clip, full-bleed: { "mode":"single", "clips":[ {"subject":"Soviet tanks Afghanistan 1979","caption":"caption text"} ] }
+- "montage" — a rapid sequence of related clips (3–5) showing passage/scale: { "mode":"montage", "clips":[ {"subject":"...","caption":"..."}, ... ] }
+- "loop"    — ONE short clip looped to fill a longer beat (a flame, marching feet, a waving flag): { "mode":"loop", "clips":[ {"subject":"...","caption":"..."} ] }
+- "freeze"  — play, then FREEZE on a detail with an investigative callout ("watch this frame"): { "mode":"freeze", "clips":[ {"subject":"...","caption":"..."} ], "freezeCue":"the narration word when the picture should lock", "annotation":{ "x":0.0-1.0, "y":0.0-1.0, "radius":0.12, "label":"what to look at" } }
 Pick: one establishing shot → single; "the war produced…" / passage of time → montage; only a brief clip exists but the line is long → loop; calling out a moment IN the footage → freeze. Keep subjects SHORT and FILMABLE — real 20th/21st-century events that actually have archival film. Use archivalPhoto instead when only STILLS would exist (people/portraits from before film, maps, documents, single photographs).
 
 ### "globe" — choose a MODE, return under "globe"  (for GLOBAL / transcontinental relationships a flat map can't show)
