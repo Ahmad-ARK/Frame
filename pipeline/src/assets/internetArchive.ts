@@ -23,6 +23,16 @@ type SearchDoc = {
   creator?: string;
 };
 
+// Strip Lucene special characters so an LLM subject can't break the query syntax,
+// then build a relevance query that BOOSTS title matches over description matches —
+// an item whose TITLE is about the subject is far more likely to actually depict it
+// than one that merely mentions it in a long description.
+function iaTermQuery(raw: string): string {
+  const cleaned = raw.replace(/[+\-!(){}\[\]^"~*?:\\/]/g, " ").replace(/\s+/g, " ").trim();
+  if (!cleaned) return "*";
+  return `(title:(${cleaned})^3 OR ${cleaned})`;
+}
+
 async function fetchJson(url: string): Promise<any> {
   let lastErr: unknown;
   for (let attempt = 1; attempt <= 3; attempt++) {
@@ -154,7 +164,7 @@ export async function findInternetArchiveVideoCandidates(
   // makes the final accept/reject call per item.
   const search = async (q: string, need: number): Promise<FoundImage[]> => {
     const params = new URLSearchParams({
-      q: `${q} AND mediatype:movies AND (licenseurl:[* TO *] OR possible-copyright-status:"Public Domain")`,
+      q: `${iaTermQuery(q)} AND mediatype:movies AND (licenseurl:[* TO *] OR possible-copyright-status:"Public Domain")`,
       rows: String(limit),
       output: "json",
     });
@@ -234,7 +244,7 @@ export async function findInternetArchiveImageCandidates(
   // signal at all, and we must not use unlicensed material on a monetized channel.
   // classifyIA then keeps only CC0 / public-domain / CC BY from this set.
   const params = new URLSearchParams({
-    q: `${query} AND mediatype:image AND licenseurl:[* TO *]`,
+    q: `${iaTermQuery(query)} AND mediatype:image AND licenseurl:[* TO *]`,
     rows: String(limit),
     output: "json",
   });

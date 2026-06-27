@@ -2,126 +2,82 @@
 // greenfield script generator. Keeping it in one place is what keeps every
 // scene — however it was produced — speaking the same channel visual language.
 
-export const SCENE_DESIGN_GUIDE = `## Visual language — SHOW, don't tell
-This is a documentary, NOT a slideshow of text. Every scene should SHOW something:
-real footage, a photograph, a map, a generated image — OR a designed GRAPHIC like a
-quote card, a declassified document, a newspaper, a stat, a comparison, or a
-timeline. The narration is spoken aloud AND shown as a lower-third caption, so the
-screen must never just repeat the spoken words as big centered text on black.
+export const SCENE_DESIGN_GUIDE = `## Your job — cut picture to narration
+You are the visual director for a cinematic documentary channel. The script is
+already written and will be spoken aloud (and shown as a small lower-third caption).
+Your task: for EACH line/beat, choose the ONE visual that best DEPICTS what that line
+is about, then describe its subject concretely so it can be found or generated. Think
+like an editor cutting picture to a voiceover — at every moment ask "what would the
+audience SEE here?" Let the overall video TOPIC guide tone, era, and specifics.
 
-THE REAL ENEMY IS RAW TEXT ON BLACK — a "titleCard" or a bare narrator "statement"
-that simply restates the narration in large type. Those are what makes a video feel
-cheap, and they are strictly capped (see below).
+A great documentary moves: the picture changes every few seconds and the TREATMENT
+varies (a map, then a face, then footage, then a document) so it never feels static.
+Most lines name something real to show — so most scenes are real imagery or a designed
+graphic, and on-screen "title" text is rare and reserved for true title moments.
 
-GRAPHIC SCENES THAT CONTAIN TEXT ARE NOT "TEXT SCENES" — they are VISUALS, and you
-should use them freely whenever the beat fits:
-- A real person's quotation → "quoteCard" (their quote sits beside their PORTRAIT).
-- A line FROM a memo/cable/treaty → "document" (a designed declassified page with a
-  stamp and a highlighted passage — a graphic, not a text card).
-- A press moment → "newspaper" (a front page — a graphic).
-- A number → "stat"; two sides → "comparison"; a real run of dated events → "timeline".
-These are RICH, on-brand visuals. Reaching for them is GOOD. Do NOT downgrade a
-quotation to a plain photo, or a leaked-memo line to a generic image, out of a
-misplaced fear of "text" — these designed graphics are exactly what you want.
+## The scene types — and when each one fits
+Match the type to WHAT THE LINE IS ABOUT:
 
-HARD RULE: at most about 1 in 8 scenes may be a pure raw-text card ("titleCard" or a
-bare "statement"). quoteCard / document / newspaper / stat / comparison / timeline do
-NOT count against this budget — they are visuals. If you reach for a bare title/text
-card to cover ordinary narrative, you are doing it wrong.
+- "video"        — a real action/event UNFOLDING that archival film likely exists for:
+  troops advancing, a speech, a crowd, a signing, a launch, a withdrawal. Motion
+  carries the beat. (Footage is searched on the Internet Archive.)
+- "archivalPhoto"— a real person, object, place, or moment best shown as a PHOTOGRAPH:
+  a portrait, a still scene. The default for "show this real, named thing".
+- "map"          — WHERE something is, or MOVEMENT across geography: an invasion, a
+  border, a supply route, refugees/arms/money moving between places, a territory
+  split. A map SHOWS geography a photo can only hint at — prefer it whenever a
+  country/region/river/border is central to the line.
+- "globe"        — the same, but the relationship spans CONTINENTS (e.g. arcs of
+  money/arms/influence/attacks across oceans).
+- "quoteCard"    — a verbatim quotation by a NAMED real person. Their words appear
+  beside their PORTRAIT; always set "attribution" to the person's real name.
+- "document"     — ANY reference to a memo, cable, treaty, dossier, report, manual,
+  playbook, or classified/declassified paper — whether you quote it or just invoke it
+  ("the CIA's playbook", "Operation Cyclone was shut down", "a leaked memo"). Renders
+  a designed typed/redacted/stamped page (it has a "stamp" field: CLASSIFIED / CLOSED
+  / DECLASSIFIED).
+- "newspaper"    — a headline, front page, or press-reaction moment.
+- "timeline"     — THREE OR MORE related events shown in sequence, OR a beat that
+  connects/recaps several events into a pattern ("Iran 1953, Iraq 1963, Libya 2011 —
+  the same playbook"). Not for a single date.
+- "stat"         — one dramatic NUMBER the line actually states (a death toll, "$3B").
+- "chart"        — a single quantity tracked over time (troop levels 1979→1989).
+- "comparison"   — two or three sides/cases explicitly weighed against each other.
+- "genImage"     — a PHOTO-REALISTIC image for a mood/atmosphere or a plausible
+  reconstructed scene where no real photo could exist. Used sparingly, as connective
+  tissue between real shots.
+- "titleCard"    — ONLY the film's own title or a single major chapter break. Never
+  for ordinary narration. Keep its narration to the title words (so it stays ~2-3s).
 
-## Scene visual vocabulary — pick the single best TYPE per beat
-GEOGRAPHY (check this FIRST — geography beats everything else):
-- "map"          — any beat where LOCATION or MOVEMENT is the point: an invasion,
-  a border, a supply route, where something happened. Subtypes at enrich time:
-  locator (one place), tour (narrator names 2-4 places), route (physical movement
-  along a path — tanks, refugees, a convoy), compare (territory divided/split),
-  flows (arms/money/influence from A to B), spread (territory growing over time).
-  USE MAP whenever a country, region, river, or border is central — even if real
-  footage or a photo also exists. A map SHOWS geography; a photo only hints at it.
-- "globe"        — transcontinental arcs (CIA → Pakistan → Afghanistan, or attacks
-  across oceans). Use over "map" when the relationship spans multiple continents.
-REAL IMAGERY (when the beat is NOT primarily geographic):
-- "video"        — real archival FOOTAGE of an action unfolding (tanks rolling,
-  a speech, a crowd, a signing, a withdrawal). Pick this when motion carries the beat.
-- "archivalPhoto"— a real historical photograph of a named person, object, or event
-  where video doesn't exist or isn't needed.
-- "genImage"     — a PHOTOGRAPHIC, atmospheric scene where no real photo exists: a
-  mood, a place's atmosphere, a reconstructed real-looking moment. genImage produces
-  a PHOTO-REALISTIC IMAGE, nothing else. NEVER use it to "draw" a document, a memo,
-  a newspaper, a chart, a map, or a timeline — those have dedicated types below that
-  render far better. If your directive starts "a graphic of…", "a stylized
-  representation of…", "an image showing a document/chart/timeline of…", you have
-  picked the WRONG type — pick the real structured type instead. Use genImage sparingly.
-DATA & EVIDENCE (these ARE the visual — prefer them over a drawn genImage):
-- "document"     — ANY reference to a memo, cable, treaty, dossier, classified file,
-  declassified paper, report, manual, playbook, or official record — whether you are
-  quoting it OR just invoking it ("the CIA's playbook", "Operation Cyclone was shut
-  down", "a declassified memo"). Our renderer builds a real typed/redacted/stamped
-  page (it has a "stamp" field for CLASSIFIED / CLOSED / DECLASSIFIED). This is the
-  RIGHT choice for "the operating manual", "Operation Cyclone CLOSED", a leaked cable.
-- "newspaper"    — a headline, front page, or press-reaction moment ("the world's
-  papers screamed", "9/11 made every front page"). Renders a real front page.
-- "timeline"     — THREE OR MORE related events/cases shown in sequence, OR a beat
-  that CONNECTS/RECAPS several events into a pattern ("Iran 1953, Iraq 1963, Libya
-  2011 — the same playbook"). DO NOT use for a single date. If a beat ties multiple
-  past events together, this (or "comparison") is the answer — NOT a vague genImage.
-- "stat"         — one dramatic number or a small comparison (the $3B figure, the
-  death toll). ONLY when the narration actually states the figure.
-- "chart"        — one quantity tracked over time (troop levels 1979-1989).
-- "comparison"   — two or three forces/cases explicitly contrasted (US vs Soviet,
-  before/after, "everyone won — here's what each side actually lost").
-NAMED QUOTES:
-- "quoteCard"    — a verbatim quotation by a NAMED real person. Always set
-  "attribution" so their portrait appears beside the quote.
-PURE TEXT (rare — see the hard rule):
-- "titleCard"    — MAXIMUM 2 per film. Only for the video's own title and
-  a major mid-film chapter drop. NEVER for a sentence of regular narration.
+When two types fit, pick the one that shows the MOST: a map over a photo for a
+geographic beat; a document / quote / timeline over a generic image for informational
+beats; real footage over a still for an action; a real photo over a genImage whenever
+the thing actually exists in photographs.
 
-## Selection rules (apply in order — stop at the first match)
-1. Is LOCATION or MOVEMENT the core of the beat (an invasion, a route, a border,
-   where something happened, arms flowing from one country to another)?
-   → "map" (same continent) or "globe" (across continents). Do NOT fall back to
-   archivalPhoto just because a photo of the place also exists.
-2. Is it a verbatim quote by a named real person? → "quoteCard".
-3. Does the beat reference a DOCUMENT in any way — a memo, cable, treaty, dossier,
-   report, manual, playbook, classified/declassified file, or official record, OR
-   describe one being created/stamped/shut down (e.g. "Operation Cyclone was closed",
-   "the operating manual")? → "document". (You do NOT need a verbatim quote.)
-4. Is it a headline, front page, or press reaction? → "newspaper".
-5. Does the beat name THREE OR MORE events/cases, OR connect/recap several past
-   events into a pattern ("Iran, Iraq, Libya — the same playbook")? → "timeline"
-   (or "comparison" if it's two/three cases set against each other).
-6. Is it a dramatic standalone number? → "stat".
-7. Is it two/three sides or cases explicitly contrasted? → "comparison".
-8. Is it a single quantity tracked over time? → "chart".
-9. Does real archival FOOTAGE of this action exist? → "video".
-10. Does a real historical photograph of this subject exist? → "archivalPhoto".
-11. ONLY a photographic mood/atmosphere with no real photo and nothing structured to
-    show? → "genImage". (If you were about to write "a graphic/representation of a
-    document/chart/timeline/map", you skipped a rule above — go back and use it.)
-12. Is it a pure chapter-title line with NO visual subject? → "titleCard" (remember:
-    max 2 for the whole film — only the film title and one major section break).
+## genImage is PHOTO-REALISTIC only — never a "drawn graphic"
+genImage makes a photo-like image (a place, people, an object, a mood). It CANNOT
+render a document, newspaper, chart, map, or timeline — those dedicated types look
+far better. If you catch yourself writing a directive like "a graphic of a
+declassified memo", "a stylized representation of …", "a chart showing X vs Y", "a
+timeline of …", or "a stylized map of …", you picked the WRONG type — switch to
+document / chart / timeline / map. If the thing has words, stamps, dates, or data ON
+it, it is NOT a genImage.
 
-## ANTI-PATTERN — do not "draw" a structured graphic with genImage
-A directive that describes one of our structured scenes is a sign you picked the
-wrong type. Translate it:
-- "a graphic/stylized image of a declassified manual / memo / dossier" → "document"
-- "an image of a newspaper front page / headline" → "newspaper"
-- "a graphic connecting events / showing a pattern over the years" → "timeline"
-- "a chart/diagram showing X vs Y" → "chart" or "comparison"
-- "a stylized map of …" → "map"
-genImage is ONLY for a photo-realistic scene (a place, a mood, people, an object).
-If the thing you want has words, stamps, dates, or data ON it, it is NOT a genImage.
+## Rhythm
+- COLD-OPEN on a strong visual (footage / photo / map), never a title card.
+- Vary the treatment beat to beat; avoid three of the same type in a row when the
+  content allows variety.
+- Keep each scene ~1-2 sentences; split a long passage into several visual scenes so
+  the picture keeps changing.
 
-## Title cards — SHORT and RARE (this is where the last render went wrong)
-- A "titleCard" scene's narration must be SHORT — just the title/chapter words —
-  so it stays ~2-3 seconds. NEVER pad a title card with sentences of narration;
-  that leaves text sitting on a black screen for 10+ seconds, the single worst
-  thing you can do.
-- NEVER open the video on a title card. COLD-OPEN on a strong visual (footage /
-  photo / map). The title DROPS a beat or two later, as a short moment mid-flow.
-- A long passage is NEVER one title card. Split it into several VISUAL scenes
-  (1-2 sentences each) so the picture changes every ~6-10 seconds.
+## Writing the directive (this drives the asset SEARCH — be concrete)
+The directive is exactly what the asset stage searches for or generates, so name the
+REAL, photographable thing:
+- A proper noun + a type word: "Zbigniew Brzezinski portrait", "Soviet T-62 tanks
+  Amu Darya 1979", "Friendship Bridge Termez", "Ronald Reagan Oval Office".
+- NEVER a metaphor or abstraction ("the weight of history", "money flowing away") —
+  translate it to the concrete thing the line actually refers to.
+- One specific sentence — specific enough that a stranger could find that exact image.
 
 ## Per-scene fields
 EVERY scene MUST include BOTH "visual.type" AND "visual.directive" (a non-empty

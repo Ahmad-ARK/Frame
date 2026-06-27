@@ -59,6 +59,41 @@ async function searchFiles(query: string, limit: number): Promise<string[]> {
     .filter((t: string) => t.startsWith("File:"));
 }
 
+/**
+ * Entity-first lookup: find the Wikipedia ARTICLES that best match the query and
+ * return each article's lead image (the "page image"). For a NAMED subject — a
+ * person ("Zia ul-Haq"), a place, an organisation, a named event — the lead image
+ * is the canonical portrait/photo, which keyword file-search badly misses (it ranks
+ * by filename/description text, so "Zia ul-Haq" can return an unrelated person whose
+ * file description merely contains those words). Returns "File:<name>" titles in
+ * article-relevance order, restricted to freely-licensed lead images.
+ */
+async function searchEntityLeadImages(query: string, limit: number): Promise<string[]> {
+  const url = `${INFO_API}?${new URLSearchParams({
+    action: "query",
+    format: "json",
+    generator: "search",
+    gsrsearch: query,
+    gsrlimit: String(limit),
+    gsrnamespace: "0", // article namespace only
+    prop: "pageimages",
+    piprop: "name",
+    pilicense: "free", // only freely-licensed lead images (channel is monetised)
+  })}`;
+  const data = await fetchJson(url);
+  const pages: any[] = Object.values(data?.query?.pages ?? {});
+  // `index` reflects search relevance order; keep the best-matching articles first.
+  pages.sort((a, b) => (a.index ?? 1e9) - (b.index ?? 1e9));
+  const titles: string[] = [];
+  for (const p of pages) {
+    if (typeof p.pageimage === "string" && p.pageimage) {
+      const t = `File:${p.pageimage}`;
+      if (!titles.includes(t)) titles.push(t);
+    }
+  }
+  return titles;
+}
+
 /** Fetch imageinfo + license extmetadata via the enwiki action API (shared repo). */
 async function imageInfo(titles: string[]): Promise<WikimediaCandidate[]> {
   if (titles.length === 0) return [];
@@ -120,14 +155,33 @@ export async function findWikimediaImageCandidates(
     return licenseScore * 10_000_000 - montagePenalty + c.width * c.height;
   };
 
-  // Try the full query, then progressively simpler ones (verbose multi-word
-  // subjects from the LLM often return nothing on Commons search).
+  const max = opts.max ?? 4;
+  const dedupe = (cs: WikimediaCandidate[]) => {
+    const seen = new Set<string>();
+    return cs.filter((c) => (seen.has(c.url) ? false : (seen.add(c.url), true)));
+  };
+
+  // 1) ENTITY-FIRST: the lead images of the best-matching Wikipedia articles.
+  //    High precision for a named person/place/org/event — this is what fixes
+  //    "Zia ul-Haq" returning a random person. Kept in article-relevance order
+  //    (NOT re-sorted by size) so the top article's portrait stays first.
+  const entityTitles = await searchEntityLeadImages(query, Math.max(5, max)).catch(() => [] as string[]);
+  const entity = dedupe((await imageInfo(entityTitles)).filter(accept));
+  // Preserve entity (relevance) order by re-indexing against the title list.
+  entity.sort((a, b) => entityTitles.indexOf(a.title) - entityTitles.indexOf(b.title));
+
+  // 2) FULL-TEXT Commons file search (good for generic, non-entity subjects and to
+  //    supply alternatives). Full query, then progressively simpler variants.
+  let fulltext: WikimediaCandidate[] = [];
   for (const q of queryVariants(query)) {
     const titles = await searchFiles(q, opts.searchLimit ?? 12);
-    const acceptable = (await imageInfo(titles)).filter(accept).sort((a, b) => score(b) - score(a));
-    if (acceptable.length) return acceptable.slice(0, opts.max ?? 4);
+    const acceptable = dedupe((await imageInfo(titles)).filter(accept)).sort((a, b) => score(b) - score(a));
+    if (acceptable.length) { fulltext = acceptable; break; }
   }
-  return [];
+
+  // Entity portraits first (precision), then full-text (variety), deduped.
+  const combined = dedupe([...entity, ...fulltext]);
+  return combined.slice(0, max);
 }
 
 /** Convenience: the single best Wikimedia image, or null. */
