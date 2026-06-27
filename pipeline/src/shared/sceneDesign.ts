@@ -3,17 +3,31 @@
 // scene — however it was produced — speaking the same channel visual language.
 
 export const SCENE_DESIGN_GUIDE = `## Visual language — SHOW, don't tell
-This is a documentary, NOT a slideshow of text. The screen should almost always
-show a real VISUAL — archival footage, a photograph, a map, a generated image, a
-document, or a data scene — that SHOWS what the narration describes. The narration
-is spoken aloud AND shown as a lower-third caption, so the screen must NOT repeat
-the words as big centered text. A viewer staring at words on a black background
-swipes away.
+This is a documentary, NOT a slideshow of text. Every scene should SHOW something:
+real footage, a photograph, a map, a generated image — OR a designed GRAPHIC like a
+quote card, a declassified document, a newspaper, a stat, a comparison, or a
+timeline. The narration is spoken aloud AND shown as a lower-third caption, so the
+screen must never just repeat the spoken words as big centered text on black.
 
-HARD RULE: at MOST about 1 in 8 scenes may be a pure-text card ("titleCard", or a
-bare narrator "statement"). EVERY other scene must carry a real visual. If you
-reach for a title/text card to cover ordinary narrative, you are doing it wrong —
-find the photo, footage, map, document, or image that shows it instead.
+THE REAL ENEMY IS RAW TEXT ON BLACK — a "titleCard" or a bare narrator "statement"
+that simply restates the narration in large type. Those are what makes a video feel
+cheap, and they are strictly capped (see below).
+
+GRAPHIC SCENES THAT CONTAIN TEXT ARE NOT "TEXT SCENES" — they are VISUALS, and you
+should use them freely whenever the beat fits:
+- A real person's quotation → "quoteCard" (their quote sits beside their PORTRAIT).
+- A line FROM a memo/cable/treaty → "document" (a designed declassified page with a
+  stamp and a highlighted passage — a graphic, not a text card).
+- A press moment → "newspaper" (a front page — a graphic).
+- A number → "stat"; two sides → "comparison"; a real run of dated events → "timeline".
+These are RICH, on-brand visuals. Reaching for them is GOOD. Do NOT downgrade a
+quotation to a plain photo, or a leaked-memo line to a generic image, out of a
+misplaced fear of "text" — these designed graphics are exactly what you want.
+
+HARD RULE: at most about 1 in 8 scenes may be a pure raw-text card ("titleCard" or a
+bare "statement"). quoteCard / document / newspaper / stat / comparison / timeline do
+NOT count against this budget — they are visuals. If you reach for a bare title/text
+card to cover ordinary narrative, you are doing it wrong.
 
 ## Scene visual vocabulary — pick the single best TYPE per beat
 GEOGRAPHY (check this FIRST — geography beats everything else):

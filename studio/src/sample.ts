@@ -63,6 +63,7 @@ What follows is the story of how a balance sheet became a border — and of the 
 const SAMPLE_ASSETS = (): Project["assets"] => [
   {
     id: uid("a"),
+    sceneId: "",
     desc: "A weathered shipping ledger, open to a column of figures",
     line: "a single ledger crossed the North Sea",
     source: "AI-generated · we couldn't verify a real 1842 ledger photo",
@@ -71,6 +72,7 @@ const SAMPLE_ASSETS = (): Project["assets"] => [
   },
   {
     id: uid("a"),
+    sceneId: "",
     desc: "A 19th-century trade route drawn across a sea map",
     line: "the ledger's logic had redrawn the map",
     source: "AI-generated · closest stock image looked too modern",

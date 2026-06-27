@@ -187,17 +187,25 @@ export async function enrichStoryboardAssets(
   const fetchVerifiedImage = async (
     subject: string,
     fileBase: string,
-    expectation?: string
+    expectation?: string,
+    queries?: string[]
   ): Promise<{ src: string; focal?: { x: number; y: number }; attribution?: string } | null> => {
-    // Gather ranked candidates across sources (deduped).
+    // Gather ranked candidates across the primary subject AND any alternative
+    // queries the LLM supplied, across all sources (deduped). Pooling alternatives
+    // is what rescues a beat whose primary phrase ("American flag") returns junk
+    // while an alt ("US flag waving") returns the right thing.
+    const phrases = [subject, ...(queries ?? [])].map((p) => p.trim()).filter(Boolean);
     const candidates: Awaited<ReturnType<(typeof candidateFinders)[number]["find"]>> = [];
     const seen = new Set<string>();
-    for (const { find } of candidateFinders) {
+    for (const phrase of phrases) {
       if (candidates.length >= maxImageCandidates) break;
-      let found: Awaited<ReturnType<(typeof candidateFinders)[number]["find"]>> = [];
-      try { found = await find(subject, { allowShareAlike: opts.allowShareAlike, max: maxImageCandidates }); }
-      catch { found = []; }
-      for (const c of found) { if (!seen.has(c.url)) { seen.add(c.url); candidates.push(c); } }
+      for (const { find } of candidateFinders) {
+        if (candidates.length >= maxImageCandidates) break;
+        let found: Awaited<ReturnType<(typeof candidateFinders)[number]["find"]>> = [];
+        try { found = await find(phrase, { allowShareAlike: opts.allowShareAlike, max: maxImageCandidates }); }
+        catch { found = []; }
+        for (const c of found) { if (!seen.has(c.url)) { seen.add(c.url); candidates.push(c); } }
+      }
     }
     if (candidates.length === 0) return null;
 
@@ -227,6 +235,43 @@ export async function enrichStoryboardAssets(
     }
     // All candidates were genuinely rejected by the verifier.
     return null;
+  };
+
+  /**
+   * Pools ranked candidates across the primary subject + alternative queries,
+   * DOWNLOADS up to `max` of them, and returns the local refs. The first uses the
+   * canonical filename; the rest get -c1/-c2 suffixes. Powers the review picker:
+   * the user sees several real options per scene instead of one blind pick.
+   */
+  const downloadCandidates = async (
+    phrases: string[],
+    fileBase: string,
+    max = 3
+  ): Promise<Array<{ ref: string; source: string; license: any; caption?: string; focal?: { x: number; y: number } }>> => {
+    const wanted = phrases.map((p) => String(p ?? "").trim()).filter(Boolean);
+    const found: Awaited<ReturnType<(typeof candidateFinders)[number]["find"]>> = [];
+    const seen = new Set<string>();
+    for (const phrase of wanted) {
+      if (found.length >= max) break;
+      for (const { find } of candidateFinders) {
+        if (found.length >= max) break;
+        let r: typeof found = [];
+        try { r = await find(phrase, { allowShareAlike: opts.allowShareAlike, max }); } catch { r = []; }
+        for (const c of r) if (!seen.has(c.url)) { seen.add(c.url); found.push(c); }
+      }
+    }
+    const out: Array<{ ref: string; source: string; license: any; caption?: string; focal?: { x: number; y: number } }> = [];
+    for (let i = 0; i < found.length && i < max; i++) {
+      const cand = found[i];
+      const ext = extFromMime(cand.mime);
+      const fileName = i === 0 ? `${fileBase}.${ext}` : `${fileBase}-c${i}.${ext}`;
+      try {
+        const abs = join(assetDir, fileName);
+        await downloadTo(cand.url, abs);
+        out.push({ ref: `assets/${sb.id}/${fileName}`, source: cand.source, license: cand.license, caption: cand.title, focal: await computeFocal(abs) });
+      } catch { /* skip a candidate that fails to download */ }
+    }
+    return out;
   };
 
   const slice = targets.slice(0, total);
@@ -286,64 +331,25 @@ export async function enrichStoryboardAssets(
     }
   }
 
-  // ── searched-image scenes: gather up to 3 candidates per scene so the user
-  // can pick the right one in the review gate. All candidates are downloaded
-  // (they're small JPEGs); the first becomes assets[0]; the rest are stored as
+  // ── searched-image scenes (no photo spec): gather up to 3 candidates per scene
+  // (pooled across the subject + any alternative queries) so the user can pick the
+  // right one in the review gate. The first becomes assets[0]; all are stored as
   // scene.visual.candidates for the review UI.
   const MAX_IMG_CANDIDATES = 3;
   await mapPool(searchTargets, opts.searchConcurrency ?? 3, async ({ scene }) => {
     const query = queryForScene(scene);
+    const altQueries: string[] = Array.isArray((scene.visual.style as any)?.queries) ? (scene.visual.style as any).queries : [];
     let result: "filled" | "not-found" | "error" = "not-found";
     let detail: string | undefined;
     try {
-      // Collect ranked candidates from all sources (deduplicated)
-      const allCandidates: Awaited<ReturnType<(typeof candidateFinders)[number]["find"]>> = [];
-      const seenUrls = new Set<string>();
-      for (const { find } of candidateFinders) {
-        if (allCandidates.length >= MAX_IMG_CANDIDATES) break;
-        let batch: typeof allCandidates = [];
-        try {
-          await throttle("search");
-          batch = await find(query, { allowShareAlike: opts.allowShareAlike, max: MAX_IMG_CANDIDATES });
-        } catch { batch = []; }
-        for (const c of batch) {
-          if (!seenUrls.has(c.url) && allCandidates.length < MAX_IMG_CANDIDATES) {
-            seenUrls.add(c.url);
-            allCandidates.push(c);
-          }
-        }
-      }
-
-      if (allCandidates.length === 0) {
-        notFound++;
-        opts.onProgress?.({ sceneId: scene.id, query, result, index: ++progress, total });
-        return;
-      }
-
-      // Download all candidates; skip any that fail
-      const downloadedCandidates: Array<{ ref: string; source: string; license: any; caption?: string }> = [];
-      for (let ci = 0; ci < allCandidates.length; ci++) {
-        const cand = allCandidates[ci];
-        const ext = extFromMime(cand.mime);
-        // First candidate uses the canonical filename (matches the assets[0] ref); the
-        // rest get a -c1, -c2 suffix so they don't overwrite each other.
-        const fileName = ci === 0 ? `${scene.id}.${ext}` : `${scene.id}-c${ci}.${ext}`;
-        try {
-          await throttle(hostOf(cand.url));
-          await downloadTo(cand.url, join(assetDir, fileName));
-          downloadedCandidates.push({ ref: `assets/${sb.id}/${fileName}`, source: cand.source, license: cand.license, caption: cand.title });
-        } catch { /* skip this candidate */ }
-      }
-
-      if (downloadedCandidates.length > 0) {
-        const primary = downloadedCandidates[0];
+      const downloaded = await downloadCandidates([query, ...altQueries], scene.id, MAX_IMG_CANDIDATES);
+      if (downloaded.length > 0) {
+        const primary = downloaded[0];
         scene.visual.assets = [{ ref: primary.ref, kind: "image", source: primary.source as any, license: primary.license }];
-        (scene.visual as any).candidates = downloadedCandidates.map((c) => ({ ref: c.ref, kind: "image", source: c.source, license: c.license, caption: c.caption }));
+        (scene.visual as any).candidates = downloaded.map((c) => ({ ref: c.ref, kind: "image", source: c.source, license: c.license, caption: c.caption }));
         filled++;
         result = "filled";
-        const first = allCandidates[0];
-        const dims = first.width && first.height ? ` · ${first.width}x${first.height}` : "";
-        detail = `${first.source} · ${first.license.type}${dims}${downloadedCandidates.length > 1 ? ` (+${downloadedCandidates.length - 1} alts)` : ""}`;
+        detail = `${primary.source} · ${primary.license?.type ?? "?"}${downloaded.length > 1 ? ` (+${downloaded.length - 1} alts)` : ""}`;
       } else {
         notFound++;
       }
@@ -428,39 +434,71 @@ export async function enrichStoryboardAssets(
     const photo: any = (scene.visual.style as any)?.photo;
     if (!photo?.items?.length) continue;
     const isGen = scene.visual.type === "genImage";
+    // For a SINGLE-image scene, pull a few real candidates (across the subject +
+    // alt queries) so the review picker offers alternatives. Multi-image modes
+    // (montage/grid/split) fill each slot individually — no per-slot alternatives.
+    const isSingle = (photo.mode ?? "single") === "single" && photo.items.length === 1;
     for (let k = 0; k < photo.items.length; k++) {
       const item = photo.items[k];
       if (item.src || !item.subject) continue;
+      const altQueries: string[] = Array.isArray(item.queries) ? item.queries : [];
+      const genFallback = () => buildFluxPrompt(String(item.subject), item.genPrompt);
       try {
         if (isGen) {
           if (fluxDisabled) { errored++; continue; }
-          const bytes = await generateFluxImage(buildFluxPrompt(String(item.subject)));
+          const bytes = await generateFluxImage(genFallback());
           const fileName = `${scene.id}-p${k}.png`;
           await writeFile(join(assetDir, fileName), bytes);
           item.src = `assets/${sb.id}/${fileName}`;
           item.focal = await computeFocal(join(assetDir, fileName));
           filled++;
           console.error(`  ✓ photo ${scene.id}[${k}] (FLUX) "${String(item.subject).slice(0, 36)}"`);
-        } else {
-          const got = await fetchVerifiedImage(String(item.subject), `${scene.id}-p${k}`);
-          if (got) {
-            item.src = got.src;
-            item.focal = got.focal;
-            if (!item.attribution && got.attribution) item.attribution = got.attribution;
+        } else if (isSingle) {
+          // Single-image scene → gather candidates for the picker.
+          const downloaded = await downloadCandidates([String(item.subject), ...altQueries], `${scene.id}-p${k}`, 3);
+          if (downloaded.length > 0) {
+            const primary = downloaded[0];
+            item.src = primary.ref;
+            item.focal = primary.focal;
+            if (!item.attribution && primary.license?.attributionText) item.attribution = primary.license.attributionText;
+            (scene.visual as any).candidates = downloaded.map((c) => ({ ref: c.ref, kind: "image", source: c.source, license: c.license, caption: c.caption }));
             filled++;
-            console.error(`  ✓ photo ${scene.id}[${k}] "${String(item.subject).slice(0, 36)}" → verified`);
+            console.error(`  ✓ photo ${scene.id}[${k}] "${String(item.subject).slice(0, 36)}" → ${downloaded.length} candidate(s)`);
           } else if (!fluxDisabled) {
-            // No license-clean image passed verification → generate one (on-subject
-            // by construction, so no placeholder gap in the grid/montage).
             try {
-              const bytes = await generateFluxImage(buildFluxPrompt(String(item.subject)));
+              const bytes = await generateFluxImage(genFallback());
               const fileName = `${scene.id}-p${k}.png`;
               await writeFile(join(assetDir, fileName), bytes);
               item.src = `assets/${sb.id}/${fileName}`;
               item.focal = await computeFocal(join(assetDir, fileName));
               item.attribution = "Generated · FLUX";
               filled++;
-              console.error(`  ✓ photo ${scene.id}[${k}] "${String(item.subject).slice(0, 36)}" → no verified image, GENERATED (FLUX)`);
+              console.error(`  ✓ photo ${scene.id}[${k}] "${String(item.subject).slice(0, 36)}" → no search hit, GENERATED (FLUX)`);
+            } catch (gErr) {
+              if (gErr instanceof FluxAuthError) fluxDisabled = true;
+              notFound++;
+            }
+          } else { notFound++; }
+          await sleep(delayMs);
+        } else {
+          // Multi-image slot — one best image per slot (with alt queries).
+          const got = await fetchVerifiedImage(String(item.subject), `${scene.id}-p${k}`, undefined, altQueries);
+          if (got) {
+            item.src = got.src;
+            item.focal = got.focal;
+            if (!item.attribution && got.attribution) item.attribution = got.attribution;
+            filled++;
+            console.error(`  ✓ photo ${scene.id}[${k}] "${String(item.subject).slice(0, 36)}" → fetched`);
+          } else if (!fluxDisabled) {
+            try {
+              const bytes = await generateFluxImage(genFallback());
+              const fileName = `${scene.id}-p${k}.png`;
+              await writeFile(join(assetDir, fileName), bytes);
+              item.src = `assets/${sb.id}/${fileName}`;
+              item.focal = await computeFocal(join(assetDir, fileName));
+              item.attribution = "Generated · FLUX";
+              filled++;
+              console.error(`  ✓ photo ${scene.id}[${k}] "${String(item.subject).slice(0, 36)}" → no search hit, GENERATED (FLUX)`);
             } catch (gErr) {
               if (gErr instanceof FluxAuthError) fluxDisabled = true;
               notFound++;
@@ -598,23 +636,24 @@ export async function enrichStoryboardAssets(
           continue;
         }
 
-        // ── 2) No authentic footage → fall back to a still archival photo (also verified) ──
-        const photo = await fetchVerifiedImage(subject, `${scene.id}-v${k}`, "a real photograph of the subject");
+        // ── 2) No authentic footage → fall back to a still archival photo (across alt queries) ──
+        const clipQueries: string[] = Array.isArray(clip.queries) ? clip.queries : [];
+        const photo = await fetchVerifiedImage(subject, `${scene.id}-v${k}`, "a real photograph of the subject", clipQueries);
         if (photo) {
           clip.src = photo.src;
           clip.kind = "image";
           clip.focal = photo.focal;
           if (!clip.attribution && photo.attribution) clip.attribution = photo.attribution;
           filled++;
-          console.error(`  ✓ footage ${scene.id}[${k}] "${subject.slice(0, 32)}" → no footage, using verified PHOTO`);
+          console.error(`  ✓ footage ${scene.id}[${k}] "${subject.slice(0, 32)}" → no footage, using PHOTO`);
           await sleep(delayMs);
           continue;
         }
 
-        // ── 3) No photo either → AI-generate a still ──
+        // ── 3) No photo either → AI-generate a still (from the clip's genPrompt) ──
         if (!fluxDisabled) {
           try {
-            const bytes = await generateFluxImage(buildFluxPrompt(subject), { width: 1536, height: 864 });
+            const bytes = await generateFluxImage(buildFluxPrompt(subject, clip.genPrompt), { width: 1536, height: 864 });
             const genName = `${scene.id}-v${k}.png`;
             await writeFile(join(assetDir, genName), bytes);
             clip.src = `assets/${sb.id}/${genName}`;

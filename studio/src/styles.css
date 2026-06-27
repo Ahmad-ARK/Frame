@@ -161,6 +161,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 .cand-thumb:disabled{opacity:.5;pointer-events:none}
 .cand-check{position:absolute;inset:0;display:grid;place-items:center;background:rgba(240,192,64,.35);border-radius:5px}
 .cand-check svg{width:12px;height:12px;stroke:var(--amber);stroke-width:2.5;fill:none}
+.cand-play{position:absolute;bottom:2px;right:3px;font-size:8px;color:#fff;text-shadow:0 1px 2px #000;z-index:1;pointer-events:none}
 .verified-note{margin-top:22px;display:flex;align-items:center;gap:10px;color:var(--ink-2);font-size:14px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--rmd);background:var(--surf)}
 .verified-note .ck{width:22px;height:22px;border-radius:50%;background:rgba(57,199,119,.14);display:grid;place-items:center}
 .verified-note .ck svg{width:12px;height:12px;stroke:var(--green);stroke-width:2.4;fill:none}

@@ -54,7 +54,8 @@ function AssetCard({ asset, preparedId }: { asset: Asset; preparedId?: string })
     patchAsset(asset.id, { busy: true });
     try {
       await api.pickAsset(preparedId, asset.sceneId, ref);
-      const newThumb = cand.thumbUrl ?? (cand.ref ? `/api/media/${cand.ref}` : undefined);
+      // images resolve to a /media/ thumb; videos play straight from their URL.
+      const newThumb = cand.thumbUrl ?? (cand.ref ? `/api/media/${cand.ref}` : cand.url);
       setSelectedRef(newThumb);
       patchAsset(asset.id, { busy: false, resolved: true, thumbUrl: newThumb, source: cand.source });
     } catch {
@@ -89,22 +90,24 @@ function AssetCard({ asset, preparedId }: { asset: Asset; preparedId?: string })
 
   const candidates = asset.candidates ?? [];
   const hasCandidates = candidates.length > 1;
+  const isVideoUrl = (u?: string) => !!u && (/\.(mp4|webm|mov)(\?|$)/i.test(u) || /archive\.org\/(download|serve)/i.test(u));
+  const selectedIsVideo = isVideoUrl(selectedRef) || (candidates[0]?.kind === "video" && !asset.candidates?.some((c) => c.kind === "image"));
 
   return (
     <motion.div className="acard" layout initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
-      {/* Main thumbnail */}
+      {/* Main preview */}
       <div className="av">
-        <div
-          className="pic"
-          style={selectedRef ? { backgroundImage: `url(${selectedRef})`, backgroundSize: "cover", backgroundPosition: "center" } : undefined}
-        >
+        <div className="pic" style={selectedRef && !selectedIsVideo ? { backgroundImage: `url(${selectedRef})`, backgroundSize: "cover", backgroundPosition: "center" } : undefined}>
+          {selectedRef && selectedIsVideo && (
+            <video src={selectedRef} controls preload="metadata" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", background: "#000" }} />
+          )}
           {asset.busy && (
             <div style={{ position: "absolute", inset: 0, display: "grid", placeItems: "center", background: "rgba(8,8,12,.55)", zIndex: 2 }}>
               <span className="spin" />
             </div>
           )}
           {!selectedRef && !asset.busy && (
-            <span style={{ fontSize: 11, color: "var(--dim)", letterSpacing: "0.08em" }}>NO IMAGE</span>
+            <span style={{ fontSize: 11, color: "var(--dim)", letterSpacing: "0.08em" }}>{selectedIsVideo ? "NO FOOTAGE" : "NO IMAGE"}</span>
           )}
         </div>
       </div>
@@ -126,11 +129,12 @@ function AssetCard({ asset, preparedId }: { asset: Asset; preparedId?: string })
         <div className="ctx">"{asset.line}"</div>
         <div className="src">{asset.source}</div>
 
-        {/* Candidate strip — click to swap */}
+        {/* Candidate strip — click to swap. Videos show a first-frame poster. */}
         {hasCandidates && (
           <div className="cand-strip">
             {candidates.map((c, i) => {
-              const cThumb = c.thumbUrl ?? (c.ref ? `/api/media/${c.ref}` : undefined);
+              const isVid = c.kind === "video";
+              const cThumb = c.thumbUrl ?? (c.ref ? `/api/media/${c.ref}` : isVid ? c.url : undefined);
               const isActive = cThumb === selectedRef || (i === 0 && !selectedRef);
               return (
                 <button
@@ -139,9 +143,11 @@ function AssetCard({ asset, preparedId }: { asset: Asset; preparedId?: string })
                   title={c.caption ?? c.source}
                   disabled={asset.busy}
                   onClick={() => pick(c)}
-                  style={cThumb ? { backgroundImage: `url(${cThumb})` } : undefined}
+                  style={cThumb && !isVid ? { backgroundImage: `url(${cThumb})` } : undefined}
                 >
-                  {!cThumb && <span style={{ fontSize: 9, color: "var(--dim)" }}>{c.kind === "video" ? "▶" : "?"}</span>}
+                  {isVid && cThumb && <video src={cThumb} preload="metadata" muted style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", borderRadius: 5 }} />}
+                  {isVid && <span className="cand-play">▶</span>}
+                  {!cThumb && !isVid && <span style={{ fontSize: 9, color: "var(--dim)" }}>?</span>}
                   {isActive && <span className="cand-check"><IconCheck /></span>}
                 </button>
               );
