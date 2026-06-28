@@ -97,10 +97,11 @@ const MEDIA_TYPES: Record<string, string> = {
   ".gif": "image/gif", ".svg": "image/svg+xml", ".mp4": "video/mp4", ".webm": "video/webm",
 };
 
-/** Serve a fetched/generated asset image from remotion/public (read-only, image
- *  types only, path-traversal guarded). Public like /outputs so <img> tags work
- *  without an auth header. */
-function serveMedia(res: http.ServerResponse, rel: string) {
+/** Serve a fetched/generated asset from remotion/public (read-only, image+video
+ *  types only, path-traversal guarded). Public like /outputs so <img>/<video> work
+ *  without an auth header. Supports HTTP Range for video so a <video> element in the
+ *  review gate can actually play and seek (without Range, browsers often refuse). */
+function serveMedia(req: http.IncomingMessage, res: http.ServerResponse, rel: string) {
   let decoded: string;
   try { decoded = decodeURIComponent(rel); } catch { return json(res, 400, { error: "bad path" }); }
   const full = resolve(PUBLIC_DIR, decoded);
@@ -108,7 +109,19 @@ function serveMedia(res: http.ServerResponse, rel: string) {
   if (!existsSync(full) || !statSync(full).isFile()) return json(res, 404, { error: "not found" });
   const ctype = MEDIA_TYPES[extname(full).toLowerCase()];
   if (!ctype) return json(res, 415, { error: "unsupported media" });
-  res.writeHead(200, { "Content-Type": ctype, "Cache-Control": "public, max-age=300" });
+  const size = statSync(full).size;
+  const range = req.headers.range;
+  if (range && ctype.startsWith("video/")) {
+    const m = /bytes=(\d*)-(\d*)/.exec(range);
+    const start = m && m[1] ? Math.min(parseInt(m[1], 10), size - 1) : 0;
+    const end = m && m[2] ? Math.min(parseInt(m[2], 10), size - 1) : size - 1;
+    if (isNaN(start) || isNaN(end) || start > end) return json(res, 416, { error: "invalid range" });
+    res.writeHead(206, { "Content-Type": ctype, "Content-Range": `bytes ${start}-${end}/${size}`, "Accept-Ranges": "bytes", "Content-Length": end - start + 1, "Cache-Control": "public, max-age=300" });
+    const stream = createReadStream(full, { start, end });
+    stream.on("error", () => res.destroy());
+    return stream.pipe(res);
+  }
+  res.writeHead(200, { "Content-Type": ctype, "Content-Length": size, "Accept-Ranges": "bytes", "Cache-Control": "public, max-age=300" });
   const stream = createReadStream(full);
   stream.on("error", () => res.destroy());
   stream.pipe(res);
@@ -138,7 +151,7 @@ const server = http.createServer(async (req, res) => {
     // Output files + asset media are public (so <video>/<img> work without an auth
     // header); everything else needs a key.
     if (path.startsWith("/outputs/")) return serveOutput(req, res, path.slice("/outputs/".length));
-    if (path.startsWith("/media/")) return serveMedia(res, path.slice("/media/".length));
+    if (path.startsWith("/media/")) return serveMedia(req, res, path.slice("/media/".length));
 
     const owner = authenticate(req.headers.authorization);
     if (!owner) return json(res, 401, { error: "unauthorized — send Authorization: Bearer <API_KEYS entry>" });

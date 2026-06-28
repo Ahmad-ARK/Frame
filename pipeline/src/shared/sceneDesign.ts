@@ -43,9 +43,14 @@ Match the type to WHAT THE LINE IS ABOUT:
 - "stat"         — one dramatic NUMBER the line actually states (a death toll, "$3B").
 - "chart"        — a single quantity tracked over time (troop levels 1979→1989).
 - "comparison"   — two or three sides/cases explicitly weighed against each other.
-- "genImage"     — a PHOTO-REALISTIC image for a mood/atmosphere or a plausible
-  reconstructed scene where no real photo could exist. Used sparingly, as connective
-  tissue between real shots.
+- "genImage"     — a PHOTO-REALISTIC image of a REAL scene where no usable photo
+  exists: the atmosphere of a real place, real people/objects in a plausible moment.
+  NOT for abstract metaphors. Do NOT invent images like "a baited trap closing", "a
+  broken mirror", "hands passing a weapon", "a path curving back on itself", "an
+  interwoven pattern" — those read as generic AI filler. For a rhetorical, thesis, or
+  transitional line with no real subject, use a "quoteCard" in "statement" mode (the
+  narrator's own words as a designed card) or stay on the previous real visual —
+  never a metaphor image. Use genImage sparingly.
 - "titleCard"    — ONLY the film's own title or a single major chapter break. Never
   for ordinary narration. Keep its narration to the title words (so it stays ~2-3s).
 
@@ -63,12 +68,16 @@ timeline of …", or "a stylized map of …", you picked the WRONG type — swit
 document / chart / timeline / map. If the thing has words, stamps, dates, or data ON
 it, it is NOT a genImage.
 
-## Rhythm
+## Scene count & rhythm — DON'T over-split
+- ONE scene per COHERENT IDEA, which is usually 2-4 sentences — NOT one scene per
+  sentence. Group sentences that share a subject into a single scene. A ~1000-word
+  script should yield roughly 18-28 scenes, NOT 50+. Over-splitting produces a
+  twitchy video and starves each scene of content.
+- A scene needs enough narration to breathe (~8-20 seconds). If a "scene" is one
+  short clause, merge it with its neighbour.
 - COLD-OPEN on a strong visual (footage / photo / map), never a title card.
 - Vary the treatment beat to beat; avoid three of the same type in a row when the
   content allows variety.
-- Keep each scene ~1-2 sentences; split a long passage into several visual scenes so
-  the picture keeps changing.
 
 ## Writing the directive (this drives the asset SEARCH — be concrete)
 The directive is exactly what the asset stage searches for or generates, so name the

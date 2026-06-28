@@ -238,6 +238,34 @@ export async function enrichStoryboard(
         notes.push(`enrich batch ${Math.floor(i / BATCH_SIZE) + 1} failed: ${String((err as Error)?.message ?? err).slice(0, 60)}`);
       }
     }
+
+    // RETRY dropped scenes: across many batches the model sometimes omits a scene
+    // id entirely, or returns only its "overlays" with no type-specific style. Those
+    // come back unpopulated and would leak into the generic image-search path. Find
+    // them and re-request just those, in small batches.
+    const unpopulated = (id: string) => {
+      const e = enrichMap[id];
+      if (!e || typeof e !== "object") return true;
+      return Object.keys(e).filter((k) => k !== "overlays").length === 0;
+    };
+    let missing = sceneInputs.filter((s) => unpopulated(s.id));
+    if (missing.length) {
+      for (let i = 0; i < missing.length; i += BATCH_SIZE) {
+        const batch = missing.slice(i, i + BATCH_SIZE);
+        try {
+          const raw = await generateJson({
+            system: ENRICH_SYSTEM_PROMPT,
+            user: buildEnrichUserPrompt(sb.topic, batch),
+            temperature: 0.2,
+            maxTokens: 8192,
+          });
+          const parsed = JSON.parse(stripFences(raw))?.scenes ?? {};
+          for (const id of Object.keys(parsed)) if (unpopulated(id)) enrichMap[id] = parsed[id];
+        } catch { /* leave for the deterministic fallback below */ }
+      }
+      const still = sceneInputs.filter((s) => unpopulated(s.id)).length;
+      notes.push(`retried ${missing.length} dropped scene(s); ${still} still unpopulated → fallback`);
+    }
   }
 
   let enriched = 0;
@@ -376,6 +404,31 @@ export async function enrichStoryboard(
         style.video = v;
         notes.push(`${scene.id}: video mode "${v.mode}" (${(v.clips ?? []).length} clip(s))`);
       }
+    }
+
+    // DETERMINISTIC FALLBACK for document/newspaper: if enrich (+retry) still left
+    // them unpopulated, synthesize a minimal template from the narration so they
+    // RENDER their designed graphic — instead of leaking into the generic image
+    // search (which is why a correctly-chosen "document" scene was fetching random
+    // Wikimedia photos). A real-but-simple memo/headline beats a wrong photo.
+    if (scene.visual.type === "document" && !style.document) {
+      const body = String(scene.narration ?? "").replace(/\s+/g, " ").trim();
+      const tm = String(scene.visual.directive ?? "").match(/['"]([^'"]{2,40})['"]/);
+      const title = (tm?.[1] || "MEMORANDUM").toUpperCase();
+      const lines: string[] = [];
+      let cur = "";
+      for (const w of body.split(" ")) {
+        if ((cur + " " + w).trim().length > 52) { lines.push(cur.trim()); cur = w; } else cur += " " + w;
+        if (lines.length >= 5) break;
+      }
+      if (cur.trim() && lines.length < 6) lines.push(cur.trim());
+      style.document = { mode: "typed", title, source: "DECLASSIFIED", lines: lines.length ? lines : [body.slice(0, 120)], stamp: "DECLASSIFIED" };
+      notes.push(`${scene.id}: document FALLBACK (typed from narration)`);
+    }
+    if (scene.visual.type === "newspaper" && !style.newspaper) {
+      const head = String(scene.narration ?? "").replace(/\s+/g, " ").trim().split(/[.!?]/)[0].slice(0, 60).toUpperCase();
+      style.newspaper = { mode: "headline", paper: "THE TIMES", headline: head || "BREAKING", dek: "", date: "" };
+      notes.push(`${scene.id}: newspaper FALLBACK (headline from narration)`);
     }
 
     scene.visual.style = style;
