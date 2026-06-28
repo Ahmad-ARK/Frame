@@ -48,6 +48,18 @@ export function finalizeAndValidate(
     if (ctx.thesis && !sb.thesis) sb.thesis = ctx.thesis;
     sb.status ??= "draft";
     if (Array.isArray(sb.scenes)) {
+      // The model occasionally appends a malformed/empty scene with no narration
+      // (or narration in the wrong field). A scene with no spoken line has no audio
+      // or timing — drop it rather than failing the whole storyboard. (Coerce a
+      // stray non-string narration first, in case the text is salvageable.)
+      sb.scenes = sb.scenes.filter((scene: any) => {
+        if (!scene || typeof scene !== "object") return false;
+        if (typeof scene.narration !== "string") {
+          const alt = scene.onScreenText ?? scene.text ?? scene.line;
+          scene.narration = typeof alt === "string" ? alt : "";
+        }
+        return scene.narration.trim().length > 0;
+      });
       const seenIds = new Set<string>();
       sb.scenes.forEach((scene: any, i: number) => {
         if (scene && typeof scene === "object") {
