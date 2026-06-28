@@ -24,6 +24,19 @@ export type EnrichResult = {
 const has = (style: any, key: string) =>
   style && style[key] !== undefined && style[key] !== null;
 
+/** Wrap narration into a few ~52-char memo lines (so a typed document has a body). */
+function linesFromText(text: string, maxLines: number): string[] {
+  const body = String(text ?? "").replace(/\s+/g, " ").trim();
+  const lines: string[] = [];
+  let cur = "";
+  for (const w of body.split(" ")) {
+    if ((cur + " " + w).trim().length > 52) { lines.push(cur.trim()); cur = w; } else cur += " " + w;
+    if (lines.length >= maxLines) break;
+  }
+  if (cur.trim() && lines.length < maxLines + 1) lines.push(cur.trim());
+  return lines.length ? lines : [body.slice(0, 120)];
+}
+
 /** First spoken-start time (ms) of a cue word in a scene's word timings, if any. */
 function findWordTime(
   wordTimings: { word: string; startMs: number; endMs: number }[] | undefined,
@@ -383,6 +396,12 @@ export async function enrichStoryboard(
         const cueT = doc.highlightCue ? findWordTime(scene.wordTimings, String(doc.highlightCue)) : undefined;
         if (cueT !== undefined) doc.highlightAtMs = cueT;
         delete doc.highlightCue;
+        // Guarantee a non-empty body for typed/redacted memos — the model sometimes
+        // returns a header with no lines, rendering a blank page. Derive from narration.
+        if (doc.mode !== "scan" && (!Array.isArray(doc.lines) || doc.lines.filter((l: any) => String(l).trim()).length === 0)) {
+          doc.lines = linesFromText(String(scene.narration ?? ""), 6);
+          notes.push(`${scene.id}: document body filled from narration`);
+        }
         style.document = doc;
         notes.push(`${scene.id}: document mode "${doc.mode}"`);
       }
@@ -412,17 +431,9 @@ export async function enrichStoryboard(
     // search (which is why a correctly-chosen "document" scene was fetching random
     // Wikimedia photos). A real-but-simple memo/headline beats a wrong photo.
     if (scene.visual.type === "document" && !style.document) {
-      const body = String(scene.narration ?? "").replace(/\s+/g, " ").trim();
       const tm = String(scene.visual.directive ?? "").match(/['"]([^'"]{2,40})['"]/);
       const title = (tm?.[1] || "MEMORANDUM").toUpperCase();
-      const lines: string[] = [];
-      let cur = "";
-      for (const w of body.split(" ")) {
-        if ((cur + " " + w).trim().length > 52) { lines.push(cur.trim()); cur = w; } else cur += " " + w;
-        if (lines.length >= 5) break;
-      }
-      if (cur.trim() && lines.length < 6) lines.push(cur.trim());
-      style.document = { mode: "typed", title, source: "DECLASSIFIED", lines: lines.length ? lines : [body.slice(0, 120)], stamp: "DECLASSIFIED" };
+      style.document = { mode: "typed", title, source: "DECLASSIFIED", lines: linesFromText(String(scene.narration ?? ""), 6), stamp: "DECLASSIFIED" };
       notes.push(`${scene.id}: document FALLBACK (typed from narration)`);
     }
     if (scene.visual.type === "newspaper" && !style.newspaper) {

@@ -198,8 +198,14 @@ export async function runJob(job: Job, update: Update): Promise<void> {
     // Step 3 — fetch real footage/images.
     if (doneStep < 3) {
       update({ stage: "assets", progress: 0.68 });
+      // Vision-verify FOOTAGE (the noisiest source — keyword movie search returns
+      // unrelated clips like a podcast for "Afghan refugees"): a wrong clip is
+      // rejected and we fall back to a verified still. Runs on Gemini now (no Qwen
+      // OOM), and is non-fatal — a verify error just skips that candidate. Still
+      // images come from precise entity/depicts search, so they skip verification
+      // (the user picks among candidates in the review gate).
       storyboard = (await enrichStoryboardAssets(storyboard, {
-        verifyFootage: false, // user verifies in the Visuals review gate
+        verifyFootage: true,
         verifyImages: false,
       })).storyboard;
       await checkpoint(3);

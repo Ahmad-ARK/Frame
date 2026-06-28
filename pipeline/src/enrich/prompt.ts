@@ -84,7 +84,7 @@ Pick: one subject → single; "the war produced..." rapid imagery → montage; t
 - "headline" — a generated front page (one dramatic headline): { "mode":"headline", "paper":"THE NEW YORK TIMES", "headline":"U.S. ATTACKED", "dek":"one-line subheading", "date":"September 12, 2001" }
 - "clipping" — a real newspaper scan: { "mode":"clipping", "paper", "headline", "date", "clipping":{ "subject":"newspaper front page 9/11" } }  // subject = SHORT photo search
 - "montage"  — a flurry of press reaction over time (3–5): { "mode":"montage", "items":[ {"headline","paper","date"} ] }
-Use headline for one front page; montage for press reaction across years; clipping when a real scan adds authenticity.
+STRONGLY PREFER "headline" (a clean rendered front page with a real headline you write) or "montage". Use "clipping" ONLY for a SPECIFIC, world-famous front page that certainly exists as a scan (e.g. the actual 9/11 NYT front page) — a generic clipping subject ("Cold War newspaper 1980s") returns an unrelated scan and looks broken. When unsure, use "headline".
 
 ### "document" — choose a MODE, return under "document"
 - "typed"    — a reconstructed memo/cable typed on paper: { "mode":"typed", "title":"MEMORANDUM", "source":"NSC · 1979", "lines":["TO: ...","FROM: ...","a body line","another line"], "highlight":"key passage (a substring of one line)", "highlightCue":"narration word when the key line lands", "stamp":"DECLASSIFIED" }
