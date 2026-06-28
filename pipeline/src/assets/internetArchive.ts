@@ -21,7 +21,15 @@ type SearchDoc = {
   rights?: string;
   "possible-copyright-status"?: string;
   creator?: string;
+  collection?: string | string[];
 };
+
+// US-government / institutional collections whose items are public domain by law
+// even when they carry no explicit licenseurl (e.g. the CIA reading-room releases,
+// the US National Archives). Used to admit authentic primary-source SCANS that
+// would otherwise be dropped by the strict license gate.
+const PD_TEXT_COLLECTIONS =
+  /\b(cia|nara|usfederalgovernment|us_government_documents|gpo|nationalsecurityarchive|fbi|department_?of_?state|nasa)\b/i;
 
 // Strip Lucene special characters so an LLM subject can't break the query syntax,
 // then build a relevance query that BOOSTS title matches over description matches —
@@ -164,22 +172,27 @@ export async function findInternetArchiveVideoCandidates(
   // makes the final accept/reject call per item.
   const search = async (q: string, need: number): Promise<FoundImage[]> => {
     const params = new URLSearchParams({
-      q: `${iaTermQuery(q)} AND mediatype:movies AND (licenseurl:[* TO *] OR possible-copyright-status:"Public Domain")`,
+      // Also admit Prelinger Archives — a hand-curated trove of public-domain
+      // historical/ephemeral film, the cleanest source of genuine archival B-roll.
+      q: `${iaTermQuery(q)} AND mediatype:movies AND (licenseurl:[* TO *] OR possible-copyright-status:"Public Domain" OR collection:prelinger)`,
       rows: String(limit),
       output: "json",
     });
-    for (const f of ["identifier", "title", "licenseurl", "rights", "possible-copyright-status", "creator"]) {
+    for (const f of ["identifier", "title", "licenseurl", "rights", "possible-copyright-status", "creator", "collection"]) {
       params.append("fl[]", f);
     }
     const data = await fetchJson(`${SEARCH}?${params}`);
     const docs: SearchDoc[] = data?.response?.docs ?? [];
+    const isPrelinger = (doc: SearchDoc) => ([] as string[]).concat(doc.collection ?? []).some((c) => /prelinger/i.test(c));
     // Prefer authentic public-domain archival film. CC-BY "movies" on IA are
     // frequently modern YouTube re-uploads (commentary, news) that merely mention
-    // the topic — PD items are far more likely to be genuine historical footage.
+    // the topic — PD items (and curated Prelinger items) are far more likely to be
+    // genuine historical footage.
     const ranked = docs
-      .map((doc) => ({ doc, decision: classifyIA(doc) }))
+      .map((doc) => ({ doc, decision: isPrelinger(doc) ? { accept: true, license: { type: "PD", attributionRequired: false } } : classifyIA(doc) }))
       .filter(({ decision }) => decision.accept || (decision.license.type === "CC BY-SA" && opts.allowShareAlike))
-      .sort((a, b) => licenseRank(a.decision.license.type) - licenseRank(b.decision.license.type));
+      // Prelinger first, then by license quality (PD over CC).
+      .sort((a, b) => (Number(isPrelinger(b.doc)) - Number(isPrelinger(a.doc))) || (licenseRank(a.decision.license.type) - licenseRank(b.decision.license.type)));
     const out: FoundImage[] = [];
     for (const { doc, decision } of ranked) {
       if (out.length >= need) break;
@@ -268,6 +281,58 @@ export async function findInternetArchiveImageCandidates(
     out.push({
       url: `${DL}/${doc.identifier}/${encodeURIComponent(file.name)}`,
       mime: file.mime,
+      source: "internetArchive",
+      license: decision.license,
+      title: doc.title,
+      descriptionUrl: `https://archive.org/details/${doc.identifier}`,
+    });
+  }
+  return out;
+}
+
+const TEXT_PAGE_WIDTH = 1200; // IA renders a first-page image on the fly at this width
+
+/**
+ * Returns up to `max` AUTHENTIC SCANNED DOCUMENTS from the Internet Archive's
+ * `texts` collection — declassified memos, government reports, historical newspapers
+ * (e.g. the CIA reading-room releases). For "document"/"newspaper" scenes this beats
+ * a reconstructed page: it's the real primary source. Each candidate's image is the
+ * item's FIRST PAGE, which IA derives on demand at `/page/n0_w<width>.jpg`.
+ *
+ * License: admits an explicit free license, PD-by-status, OR a known US-government /
+ * institutional collection that is public domain by law (CIA, NARA, …) — those
+ * carry no licenseurl but are unambiguously free for a monetised channel.
+ */
+export async function findInternetArchiveTextCandidates(
+  query: string,
+  opts: FinderOptions & { max?: number } = {}
+): Promise<FoundImage[]> {
+  const limit = opts.searchLimit ?? 15;
+  const max = opts.max ?? 4;
+  const params = new URLSearchParams({
+    q: `${iaTermQuery(query)} AND mediatype:texts AND (licenseurl:[* TO *] OR possible-copyright-status:"Public Domain" OR collection:(cia OR nara OR usfederalgovernment OR gpo OR nationalsecurityarchive))`,
+    rows: String(limit),
+    output: "json",
+  });
+  for (const f of ["identifier", "title", "licenseurl", "rights", "possible-copyright-status", "creator", "collection"]) {
+    params.append("fl[]", f);
+  }
+  const data = await fetchJson(`${SEARCH}?${params}`);
+  const docs: SearchDoc[] = data?.response?.docs ?? [];
+
+  const out: FoundImage[] = [];
+  for (const doc of docs) {
+    if (out.length >= max) break;
+    let decision = classifyIA(doc);
+    if (!decision.accept) {
+      const collections = ([] as string[]).concat(doc.collection ?? []);
+      const govPD = collections.some((c) => PD_TEXT_COLLECTIONS.test(c));
+      if (govPD) decision = { accept: true, license: { type: "PD", attributionRequired: false } };
+      else if (!(decision.license.type === "CC BY-SA" && opts.allowShareAlike)) continue;
+    }
+    out.push({
+      url: `${DL}/${doc.identifier}/page/n0_w${TEXT_PAGE_WIDTH}.jpg`,
+      mime: "image/jpeg",
       source: "internetArchive",
       license: decision.license,
       title: doc.title,

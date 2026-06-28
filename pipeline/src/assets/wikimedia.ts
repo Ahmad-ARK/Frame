@@ -61,14 +61,17 @@ async function searchFiles(query: string, limit: number): Promise<string[]> {
 
 /**
  * Entity-first lookup: find the Wikipedia ARTICLES that best match the query and
- * return each article's lead image (the "page image"). For a NAMED subject — a
- * person ("Zia ul-Haq"), a place, an organisation, a named event — the lead image
- * is the canonical portrait/photo, which keyword file-search badly misses (it ranks
- * by filename/description text, so "Zia ul-Haq" can return an unrelated person whose
- * file description merely contains those words). Returns "File:<name>" titles in
- * article-relevance order, restricted to freely-licensed lead images.
+ * return (a) each article's lead image (the "page image") and (b) the TOP article's
+ * Wikidata QID. For a NAMED subject — a person ("Zia ul-Haq"), a place, an org, a
+ * named event — the lead image is the canonical portrait/photo, which keyword
+ * file-search badly misses (it ranks by filename/description text, so "Zia ul-Haq"
+ * can return an unrelated person whose file description merely contains those words).
+ * The QID comes from the article (Wikipedia's search already disambiguates — it
+ * returns President Zia, not a same-named researcher), and powers a precise
+ * "depicts" file search. Lead-image titles are in article-relevance order, restricted
+ * to freely-licensed lead images.
  */
-async function searchEntityLeadImages(query: string, limit: number): Promise<string[]> {
+async function searchEntity(query: string, limit: number): Promise<{ titles: string[]; qid?: string }> {
   const url = `${INFO_API}?${new URLSearchParams({
     action: "query",
     format: "json",
@@ -76,9 +79,10 @@ async function searchEntityLeadImages(query: string, limit: number): Promise<str
     gsrsearch: query,
     gsrlimit: String(limit),
     gsrnamespace: "0", // article namespace only
-    prop: "pageimages",
+    prop: "pageimages|pageprops",
     piprop: "name",
     pilicense: "free", // only freely-licensed lead images (channel is monetised)
+    ppprop: "wikibase_item", // the article's Wikidata QID (for depicts search)
   })}`;
   const data = await fetchJson(url);
   const pages: any[] = Object.values(data?.query?.pages ?? {});
@@ -91,7 +95,22 @@ async function searchEntityLeadImages(query: string, limit: number): Promise<str
       if (!titles.includes(t)) titles.push(t);
     }
   }
-  return titles;
+  const qid: string | undefined = pages[0]?.pageprops?.wikibase_item;
+  return { titles, qid };
+}
+
+/**
+ * "Depicts" search (Wikimedia structured data): files tagged P180=<QID> are
+ * EXPLICITLY marked as depicting that exact Wikidata entity — curated metadata, not
+ * filename guessing. The single highest-precision way to get real images of a named
+ * subject. Runs through the reachable Core REST host (no commons.wikimedia.org).
+ */
+async function searchByDepicts(qid: string, limit: number): Promise<string[]> {
+  const url = `${SEARCH_API}?${new URLSearchParams({ q: `haswbstatement:P180=${qid}`, limit: String(limit) })}`;
+  const data = await fetchJson(url);
+  return (data?.pages ?? [])
+    .map((p: any) => (p.key ?? p.title ?? "") as string)
+    .filter((t: string) => t.startsWith("File:"));
 }
 
 /** Fetch imageinfo + license extmetadata via the enwiki action API (shared repo). */
@@ -161,17 +180,28 @@ export async function findWikimediaImageCandidates(
     return cs.filter((c) => (seen.has(c.url) ? false : (seen.add(c.url), true)));
   };
 
-  // 1) ENTITY-FIRST: the lead images of the best-matching Wikipedia articles.
-  //    High precision for a named person/place/org/event — this is what fixes
-  //    "Zia ul-Haq" returning a random person. Kept in article-relevance order
-  //    (NOT re-sorted by size) so the top article's portrait stays first.
-  const entityTitles = await searchEntityLeadImages(query, Math.max(5, max)).catch(() => [] as string[]);
-  const entity = dedupe((await imageInfo(entityTitles)).filter(accept));
-  // Preserve entity (relevance) order by re-indexing against the title list.
-  entity.sort((a, b) => entityTitles.indexOf(a.title) - entityTitles.indexOf(b.title));
+  // 1) ENTITY: resolve the best-matching Wikipedia article → its lead image (the
+  //    canonical portrait) + its Wikidata QID. This is what fixes "Zia ul-Haq"
+  //    returning a random person.
+  const { titles: entityTitles, qid } = await searchEntity(query, Math.max(5, max)).catch(() => ({ titles: [] as string[], qid: undefined }));
 
-  // 2) FULL-TEXT Commons file search (good for generic, non-entity subjects and to
-  //    supply alternatives). Full query, then progressively simpler variants.
+  // 2) DEPICTS: files structurally tagged P180=<QID> — guaranteed to show that exact
+  //    entity (curated metadata, the highest-precision source). Only when we have a
+  //    QID from step 1 (so it's the disambiguated entity, not a same-named other).
+  const depictsTitles = qid ? await searchByDepicts(qid, Math.max(6, max * 2)).catch(() => [] as string[]) : [];
+
+  // Resolve lead + depicts titles to candidates in ONE imageinfo batch, then keep
+  // each group's relevance order: lead image (the portrait) first, then depicts.
+  const entitySet = dedupe((await imageInfo([...new Set([...entityTitles, ...depictsTitles])])).filter(accept));
+  const orderOf = (t: string) => {
+    const li = entityTitles.indexOf(t);
+    if (li >= 0) return li;                         // lead images first, in article order
+    const di = depictsTitles.indexOf(t);
+    return di >= 0 ? 1000 + di : 2000;              // then depicts, in their order
+  };
+  entitySet.sort((a, b) => orderOf(a.title) - orderOf(b.title));
+
+  // 3) FULL-TEXT Commons file search (generic/non-entity subjects + extra variety).
   let fulltext: WikimediaCandidate[] = [];
   for (const q of queryVariants(query)) {
     const titles = await searchFiles(q, opts.searchLimit ?? 12);
@@ -179,8 +209,8 @@ export async function findWikimediaImageCandidates(
     if (acceptable.length) { fulltext = acceptable; break; }
   }
 
-  // Entity portraits first (precision), then full-text (variety), deduped.
-  const combined = dedupe([...entity, ...fulltext]);
+  // Entity portrait + depicts (precision) first, then full-text (variety), deduped.
+  const combined = dedupe([...entitySet, ...fulltext]);
   return combined.slice(0, max);
 }
 

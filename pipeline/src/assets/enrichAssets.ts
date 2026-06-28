@@ -4,7 +4,7 @@ import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { type Storyboard, type Scene } from "../schema/storyboard.js";
 import { resolveFinders, resolveCandidateFinders, DEFAULT_SOURCE_ORDER } from "./sources.js";
-import { findInternetArchiveVideoCandidates } from "./internetArchive.js";
+import { findInternetArchiveVideoCandidates, findInternetArchiveTextCandidates } from "./internetArchive.js";
 import { verifyFootage, type FootageVerdict } from "./footageVerify.js";
 import { verifyImage, type ImageVerdict } from "./imageVerify.js";
 import { isQuotaError } from "../gemini/client.js";
@@ -519,25 +519,52 @@ export async function enrichStoryboardAssets(
   }
 
   // ── Pass 5: newspaper clippings + document scans (single fetched image each) ──
+  // For these scenes a REAL scanned primary source beats a generic photo: we first
+  // try the Internet Archive's `texts` collection (declassified memos, gov reports,
+  // historical front pages — e.g. the CIA reading-room releases), using the item's
+  // first-page image. Falls back to ordinary image search if no scan is found.
   for (const scene of sb.scenes) {
     const style: any = scene.visual.style ?? {};
     const slot = scene.visual.type === "newspaper" ? style.newspaper?.clipping
       : scene.visual.type === "document" ? style.document?.scan
       : undefined;
     if (!slot || slot.src || !slot.subject) continue;
+    const subject = String(slot.subject);
     try {
-      const expectation = scene.visual.type === "newspaper"
-        ? "a real newspaper front page or press clipping (printed headlines/columns)"
-        : "a real scanned document, memo, cable, or typed/handwritten page";
-      const got = await fetchVerifiedImage(String(slot.subject), `${scene.id}-doc`, expectation);
-      if (got) {
-        slot.src = got.src;
-        slot.focal = got.focal;
-        filled++;
-        console.error(`  ✓ ${scene.visual.type} ${scene.id} "${String(slot.subject).slice(0, 36)}" → verified`);
-      } else {
-        notFound++;
-        console.error(`  · ${scene.visual.type} ${scene.id} "${String(slot.subject).slice(0, 36)}" → no verified image`);
+      // 1) Authentic scanned document/newspaper from IA texts.
+      let scanned = false;
+      try {
+        const texts = await findInternetArchiveTextCandidates(subject, { allowShareAlike: opts.allowShareAlike, max: 3 });
+        for (const cand of texts) {
+          const fileName = `${scene.id}-doc.jpg`;
+          try {
+            await downloadTo(cand.url, join(assetDir, fileName));
+            slot.src = `assets/${sb.id}/${fileName}`;
+            slot.focal = await computeFocal(join(assetDir, fileName));
+            if (!slot.attribution && cand.license?.attributionText) slot.attribution = cand.license.attributionText;
+            filled++;
+            scanned = true;
+            console.error(`  ✓ ${scene.visual.type} ${scene.id} "${subject.slice(0, 36)}" → IA scan (${cand.title?.slice(0, 40) ?? "texts"})`);
+            break;
+          } catch { /* page image 404/locked — try the next item */ }
+        }
+      } catch { /* IA texts search failed — fall through to image search */ }
+
+      // 2) Fall back to ordinary (entity/depicts/full-text) image search.
+      if (!scanned) {
+        const expectation = scene.visual.type === "newspaper"
+          ? "a real newspaper front page or press clipping (printed headlines/columns)"
+          : "a real scanned document, memo, cable, or typed/handwritten page";
+        const got = await fetchVerifiedImage(subject, `${scene.id}-doc`, expectation);
+        if (got) {
+          slot.src = got.src;
+          slot.focal = got.focal;
+          filled++;
+          console.error(`  ✓ ${scene.visual.type} ${scene.id} "${subject.slice(0, 36)}" → image search`);
+        } else {
+          notFound++;
+          console.error(`  · ${scene.visual.type} ${scene.id} "${subject.slice(0, 36)}" → no scan or image`);
+        }
       }
       await sleep(delayMs);
     } catch (err) {
